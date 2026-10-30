@@ -1112,11 +1112,11 @@ button.ws-row{cursor:pointer}
 .ws-person .ico.ok{width:16px;height:16px;color:#1E8E5A}
 @media (max-width:1180px){.ws-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:820px){.ws-grid{grid-template-columns:1fr}.ws-sat{grid-row:auto}.hm-grid{grid-template-columns:1fr}}
-#s2 .prev-iss{position:relative;z-index:3;background:#FFF5F5;margin:6px -16px -12px;padding:10px 16px 12px;border-top:1px solid #FDE2E2;border-radius:0 0 16px 16px}
-#s2 .prev-iss .sev{filter:none;font-weight:700}
-#s2 .prev-iss .blur{filter:blur(4px);color:#7A1F24}
+#s2 .prev-iss{position:relative;z-index:3;margin-top:4px;padding-top:11px;border-top:1px solid #EEEEEE}
+#s2 .prev-iss .sev{filter:none;font-weight:700;color:#C8232C;background:#FDE1E1}
+#s2 .prev-iss .blur{filter:blur(4px);color:#C8232C}
 #s2 .prev-iss em.blur{color:#D4383E}
-#s2 .prev::after{height:34%;bottom:46px}
+#s2 .prev::after{height:34%;bottom:44px}
 .ws-tiles{grid-template-columns:1fr 1fr;gap:8px}
 .ws-tile{display:grid;grid-template-columns:18px 1fr;column-gap:12px;row-gap:2px;align-items:center;padding:12px 14px 14px}
 .ws-tile .ico{grid-row:1 / span 2;width:18px;height:18px;margin:0}
@@ -1134,6 +1134,7 @@ button.ws-row{cursor:pointer}
 .ed-bar b{font-size:14.5px}
 @media (max-width:1180px){.muted.inline{display:none}.sc-hero{align-items:flex-start;flex-direction:column;gap:14px}}
 #s2{background:#FAFAFA}
+#s2 .plans3 .chk .ico{display:block;width:12px;height:12px;transform:translateY(1px)}
 </style>
 </head>
 <body class="dark">
@@ -1622,7 +1623,7 @@ function runReady(){readyTimers.forEach(clearTimeout);readyTimers=[];const sr=$(
 let promoEnd=0,timerId=0;function tick(){const ms=Math.max(0,promoEnd-Date.now());const m=Math.floor(ms/60000),sec=Math.floor(ms/1000)%60;const el=$('timer');el.textContent=String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');(el.closest('.promo')||el.closest('.deal')).classList.toggle('hot',ms<60000);if(ms<=0)clearInterval(timerId);}
 function startPromo(){if(!promoEnd||promoEnd<Date.now()){promoEnd=Date.now()+15*60*1000;}clearInterval(timerId);timerId=setInterval(tick,1000);tick();}
 const plans=[...document.querySelectorAll('.plan')];plans.forEach(p=>p.addEventListener('click',()=>{if(p.classList.contains('on'))return;const card=p.closest('.checkout');plans.forEach(q=>{q.classList.toggle('on',q===p);q.setAttribute('aria-checked',q===p);});card.classList.add('swapping');rollPrice($('jnew'),+p.dataset.new);rollPrice($('jold'),+p.dataset.old);const off=$('joff');off.textContent='−'+p.dataset.off+'%';off.classList.remove('pop');void off.offsetWidth;off.classList.add('pop');setTimeout(()=>{$('ctatxt').textContent=p.dataset.cta;$('ctasub').textContent=p.dataset.sub;card.classList.remove('swapping');},RM?0:200);movePsel();}));
-function movePsel(){const wrap=document.querySelector('.plans3'),sel=wrap.querySelector('.psel'),on=wrap.querySelector('.plan.on');if(!on){sel.style.opacity=0;return;}const r=on.getBoundingClientRect(),w=wrap.getBoundingClientRect();sel.style.width=r.width+'px';sel.style.height=r.height+'px';sel.style.transform='translate('+(r.left-w.left)+'px,'+(r.top-w.top)+'px)';sel.style.opacity=1;}
+function movePsel(){const wrap=document.querySelector('.plans3'),sel=wrap.querySelector('.psel'),on=wrap.querySelector('.plan.on');if(!on){sel.style.opacity=0;return;}const z=parseFloat(getComputedStyle(document.querySelector('#s2 .page')).zoom)||1;const r=on.getBoundingClientRect(),w=wrap.getBoundingClientRect();sel.style.width=r.width/z+'px';sel.style.height=r.height/z+'px';sel.style.transform='translate('+(r.left-w.left)/z+'px,'+(r.top-w.top)/z+'px)';sel.style.opacity=1;}
 addEventListener('resize',()=>requestAnimationFrame(movePsel));
 /* price rolls from the old value to the new one, 380 ms ease-out, decimals only when the price has them */
 function rollPrice(el,to){const from=parseFloat(el.textContent.replace(/[^0-9.]/g,''))||0;const dec=Number.isInteger(to)?0:2;if(RM){el.textContent='$'+to.toFixed(dec);return;}const t0=performance.now();el.classList.remove('roll');void el.offsetWidth;el.classList.add('roll');function f(now){const k=Math.min(1,(now-t0)/380),e=1-Math.pow(1-k,3);const v=from+(to-from)*e;el.textContent='$'+v.toFixed(dec);if(k<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
