@@ -880,8 +880,6 @@ body.dark .tools{color:#fff}body:not(.dark) .tools{color:var(--ink)}
 .rc-actions{display:flex;gap:10px;opacity:0;transform:translateY(10px);transition:opacity .4s var(--ease),transform .5s var(--ease);pointer-events:none}
 #sR.final .rc-actions{opacity:1;transform:none;pointer-events:auto}
 #sR.final .rc{box-shadow:0 50px 110px -30px rgba(0,10,60,.55),0 0 0 1px rgba(255,255,255,.5) inset,0 0 80px -10px rgba(0,179,255,.35)}
-@media (max-height:760px){.rc-wrap{zoom:.86}}
-@media (max-height:620px){.rc-wrap{zoom:.74}}
 /* school detail */
 .sc-head{display:flex;align-items:center;gap:18px}
 .sc-logo{width:56px;height:56px;object-fit:contain;background:#fff;border:1px solid #E6E6E6;border-radius:16px;padding:8px}
@@ -1137,6 +1135,27 @@ button.ws-row{cursor:pointer}
 #s2 .plans3 .chk{display:block;line-height:0}
 #s2 .plans3 .chk .ico{position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;display:block;transform:none}
 .rc-actions{position:relative;z-index:2}
+/* fix39: reveal card breathing room */
+.rc{width:min(560px,100%);padding:24px 28px 20px;border-radius:26px}
+.rc-wrap{gap:22px}
+.rc-top{gap:16px}
+.rc-who{gap:13px}
+.rc-who img{width:44px;height:44px}
+.rc-who b{font-size:17px}
+.rc-who span{margin-top:2px}
+.rc-cols{grid-template-columns:1fr 70px 86px;gap:14px;margin-top:22px;padding-bottom:10px}
+.rc-row{grid-template-columns:32px 1fr 70px 86px;column-gap:14px;padding:13px 0}
+.rc-row img{width:28px;height:28px}
+.rc-row b{font-size:14.5px}
+.rc-bar{margin-top:8px;max-width:240px}
+.rc-row em{font-size:26px}
+.rc-foot{gap:12px;margin-top:18px}
+.rc-foot div{padding:14px 16px;gap:5px;border-radius:14px}
+.rc-foot b{font-size:16px}
+.rc-url{margin-top:16px}
+@media (max-height:820px){.rc-wrap{zoom:.9}}
+@media (max-height:720px){.rc-wrap{zoom:.8}}
+@media (max-height:600px){.rc-wrap{zoom:.7}}
 </style>
 </head>
 <body class="dark">
