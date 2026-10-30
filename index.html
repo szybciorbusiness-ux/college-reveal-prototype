@@ -253,8 +253,9 @@ button{font-family:inherit}
 .spin{width:13px;height:13px;border-radius:50%;border:2px solid rgba(0,89,255,.25);border-top-color:var(--blue);animation:spin .9s linear infinite;flex:none}
 .proc .pct{font:600 14px/1 var(--mono);color:var(--grey);font-variant-numeric:tabular-nums}
 .lines{list-style:none;margin:0;padding:8px 18px 10px;display:block}
-.lines li{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:center;font:400 14px/1 var(--sans);color:var(--ink);height:0;opacity:0;overflow:hidden;transform:translateY(6px);transition:height .36s var(--ease),opacity .3s var(--ease) .08s,transform .36s var(--ease)}
-.lines li.show{height:44px;opacity:1;transform:none}
+.lines li{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:center;font:400 14px/1 var(--sans);color:var(--ink);height:0;opacity:0;overflow:hidden;transform:translateX(-10px);filter:blur(2px);transition:height .4s var(--ease),opacity .28s var(--ease) .1s,transform .4s var(--ease) .06s,filter .3s var(--ease) .1s}
+.lines li.show{height:44px;opacity:1;transform:none;filter:blur(0)}
+.lines .val.hot{animation:pop .3s var(--ease)}
 .lines li .tick{width:18px;height:18px;border-radius:50%;background:var(--blue);display:grid;place-items:center;color:#fff}
 .lines li .tick svg{width:10px;height:10px}
 .lines li.live .tick{background:transparent;border:2px solid rgba(0,89,255,.25);border-top-color:var(--blue);animation:spin .9s linear infinite}
@@ -523,12 +524,10 @@ button{font-family:inherit}
 .deal{display:block;font:600 clamp(16px,1.4vw,22px)/1.3 var(--sans);letter-spacing:-.02em;color:var(--blue);margin-bottom:18px;text-align:center}
 .deal .timer{background:transparent;padding:0;font:inherit;font-variant-numeric:tabular-nums;color:inherit}
 .deal.hot,.deal.hot .timer{color:var(--bad)}
-#s2 .h .rd{display:inline-block;height:1.22em;width:auto;vertical-align:-.3em;margin-left:.08em;overflow:visible}
-#s2 .h .rdf{fill:var(--blue);opacity:0;transition:opacity .3s var(--ease)}
-#s2 .h .rds{fill:none;stroke:var(--blue);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .42s cubic-bezier(.4,0,.3,1)}
-#s2.on .h .rds{stroke-dashoffset:0}
-#s2.on .h .rdf{opacity:1}
-@media (prefers-reduced-motion:reduce){#s2 .h .rds{stroke-dashoffset:0;transition:none}#s2 .h .rdf{opacity:1;transition:none}}
+#sr .h .rd{display:inline-block;height:1.22em;width:auto;vertical-align:-.3em;margin-left:.08em;overflow:visible}
+#sr .h .rdf{fill:var(--blue);clip-path:inset(-40% 100% -40% 0);transition:clip-path .22s cubic-bezier(.4,0,.2,1)}
+#sr.on .h .rdf{clip-path:inset(-40% 0 -40% 0)}
+@media (prefers-reduced-motion:reduce){#sr .h .rdf{clip-path:none;transition:none}}
 #s2 .steps.row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 32px;margin-top:28px}
 #s2 .steps.row li{font-size:15px;gap:9px}
 #s2 .steps.row li .tick{width:22px;height:22px}#s2 .steps.row li .tick svg{width:12px;height:12px}
@@ -537,7 +536,8 @@ button{font-family:inherit}
 .just .off{font:600 14px/1 var(--sans);color:var(--blue);background:var(--soft);border:0;border-radius:999px;padding:6px 10px}
 .jdesc{margin:-8px 0 0;font:400 15px/1.5 var(--sans);color:var(--grey);max-width:46ch}
 .cta.glossy{transition:background .15s ease,transform .16s var(--ease);background:#0059FF;border:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 1px 2px rgba(0,40,160,.18);color:#fff}
-.cta.glossy:hover{background:#004BE0}
+.cta.glossy:hover{background:#0A4FEB;transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 18px -8px rgba(0,89,255,.55)}
+.cta.glossy:active{transform:translateY(0) scale(.985)}
 .cta.glossy::after{display:none}
 .cta.glossy small{opacity:.78}
 .reas{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;font:400 14px/1.4 var(--sans);color:var(--grey);margin-top:-6px}
@@ -653,7 +653,7 @@ hr.fade{border:0;height:1px;margin:2px 0;background:linear-gradient(90deg,rgba(2
 .rm-li b{font-weight:500}
 .rm-sub{font-weight:400}
 .crumb{font-weight:500}
-#confetti2{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+#confetti2{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
 /* ---------- interactions (Emil's bar: ease-out, under 300 ms, press scale .97, no scale(0), hover gated) ---------- */
 .rm-tabs,.rm-side{position:relative}
 .rm-tabs .ind,.rm-side .sind{position:absolute;border-radius:10px;background:#F1F2F4;pointer-events:none;opacity:0;transition:transform .2s var(--ease),width .2s var(--ease),height .2s var(--ease),opacity .15s var(--ease);z-index:0}
@@ -732,6 +732,46 @@ hr.fade{border:0;height:1px;margin:2px 0;background:linear-gradient(90deg,rgba(2
 .cmdk-empty{padding:26px 10px;text-align:center;font:400 14px/1.4 var(--sans);color:#8A8F98}
 .rm-search{cursor:text}
 @media (prefers-reduced-motion:reduce){.pg.on,.pg.out{animation:none}.cmdk-bg,.cmdk-box{transition:none}}
+/* ---------- profile creation (Family-style): color, emoji, creating, card ---------- */
+.page.ob{--pt:clamp(110px,14vh,180px);align-items:center;text-align:center}
+.page.ob.center{--pt:clamp(150px,20vh,240px)}
+.ob-h{font:600 clamp(26px,2.4vw,34px)/1.15 var(--sans);letter-spacing:-.025em;color:#1D1F24}
+.ob .rm-sub{margin-top:10px;max-width:40ch;text-align:center}
+.obhead{margin-bottom:18px}
+.dots{display:inline-flex;gap:6px}.dots i{width:34px;height:4px;border-radius:4px;background:#E6E7EA;transition:background .2s ease}.dots i.on{background:var(--blue)}
+.swatches{margin-top:36px;display:grid;grid-template-columns:repeat(5,52px);gap:18px 22px;justify-content:center}
+.sw{width:52px;height:52px;border-radius:50%;border:0;background:var(--c);cursor:pointer;position:relative;transition:transform .18s var(--ease);box-shadow:inset 0 0 0 0 #fff}
+.sw::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--c);opacity:0;transform:scale(.9);transition:opacity .18s var(--ease),transform .18s var(--ease)}
+.sw:hover{transform:scale(1.06)}.sw:active{transform:scale(.94)}
+.sw.on{box-shadow:inset 0 0 0 3px #fff}.sw.on::after{opacity:1;transform:scale(1)}
+.obnote{margin:34px 0 0;font:400 12.5px/1.4 var(--sans);color:#8A8F98}
+.obnext{margin-top:16px;width:min(420px,100%);height:52px;border-radius:14px;font-weight:600;font-size:16px}
+.avprev{margin-top:28px;width:112px;height:112px;border-radius:50%;background:var(--pc,#0059FF);display:grid;place-items:center;font-size:54px;transition:background .25s ease,transform .25s var(--ease)}
+.avprev.bump{animation:pop .26s var(--ease)}
+.emojis{margin-top:24px;display:grid;grid-template-columns:repeat(8,46px);gap:6px;justify-content:center}
+.em{width:46px;height:46px;border-radius:12px;border:0;background:transparent;font-size:26px;cursor:pointer;transition:background .15s ease,transform .16s var(--ease)}
+.em:hover{background:#F1F2F4}.em:active{transform:scale(.9)}.em.on{background:#EAF0FF}
+.dashes{margin-top:30px;width:320px;height:180px}
+/* the card lands: scale .9 + 24 px + slight tilt → rest, 520 ms ease-out, then the badge pops */
+.pcard{margin-top:34px;width:min(380px,100%);aspect-ratio:1.7;border-radius:22px;padding:20px 22px;background:var(--pc,#0059FF);color:var(--pct,#fff);display:flex;flex-direction:column;justify-content:space-between;text-align:left;box-shadow:0 30px 60px -28px rgba(20,22,30,.45);opacity:0;transform:translateY(24px) scale(.9) rotateX(10deg);transform-origin:50% 100%;transition:transform .52s var(--ease) .35s,opacity .3s var(--ease) .35s}
+#sr.on .pcard{opacity:1;transform:none}
+.pc-top{display:flex;justify-content:space-between;align-items:flex-start}
+.pc-em{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:30px}
+.pc-id{display:inline-flex;align-items:center;gap:6px;font:500 13px/1 var(--mono);opacity:.85;margin-top:6px}.pc-id .ico{width:13px;height:13px}
+.pc-bot{display:flex;justify-content:space-between;align-items:flex-end}
+.pc-bot b{display:block;font:700 20px/1.15 var(--sans);letter-spacing:-.02em}.pc-bot span{font:400 13px/1.3 var(--sans);opacity:.8}
+.pc-badge{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.95);color:#1D1F24;font:600 12px/1 var(--sans);opacity:0;transform:scale(.8);transition:opacity .2s var(--ease) .95s,transform .3s var(--ease) .95s}
+#sr.on .pc-badge{opacity:1;transform:none}.pc-badge .ico{width:12px;height:12px;color:var(--good)}
+.pcard.light{--pct:#1D1F24}.pcard.light .pc-em{background:rgba(0,0,0,.08)}
+@media (prefers-reduced-motion:reduce){.pcard,.pc-badge{transition:none;opacity:1;transform:none}}
+/* build → dashboard: the blob swells past the frame while the card and copy blur away, then the app sharpens in */
+#s3 .morph{transition:transform .9s cubic-bezier(.7,0,.3,1),opacity .6s var(--ease) .35s,filter .7s var(--ease)}
+#s3.reveal .morph{transform:scale(16);filter:blur(6px);opacity:0}
+#s3 .proc,#s3 .h,#s3 .lead{transition:opacity .35s var(--ease),filter .4s var(--ease),transform .45s var(--ease)}
+#s3.reveal .proc,#s3.reveal .h,#s3.reveal .lead{opacity:0;filter:blur(8px);transform:scale(.98)}
+#app.enter .rm{animation:appin .7s var(--ease) both}
+@keyframes appin{from{opacity:0;filter:blur(12px);transform:scale(1.03)}to{opacity:1;filter:blur(0);transform:none}}
+@media (prefers-reduced-motion:reduce){#s3 .morph,#s3 .proc,#s3 .h,#s3 .lead{transition:none}#app.enter .rm{animation:none}}
 /* prototype tools */
 .tools{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));z-index:9;display:flex;gap:5px;flex-wrap:wrap}
 .tools button{font:500 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:currentColor;background:rgba(127,127,127,.12);border:1px solid rgba(127,127,127,.25);border-radius:999px;cursor:pointer;padding:7px 10px;opacity:.5;transition:opacity .16s var(--ease)}
@@ -755,6 +795,7 @@ body.dark .tools{color:#fff}body:not(.dark) .tools{color:var(--ink)}
   <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></symbol>
   <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol>
   <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></symbol>
@@ -784,12 +825,58 @@ body.dark .tools{color:#fff}body:not(.dark) .tools{color:var(--ink)}
  </div>
 </section>
 
+<!-- 01b · Pick a color -->
+<section class="screen" id="sc" aria-label="Choose a color">
+ <div class="page ob">
+  <div class="obhead rise"><span class="dots"><i class="on"></i><i></i><i></i></span></div>
+  <h1 class="h2 ob-h rise">Choose a color</h1>
+  <p class="rm-sub rise">Pick a color for your profile. You can change it later.</p>
+  <div class="swatches rise" role="radiogroup" aria-label="Profile color"><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#FF2D6F" data-c="#FF2D6F"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#FF3D9A" data-c="#FF3D9A"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#D63CFF" data-c="#D63CFF"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#8A4DFF" data-c="#8A4DFF"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#4F46FF" data-c="#4F46FF"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#2F6BFF" data-c="#2F6BFF"></button><button type="button" class="sw on" role="radio" aria-checked="true" style="--c:#0059FF" data-c="#0059FF"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#00B3FF" data-c="#00B3FF"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#19B5A6" data-c="#19B5A6"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#1E9E5A" data-c="#1E9E5A"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#7CC21E" data-c="#7CC21E"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#F2B01E" data-c="#F2B01E"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#FF8A1E" data-c="#FF8A1E"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#FF5A2D" data-c="#FF5A2D"></button><button type="button" class="sw" role="radio" aria-checked="false" style="--c:#141414" data-c="#141414"></button></div>
+  <p class="obnote rise">Only you will see your profile color.</p>
+  <button class="btn obnext rise" type="button" data-go="si">Continue</button>
+ </div>
+</section>
+
+<!-- 01c · Display image -->
+<section class="screen" id="si" aria-label="Set a display image">
+ <div class="page ob">
+  <div class="obhead rise"><span class="dots"><i class="on"></i><i class="on"></i><i></i></span></div>
+  <h1 class="h2 ob-h rise">Set a display image</h1>
+  <p class="rm-sub rise">Pick an emoji for your profile. This is visible only to you.</p>
+  <div class="avprev rise"><span id="avprev">🎓</span></div>
+  <div class="emojis rise" role="radiogroup" aria-label="Emoji"><button type="button" class="em on" role="radio" aria-checked="true">🎓</button><button type="button" class="em" role="radio" aria-checked="false">📚</button><button type="button" class="em" role="radio" aria-checked="false">🚀</button><button type="button" class="em" role="radio" aria-checked="false">🧠</button><button type="button" class="em" role="radio" aria-checked="false">⚡</button><button type="button" class="em" role="radio" aria-checked="false">🔥</button><button type="button" class="em" role="radio" aria-checked="false">🌊</button><button type="button" class="em" role="radio" aria-checked="false">🪐</button><button type="button" class="em" role="radio" aria-checked="false">🎯</button><button type="button" class="em" role="radio" aria-checked="false">🏆</button><button type="button" class="em" role="radio" aria-checked="false">🧪</button><button type="button" class="em" role="radio" aria-checked="false">🎨</button><button type="button" class="em" role="radio" aria-checked="false">🎸</button><button type="button" class="em" role="radio" aria-checked="false">⚽</button><button type="button" class="em" role="radio" aria-checked="false">🏀</button><button type="button" class="em" role="radio" aria-checked="false">🦉</button><button type="button" class="em" role="radio" aria-checked="false">🐻</button><button type="button" class="em" role="radio" aria-checked="false">🦊</button><button type="button" class="em" role="radio" aria-checked="false">🐯</button><button type="button" class="em" role="radio" aria-checked="false">🦋</button><button type="button" class="em" role="radio" aria-checked="false">🌵</button><button type="button" class="em" role="radio" aria-checked="false">🍀</button><button type="button" class="em" role="radio" aria-checked="false">🍕</button><button type="button" class="em" role="radio" aria-checked="false">☕</button></div>
+  <button class="btn obnext rise" type="button" data-go="sg">Continue</button>
+ </div>
+</section>
+
+<!-- 01d · Creating -->
+<section class="screen" id="sg" aria-label="Creating your profile">
+ <div class="page ob center">
+  <h1 class="h2 ob-h rise" style="color:#8A8F98">Creating your profile</h1>
+  <canvas class="dashes rise" id="dashes" width="640" height="360" aria-hidden="true"></canvas>
+  <p class="rm-sub rise" id="sgsub">Putting your transcript, scores and schools together…</p>
+ </div>
+</section>
+
+<!-- 01e · Profile ready -->
+<section class="screen" id="sr" aria-label="Your profile is ready">
+ <div class="page ob center">
+  <h1 class="h blend rise">Your profile is <svg class="rd" viewBox="4.5 -70.0 193.8 96.3" aria-label="ready" role="img"><path class="rdf" style="transition-delay:0.45s" d="M11.9-3.5L11.9-3.5Q11-4.2 10.7-4.9Q10.3-5.6 10.6-7.6L10.6-7.6Q10.9-10.4 11.4-12.6Q11.9-14.7 12.6-17.5L12.6-17.5Q12.8-18.7 13.8-21.6Q14.7-24.5 16.1-27.9Q17.5-31.3 18.9-34.4Q20.3-37.4 21.3-38.9L21.3-38.9Q22.1-39.5 23.3-39.4Q24.4-39.3 25.2-38.5L25.2-38.5Q26.3-37.6 25.6-35.4Q24.8-33.1 22.5-28.3L22.5-28.3Q21.3-25.6 20.7-24.3Q20.1-22.9 20.2-22.7Q20.3-22.4 21.1-22.9L21.1-22.9Q21.7-24 23.3-25.5Q24.9-26.9 26.7-28.3Q28.5-29.7 30.1-30.8Q31.7-31.9 32.3-32.2L32.3-32.2Q33.1-32.7 34.1-33.1Q35.2-33.4 35.6-33.6L35.6-33.6Q37.9-34.7 40.3-34.4Q42.7-34.1 43.3-32.6L43.3-32.6Q43.4-31.8 44.0-31.4Q44.5-31 44.5-31L44.5-31Q44.9-31 45.0-30.7Q45-30.4 45-30.4L45-30.4Q45-29.7 44.0-29.6Q42.9-29.4 41.3-29.3L41.3-29.3Q40-29.2 39-28.8Q38-28.4 36.6-27.8L36.6-27.8Q32.8-25.6 29.4-23.5Q25.9-21.4 22.7-17.9L22.7-17.9Q22-17.1 21.3-16Q20.6-14.9 19.8-13.6L19.8-13.6Q19.3-13.1 18.8-11.4Q18.3-9.7 17.9-8.2Q17.6-6.6 17.6-6.3L17.6-6.3Q17.6-6.3 17.3-5.4Q17-4.4 16.3-3.5L16.3-3.5Q15.1-1.9 14.3-1.9Q13.5-1.9 11.9-3.5Z"/><path class="rdf" style="transition-delay:0.62s" d="M63.6-3.5L63.6-3.5Q61.5-1.7 58.8-1.4Q56-1.1 53.4-2.3Q50.8-3.4 49.1-5.8L49.1-5.8Q47.4-8 46.9-10.9Q46.4-13.7 46.8-18.3L46.8-18.3Q47.1-22.2 49.3-26.2Q51.5-30.1 54.7-33.2Q57.8-36.3 60.9-37.5L60.9-37.5Q62.4-38.5 63.5-38.5Q64.5-38.4 66.7-38.2L66.7-38.2Q69-37.9 70.2-37.3Q71.3-36.7 72-35.7L72-35.7Q73.5-34.2 74-32.8Q74.5-31.3 74.5-29.9L74.5-29.9Q74.1-27.7 71.6-24.6Q69-21.4 64.9-19.4L64.9-19.4Q62.7-18.7 60.1-18.8Q57.5-18.9 55.8-20.1L55.8-20.1Q53.9-20.9 53.3-19.9Q52.7-18.8 52.2-14.8L52.2-14.8Q51.8-11 52.8-9.3Q53.8-7.5 55.5-7.2L55.5-7.2Q57.5-6.8 58.7-6.7Q59.8-6.5 61.5-7.5L61.5-7.5Q63.1-8.5 63.5-8.7Q63.9-8.8 64.2-9.1Q64.4-9.3 65.4-10.3L65.4-10.3Q66.1-11 66.5-11.4Q66.9-11.7 67.4-11.7L67.4-11.7Q67.9-11.7 68.3-11.3Q68.7-10.8 69.1-10.6L69.1-10.6Q70.1-10.6 69.6-9.4Q69-8.2 67.4-6.6Q65.8-4.9 63.6-3.5ZM63.5-24.7L63.5-24.7Q64.6-25.2 65.8-26.2Q67-27.1 67.8-28.3Q68.7-29.4 68.7-30.2L68.7-30.2Q68.7-31.6 67.4-32.6Q66.1-33.5 63.5-32.8L63.5-32.8Q62.4-32.5 61-31.4Q59.6-30.2 58.4-28.8Q57.1-27.4 56.4-26.3Q55.6-25.2 55.8-25L55.8-25Q56.1-24.5 57.5-24.3Q58.9-24 60.7-24.1Q62.4-24.2 63.5-24.7Z"/><path class="rdf" style="transition-delay:0.79s" d="M79.2-3.6L79.2-3.6Q78.8-4.4 78.2-4.9Q77.6-5.3 77.6-5.7L77.6-5.7Q77.6-6.1 77.5-6.6Q77.5-7 77.1-7.4L77.1-7.4Q76.6-8 77.2-10.2Q77.8-12.3 79.2-15.5Q80.6-18.6 82.5-22.1L82.5-22.1Q83.3-22.9 84.1-24.2Q84.9-25.5 85.3-25.9L85.3-25.9Q85.3-26.3 85.6-26.7Q85.9-27 86.3-27L86.3-27L86.3-27.6Q86.3-28.1 87.3-29.3Q88.2-30.5 89.6-32.0Q91-33.4 92.5-34.8Q94-36.1 95-36.7L95-36.7Q97.1-38.1 99.3-38.4Q101.6-38.7 103.2-37.4L103.2-37.4Q103.5-37.1 104.2-36.4Q104.9-35.7 105.8-34.9Q106.8-34 107.8-33.1L107.8-33.1L111.5-29.8L109.7-24.8Q108.4-20.8 109.1-17.8Q109.7-14.8 111-12.6L111-12.6Q111.5-11.5 113.1-10.5Q114.6-9.5 116-9.3L116-9.3Q116.8-9.2 117.5-8.7Q118.2-8.2 118.2-7.1L118.2-7.1Q118.2-6.1 117.8-5.5Q117.4-4.9 116.4-4.7L116.4-4.7Q113.1-4.3 110.3-6.3Q107.4-8.3 105-12.9L105-12.9Q104.6-13.5 104.0-15.2Q103.3-16.8 103.2-17.3L103.2-17.3Q102.8-16.8 101.7-15.5Q100.6-14.1 100-13.5L100-13.5Q92.9-6.3 87.8-3.9Q82.6-1.4 79.2-3.6ZM82.8-9.2L82.8-9.2Q82.8-8.5 85.0-9.3Q87.1-10 89.6-12L89.6-12Q93-14.9 96.5-18.4Q99.9-21.9 102-24.9L102-24.9L104.2-28.5Q103.2-30.8 102.1-31.7Q100.9-32.5 100.1-32.5L100.1-32.5Q98.8-32.5 96.3-30.1Q93.7-27.7 90.8-23.7Q87.9-19.7 85.3-14.9L85.3-14.9Q84.3-12.9 83.5-11.1Q82.8-9.2 82.8-9.2Z"/><path class="rdf" style="transition-delay:0.96s" d="M148.4 1.9L148.4 1.9Q147.1 2.2 146.3 1.6Q145.4 0.9 145-0.3L145-0.3Q144.2-2.6 143.8-5.4Q143.5-8.1 143.7-10.2L143.7-10.2L143.9-12.3L140-9.2Q136.6-6.2 133.4-4.9Q130.3-3.6 127.9-3.6L127.9-3.6Q126.8-3.8 125.7-4.4Q124.6-5 123.8-5.9Q122.9-6.8 122.4-7.8L122.4-7.8Q121.8-9.2 122.1-11.6Q122.3-14 123.3-16.9Q124.2-19.7 125.7-22.5Q127.1-25.2 129-27.3L129-27.3Q132.3-32.3 136.1-33.4Q139.9-34.5 143.6-32.3L143.6-32.3Q146.2-31.2 146.8-31.3Q147.5-31.4 148-33.6L148-33.6Q148.4-35.2 148.8-36.9Q149.2-38.5 150.1-41.3L150.1-41.3Q152.6-48.9 154.4-53.2Q156.3-57.5 157.8-60.7L157.8-60.7Q158.9-63 159.7-63.6Q160.4-64.1 161.2-64L161.2-64Q162.3-64 163.2-63.2Q164.1-62.4 164.6-61L164.6-61Q165-60.1 164.9-59.5Q164.9-58.8 164.3-57.7L164.3-57.7Q163-55.3 161.3-51.4Q159.5-47.4 157.8-42.7Q156-38 154.5-33.4Q153-28.8 152-25.3L152-25.3Q151.4-23.1 150.9-19.7Q150.5-16.3 150.2-12.8Q149.9-9.2 149.8-6.5Q149.8-3.7 150-2.9L150-2.9Q150.6-0.9 150.6 0.1Q150.5 1.1 150 1.5Q149.5 1.8 148.4 1.9ZM131.5-9.2L131.5-9.2Q132.9-9.5 134.3-10.3Q135.6-11.1 137.1-12.2L137.1-12.2Q140.1-14.5 142.3-16.4Q144.5-18.3 145.2-22.2L145.2-22.2Q145.4-24.1 144.8-25.3Q144.3-26.4 143.1-27.4L143.1-27.4Q141.9-28.2 139.8-28.1Q137.8-27.9 135.6-25.9L135.6-25.9Q133.2-23.7 130.9-20Q128.7-16.3 127.6-10.9L127.6-10.9Q127.4-9.9 128.2-9.3Q129-8.7 131.5-9.2Z"/><path class="rdf" style="transition-delay:1.13s" d="M159.4 19.9L159.4 19.9Q157 20.6 154.2 20.2Q151.3 19.7 149.2 18.4Q147 17.1 146.7 15.5L146.7 15.5Q146.6 14.9 147.1 14.2Q147.5 13.5 148.2 13.3Q148.8 13 149.3 13.6L149.3 13.6Q150.1 14.1 152.2 14.9Q154.3 15.6 156.9 15.1L156.9 15.1Q159.2 14.6 161.4 12.4Q163.7 10.2 165.1 8.3L165.1 8.3Q165.9 7.1 167.8 4Q169.7 0.9 171.8-2.9Q173.8-6.6 175.2-9.8L175.2-9.8Q175.5-10.6 175.9-11.7Q176.3-12.8 176.9-13.5L176.9-13.5Q177.5-14.7 177.9-15.8Q178.4-16.8 178.5-17.2L178.5-17.2Q178.6-17.7 179.4-19.2Q180.2-20.7 180.9-22.2L180.9-22.2Q181.4-23.7 182.4-26.6Q183.4-29.5 184.4-31.3L184.4-31.3Q185.6-33.6 186.3-35.1Q187.1-36.5 188-36.8L188-36.8L188-36.8L188-36.8Q188.9-37.5 189.3-37.5Q189.6-37.5 190.7-36.9L190.7-36.9Q191.9-35.7 192.2-34.6Q192.5-33.4 191.9-31.8Q191.4-30.1 189.9-27.3L189.9-27.3Q189.1-24.9 188.2-23.0Q187.2-21 186.7-20.4L186.7-20.4Q186.2-19.2 185.6-17.8Q184.9-16.3 184.4-15.1L184.4-15.1Q182.6-11.1 181.3-8.6Q180-6.1 179-4Q178-1.9 176.9 0.9L176.9 0.9Q174.6 4.6 172.4 8.0Q170.3 11.3 167.9 14.2L167.9 14.2Q166.9 15.1 165.4 16.3Q163.9 17.5 162.3 18.5Q160.8 19.5 159.4 19.9ZM172.9-4.1L172.9-4.1Q171.4-4.3 169.9-5.9Q168.5-7.5 167.7-9.3Q166.9-11.1 167.1-11.9L167.1-11.9Q167.1-12.4 167.1-12.7Q167.1-13 167.1-13L167.1-13Q166.5-13 166.1-14.5Q165.6-16 165.4-18.4Q165.2-20.8 165.2-23.5Q165.1-26.2 165.3-28.6L165.3-28.6Q165.7-30.3 165.7-32.4Q165.7-34.4 165.8-35.6L165.8-35.6Q165.7-37.2 166.1-37.8Q166.5-38.3 166.9-38.6L166.9-38.6L166.9-38.6L166.9-38.6Q169.7-39.8 170.7-37.1Q171.6-34.5 171.1-27.3L171.1-27.3Q170.9-23.3 171.1-19.3Q171.3-15.3 172.3-12.3Q173.2-9.3 174.9-8.2L174.9-8.2Q175.6-7.8 175.6-7.1Q175.6-6.4 175.2-5.7Q174.8-4.9 174.2-4.5Q173.5-4 172.9-4.1Z"/></svg></h1>
+  <div class="pcard" id="pcard">
+   <div class="pc-top"><span class="pc-em" id="pcEm">🎓</span><span class="pc-id">CR-4821 <svg class="ico"><use href="#i-copy"/></svg></span></div>
+   <div class="pc-bot"><div><b>Evan Carter</b><span>5 schools</span></div><span class="pc-badge"><svg class="ico"><use href="#i-check"/></svg>Synced</span></div>
+  </div>
+  <p class="rm-sub rise" style="margin-top:22px">Your profile was added to your account.</p>
+  <button class="btn obnext rise" type="button" data-go="s2" style="margin-top:30px">View my chances</button>
+ </div>
+</section>
+
 <!-- 02 · Paywall -->
+<canvas id="confetti2" aria-hidden="true"></canvas>
 <section class="screen" id="s2" aria-label="Unlock your chances">
- <canvas id="confetti2" aria-hidden="true"></canvas>
  <div class="page">
   <div class="deal rise" role="status">Up to 60% off ends in <span class="timer" id="timer">15:00</span></div>
-  <h1 class="h blend rise">Your profile is <svg class="rd" viewBox="4.5 -70.0 193.8 96.3" aria-label="ready" role="img"><path class="rdf" style="transition-delay:0.84s" d="M11.9-3.5L11.9-3.5Q11-4.2 10.7-4.9Q10.3-5.6 10.6-7.6L10.6-7.6Q10.9-10.4 11.4-12.6Q11.9-14.7 12.6-17.5L12.6-17.5Q12.8-18.7 13.8-21.6Q14.7-24.5 16.1-27.9Q17.5-31.3 18.9-34.4Q20.3-37.4 21.3-38.9L21.3-38.9Q22.1-39.5 23.3-39.4Q24.4-39.3 25.2-38.5L25.2-38.5Q26.3-37.6 25.6-35.4Q24.8-33.1 22.5-28.3L22.5-28.3Q21.3-25.6 20.7-24.3Q20.1-22.9 20.2-22.7Q20.3-22.4 21.1-22.9L21.1-22.9Q21.7-24 23.3-25.5Q24.9-26.9 26.7-28.3Q28.5-29.7 30.1-30.8Q31.7-31.9 32.3-32.2L32.3-32.2Q33.1-32.7 34.1-33.1Q35.2-33.4 35.6-33.6L35.6-33.6Q37.9-34.7 40.3-34.4Q42.7-34.1 43.3-32.6L43.3-32.6Q43.4-31.8 44.0-31.4Q44.5-31 44.5-31L44.5-31Q44.9-31 45.0-30.7Q45-30.4 45-30.4L45-30.4Q45-29.7 44.0-29.6Q42.9-29.4 41.3-29.3L41.3-29.3Q40-29.2 39-28.8Q38-28.4 36.6-27.8L36.6-27.8Q32.8-25.6 29.4-23.5Q25.9-21.4 22.7-17.9L22.7-17.9Q22-17.1 21.3-16Q20.6-14.9 19.8-13.6L19.8-13.6Q19.3-13.1 18.8-11.4Q18.3-9.7 17.9-8.2Q17.6-6.6 17.6-6.3L17.6-6.3Q17.6-6.3 17.3-5.4Q17-4.4 16.3-3.5L16.3-3.5Q15.1-1.9 14.3-1.9Q13.5-1.9 11.9-3.5Z"/><path class="rds" pathLength="1" style="transition-delay:0.45s" d="M11.9-3.5L11.9-3.5Q11-4.2 10.7-4.9Q10.3-5.6 10.6-7.6L10.6-7.6Q10.9-10.4 11.4-12.6Q11.9-14.7 12.6-17.5L12.6-17.5Q12.8-18.7 13.8-21.6Q14.7-24.5 16.1-27.9Q17.5-31.3 18.9-34.4Q20.3-37.4 21.3-38.9L21.3-38.9Q22.1-39.5 23.3-39.4Q24.4-39.3 25.2-38.5L25.2-38.5Q26.3-37.6 25.6-35.4Q24.8-33.1 22.5-28.3L22.5-28.3Q21.3-25.6 20.7-24.3Q20.1-22.9 20.2-22.7Q20.3-22.4 21.1-22.9L21.1-22.9Q21.7-24 23.3-25.5Q24.9-26.9 26.7-28.3Q28.5-29.7 30.1-30.8Q31.7-31.9 32.3-32.2L32.3-32.2Q33.1-32.7 34.1-33.1Q35.2-33.4 35.6-33.6L35.6-33.6Q37.9-34.7 40.3-34.4Q42.7-34.1 43.3-32.6L43.3-32.6Q43.4-31.8 44.0-31.4Q44.5-31 44.5-31L44.5-31Q44.9-31 45.0-30.7Q45-30.4 45-30.4L45-30.4Q45-29.7 44.0-29.6Q42.9-29.4 41.3-29.3L41.3-29.3Q40-29.2 39-28.8Q38-28.4 36.6-27.8L36.6-27.8Q32.8-25.6 29.4-23.5Q25.9-21.4 22.7-17.9L22.7-17.9Q22-17.1 21.3-16Q20.6-14.9 19.8-13.6L19.8-13.6Q19.3-13.1 18.8-11.4Q18.3-9.7 17.9-8.2Q17.6-6.6 17.6-6.3L17.6-6.3Q17.6-6.3 17.3-5.4Q17-4.4 16.3-3.5L16.3-3.5Q15.1-1.9 14.3-1.9Q13.5-1.9 11.9-3.5Z"/><path class="rdf" style="transition-delay:1.14s" d="M63.6-3.5L63.6-3.5Q61.5-1.7 58.8-1.4Q56-1.1 53.4-2.3Q50.8-3.4 49.1-5.8L49.1-5.8Q47.4-8 46.9-10.9Q46.4-13.7 46.8-18.3L46.8-18.3Q47.1-22.2 49.3-26.2Q51.5-30.1 54.7-33.2Q57.8-36.3 60.9-37.5L60.9-37.5Q62.4-38.5 63.5-38.5Q64.5-38.4 66.7-38.2L66.7-38.2Q69-37.9 70.2-37.3Q71.3-36.7 72-35.7L72-35.7Q73.5-34.2 74-32.8Q74.5-31.3 74.5-29.9L74.5-29.9Q74.1-27.7 71.6-24.6Q69-21.4 64.9-19.4L64.9-19.4Q62.7-18.7 60.1-18.8Q57.5-18.9 55.8-20.1L55.8-20.1Q53.9-20.9 53.3-19.9Q52.7-18.8 52.2-14.8L52.2-14.8Q51.8-11 52.8-9.3Q53.8-7.5 55.5-7.2L55.5-7.2Q57.5-6.8 58.7-6.7Q59.8-6.5 61.5-7.5L61.5-7.5Q63.1-8.5 63.5-8.7Q63.9-8.8 64.2-9.1Q64.4-9.3 65.4-10.3L65.4-10.3Q66.1-11 66.5-11.4Q66.9-11.7 67.4-11.7L67.4-11.7Q67.9-11.7 68.3-11.3Q68.7-10.8 69.1-10.6L69.1-10.6Q70.1-10.6 69.6-9.4Q69-8.2 67.4-6.6Q65.8-4.9 63.6-3.5ZM63.5-24.7L63.5-24.7Q64.6-25.2 65.8-26.2Q67-27.1 67.8-28.3Q68.7-29.4 68.7-30.2L68.7-30.2Q68.7-31.6 67.4-32.6Q66.1-33.5 63.5-32.8L63.5-32.8Q62.4-32.5 61-31.4Q59.6-30.2 58.4-28.8Q57.1-27.4 56.4-26.3Q55.6-25.2 55.8-25L55.8-25Q56.1-24.5 57.5-24.3Q58.9-24 60.7-24.1Q62.4-24.2 63.5-24.7Z"/><path class="rds" pathLength="1" style="transition-delay:0.75s" d="M63.6-3.5L63.6-3.5Q61.5-1.7 58.8-1.4Q56-1.1 53.4-2.3Q50.8-3.4 49.1-5.8L49.1-5.8Q47.4-8 46.9-10.9Q46.4-13.7 46.8-18.3L46.8-18.3Q47.1-22.2 49.3-26.2Q51.5-30.1 54.7-33.2Q57.8-36.3 60.9-37.5L60.9-37.5Q62.4-38.5 63.5-38.5Q64.5-38.4 66.7-38.2L66.7-38.2Q69-37.9 70.2-37.3Q71.3-36.7 72-35.7L72-35.7Q73.5-34.2 74-32.8Q74.5-31.3 74.5-29.9L74.5-29.9Q74.1-27.7 71.6-24.6Q69-21.4 64.9-19.4L64.9-19.4Q62.7-18.7 60.1-18.8Q57.5-18.9 55.8-20.1L55.8-20.1Q53.9-20.9 53.3-19.9Q52.7-18.8 52.2-14.8L52.2-14.8Q51.8-11 52.8-9.3Q53.8-7.5 55.5-7.2L55.5-7.2Q57.5-6.8 58.7-6.7Q59.8-6.5 61.5-7.5L61.5-7.5Q63.1-8.5 63.5-8.7Q63.9-8.8 64.2-9.1Q64.4-9.3 65.4-10.3L65.4-10.3Q66.1-11 66.5-11.4Q66.9-11.7 67.4-11.7L67.4-11.7Q67.9-11.7 68.3-11.3Q68.7-10.8 69.1-10.6L69.1-10.6Q70.1-10.6 69.6-9.4Q69-8.2 67.4-6.6Q65.8-4.9 63.6-3.5ZM63.5-24.7L63.5-24.7Q64.6-25.2 65.8-26.2Q67-27.1 67.8-28.3Q68.7-29.4 68.7-30.2L68.7-30.2Q68.7-31.6 67.4-32.6Q66.1-33.5 63.5-32.8L63.5-32.8Q62.4-32.5 61-31.4Q59.6-30.2 58.4-28.8Q57.1-27.4 56.4-26.3Q55.6-25.2 55.8-25L55.8-25Q56.1-24.5 57.5-24.3Q58.9-24 60.7-24.1Q62.4-24.2 63.5-24.7Z"/><path class="rdf" style="transition-delay:1.44s" d="M79.2-3.6L79.2-3.6Q78.8-4.4 78.2-4.9Q77.6-5.3 77.6-5.7L77.6-5.7Q77.6-6.1 77.5-6.6Q77.5-7 77.1-7.4L77.1-7.4Q76.6-8 77.2-10.2Q77.8-12.3 79.2-15.5Q80.6-18.6 82.5-22.1L82.5-22.1Q83.3-22.9 84.1-24.2Q84.9-25.5 85.3-25.9L85.3-25.9Q85.3-26.3 85.6-26.7Q85.9-27 86.3-27L86.3-27L86.3-27.6Q86.3-28.1 87.3-29.3Q88.2-30.5 89.6-32.0Q91-33.4 92.5-34.8Q94-36.1 95-36.7L95-36.7Q97.1-38.1 99.3-38.4Q101.6-38.7 103.2-37.4L103.2-37.4Q103.5-37.1 104.2-36.4Q104.9-35.7 105.8-34.9Q106.8-34 107.8-33.1L107.8-33.1L111.5-29.8L109.7-24.8Q108.4-20.8 109.1-17.8Q109.7-14.8 111-12.6L111-12.6Q111.5-11.5 113.1-10.5Q114.6-9.5 116-9.3L116-9.3Q116.8-9.2 117.5-8.7Q118.2-8.2 118.2-7.1L118.2-7.1Q118.2-6.1 117.8-5.5Q117.4-4.9 116.4-4.7L116.4-4.7Q113.1-4.3 110.3-6.3Q107.4-8.3 105-12.9L105-12.9Q104.6-13.5 104.0-15.2Q103.3-16.8 103.2-17.3L103.2-17.3Q102.8-16.8 101.7-15.5Q100.6-14.1 100-13.5L100-13.5Q92.9-6.3 87.8-3.9Q82.6-1.4 79.2-3.6ZM82.8-9.2L82.8-9.2Q82.8-8.5 85.0-9.3Q87.1-10 89.6-12L89.6-12Q93-14.9 96.5-18.4Q99.9-21.9 102-24.9L102-24.9L104.2-28.5Q103.2-30.8 102.1-31.7Q100.9-32.5 100.1-32.5L100.1-32.5Q98.8-32.5 96.3-30.1Q93.7-27.7 90.8-23.7Q87.9-19.7 85.3-14.9L85.3-14.9Q84.3-12.9 83.5-11.1Q82.8-9.2 82.8-9.2Z"/><path class="rds" pathLength="1" style="transition-delay:1.05s" d="M79.2-3.6L79.2-3.6Q78.8-4.4 78.2-4.9Q77.6-5.3 77.6-5.7L77.6-5.7Q77.6-6.1 77.5-6.6Q77.5-7 77.1-7.4L77.1-7.4Q76.6-8 77.2-10.2Q77.8-12.3 79.2-15.5Q80.6-18.6 82.5-22.1L82.5-22.1Q83.3-22.9 84.1-24.2Q84.9-25.5 85.3-25.9L85.3-25.9Q85.3-26.3 85.6-26.7Q85.9-27 86.3-27L86.3-27L86.3-27.6Q86.3-28.1 87.3-29.3Q88.2-30.5 89.6-32.0Q91-33.4 92.5-34.8Q94-36.1 95-36.7L95-36.7Q97.1-38.1 99.3-38.4Q101.6-38.7 103.2-37.4L103.2-37.4Q103.5-37.1 104.2-36.4Q104.9-35.7 105.8-34.9Q106.8-34 107.8-33.1L107.8-33.1L111.5-29.8L109.7-24.8Q108.4-20.8 109.1-17.8Q109.7-14.8 111-12.6L111-12.6Q111.5-11.5 113.1-10.5Q114.6-9.5 116-9.3L116-9.3Q116.8-9.2 117.5-8.7Q118.2-8.2 118.2-7.1L118.2-7.1Q118.2-6.1 117.8-5.5Q117.4-4.9 116.4-4.7L116.4-4.7Q113.1-4.3 110.3-6.3Q107.4-8.3 105-12.9L105-12.9Q104.6-13.5 104.0-15.2Q103.3-16.8 103.2-17.3L103.2-17.3Q102.8-16.8 101.7-15.5Q100.6-14.1 100-13.5L100-13.5Q92.9-6.3 87.8-3.9Q82.6-1.4 79.2-3.6ZM82.8-9.2L82.8-9.2Q82.8-8.5 85.0-9.3Q87.1-10 89.6-12L89.6-12Q93-14.9 96.5-18.4Q99.9-21.9 102-24.9L102-24.9L104.2-28.5Q103.2-30.8 102.1-31.7Q100.9-32.5 100.1-32.5L100.1-32.5Q98.8-32.5 96.3-30.1Q93.7-27.7 90.8-23.7Q87.9-19.7 85.3-14.9L85.3-14.9Q84.3-12.9 83.5-11.1Q82.8-9.2 82.8-9.2Z"/><path class="rdf" style="transition-delay:1.74s" d="M148.4 1.9L148.4 1.9Q147.1 2.2 146.3 1.6Q145.4 0.9 145-0.3L145-0.3Q144.2-2.6 143.8-5.4Q143.5-8.1 143.7-10.2L143.7-10.2L143.9-12.3L140-9.2Q136.6-6.2 133.4-4.9Q130.3-3.6 127.9-3.6L127.9-3.6Q126.8-3.8 125.7-4.4Q124.6-5 123.8-5.9Q122.9-6.8 122.4-7.8L122.4-7.8Q121.8-9.2 122.1-11.6Q122.3-14 123.3-16.9Q124.2-19.7 125.7-22.5Q127.1-25.2 129-27.3L129-27.3Q132.3-32.3 136.1-33.4Q139.9-34.5 143.6-32.3L143.6-32.3Q146.2-31.2 146.8-31.3Q147.5-31.4 148-33.6L148-33.6Q148.4-35.2 148.8-36.9Q149.2-38.5 150.1-41.3L150.1-41.3Q152.6-48.9 154.4-53.2Q156.3-57.5 157.8-60.7L157.8-60.7Q158.9-63 159.7-63.6Q160.4-64.1 161.2-64L161.2-64Q162.3-64 163.2-63.2Q164.1-62.4 164.6-61L164.6-61Q165-60.1 164.9-59.5Q164.9-58.8 164.3-57.7L164.3-57.7Q163-55.3 161.3-51.4Q159.5-47.4 157.8-42.7Q156-38 154.5-33.4Q153-28.8 152-25.3L152-25.3Q151.4-23.1 150.9-19.7Q150.5-16.3 150.2-12.8Q149.9-9.2 149.8-6.5Q149.8-3.7 150-2.9L150-2.9Q150.6-0.9 150.6 0.1Q150.5 1.1 150 1.5Q149.5 1.8 148.4 1.9ZM131.5-9.2L131.5-9.2Q132.9-9.5 134.3-10.3Q135.6-11.1 137.1-12.2L137.1-12.2Q140.1-14.5 142.3-16.4Q144.5-18.3 145.2-22.2L145.2-22.2Q145.4-24.1 144.8-25.3Q144.3-26.4 143.1-27.4L143.1-27.4Q141.9-28.2 139.8-28.1Q137.8-27.9 135.6-25.9L135.6-25.9Q133.2-23.7 130.9-20Q128.7-16.3 127.6-10.9L127.6-10.9Q127.4-9.9 128.2-9.3Q129-8.7 131.5-9.2Z"/><path class="rds" pathLength="1" style="transition-delay:1.35s" d="M148.4 1.9L148.4 1.9Q147.1 2.2 146.3 1.6Q145.4 0.9 145-0.3L145-0.3Q144.2-2.6 143.8-5.4Q143.5-8.1 143.7-10.2L143.7-10.2L143.9-12.3L140-9.2Q136.6-6.2 133.4-4.9Q130.3-3.6 127.9-3.6L127.9-3.6Q126.8-3.8 125.7-4.4Q124.6-5 123.8-5.9Q122.9-6.8 122.4-7.8L122.4-7.8Q121.8-9.2 122.1-11.6Q122.3-14 123.3-16.9Q124.2-19.7 125.7-22.5Q127.1-25.2 129-27.3L129-27.3Q132.3-32.3 136.1-33.4Q139.9-34.5 143.6-32.3L143.6-32.3Q146.2-31.2 146.8-31.3Q147.5-31.4 148-33.6L148-33.6Q148.4-35.2 148.8-36.9Q149.2-38.5 150.1-41.3L150.1-41.3Q152.6-48.9 154.4-53.2Q156.3-57.5 157.8-60.7L157.8-60.7Q158.9-63 159.7-63.6Q160.4-64.1 161.2-64L161.2-64Q162.3-64 163.2-63.2Q164.1-62.4 164.6-61L164.6-61Q165-60.1 164.9-59.5Q164.9-58.8 164.3-57.7L164.3-57.7Q163-55.3 161.3-51.4Q159.5-47.4 157.8-42.7Q156-38 154.5-33.4Q153-28.8 152-25.3L152-25.3Q151.4-23.1 150.9-19.7Q150.5-16.3 150.2-12.8Q149.9-9.2 149.8-6.5Q149.8-3.7 150-2.9L150-2.9Q150.6-0.9 150.6 0.1Q150.5 1.1 150 1.5Q149.5 1.8 148.4 1.9ZM131.5-9.2L131.5-9.2Q132.9-9.5 134.3-10.3Q135.6-11.1 137.1-12.2L137.1-12.2Q140.1-14.5 142.3-16.4Q144.5-18.3 145.2-22.2L145.2-22.2Q145.4-24.1 144.8-25.3Q144.3-26.4 143.1-27.4L143.1-27.4Q141.9-28.2 139.8-28.1Q137.8-27.9 135.6-25.9L135.6-25.9Q133.2-23.7 130.9-20Q128.7-16.3 127.6-10.9L127.6-10.9Q127.4-9.9 128.2-9.3Q129-8.7 131.5-9.2Z"/><path class="rdf" style="transition-delay:2.04s" d="M159.4 19.9L159.4 19.9Q157 20.6 154.2 20.2Q151.3 19.7 149.2 18.4Q147 17.1 146.7 15.5L146.7 15.5Q146.6 14.9 147.1 14.2Q147.5 13.5 148.2 13.3Q148.8 13 149.3 13.6L149.3 13.6Q150.1 14.1 152.2 14.9Q154.3 15.6 156.9 15.1L156.9 15.1Q159.2 14.6 161.4 12.4Q163.7 10.2 165.1 8.3L165.1 8.3Q165.9 7.1 167.8 4Q169.7 0.9 171.8-2.9Q173.8-6.6 175.2-9.8L175.2-9.8Q175.5-10.6 175.9-11.7Q176.3-12.8 176.9-13.5L176.9-13.5Q177.5-14.7 177.9-15.8Q178.4-16.8 178.5-17.2L178.5-17.2Q178.6-17.7 179.4-19.2Q180.2-20.7 180.9-22.2L180.9-22.2Q181.4-23.7 182.4-26.6Q183.4-29.5 184.4-31.3L184.4-31.3Q185.6-33.6 186.3-35.1Q187.1-36.5 188-36.8L188-36.8L188-36.8L188-36.8Q188.9-37.5 189.3-37.5Q189.6-37.5 190.7-36.9L190.7-36.9Q191.9-35.7 192.2-34.6Q192.5-33.4 191.9-31.8Q191.4-30.1 189.9-27.3L189.9-27.3Q189.1-24.9 188.2-23.0Q187.2-21 186.7-20.4L186.7-20.4Q186.2-19.2 185.6-17.8Q184.9-16.3 184.4-15.1L184.4-15.1Q182.6-11.1 181.3-8.6Q180-6.1 179-4Q178-1.9 176.9 0.9L176.9 0.9Q174.6 4.6 172.4 8.0Q170.3 11.3 167.9 14.2L167.9 14.2Q166.9 15.1 165.4 16.3Q163.9 17.5 162.3 18.5Q160.8 19.5 159.4 19.9ZM172.9-4.1L172.9-4.1Q171.4-4.3 169.9-5.9Q168.5-7.5 167.7-9.3Q166.9-11.1 167.1-11.9L167.1-11.9Q167.1-12.4 167.1-12.7Q167.1-13 167.1-13L167.1-13Q166.5-13 166.1-14.5Q165.6-16 165.4-18.4Q165.2-20.8 165.2-23.5Q165.1-26.2 165.3-28.6L165.3-28.6Q165.7-30.3 165.7-32.4Q165.7-34.4 165.8-35.6L165.8-35.6Q165.7-37.2 166.1-37.8Q166.5-38.3 166.9-38.6L166.9-38.6L166.9-38.6L166.9-38.6Q169.7-39.8 170.7-37.1Q171.6-34.5 171.1-27.3L171.1-27.3Q170.9-23.3 171.1-19.3Q171.3-15.3 172.3-12.3Q173.2-9.3 174.9-8.2L174.9-8.2Q175.6-7.8 175.6-7.1Q175.6-6.4 175.2-5.7Q174.8-4.9 174.2-4.5Q173.5-4 172.9-4.1Z"/><path class="rds" pathLength="1" style="transition-delay:1.65s" d="M159.4 19.9L159.4 19.9Q157 20.6 154.2 20.2Q151.3 19.7 149.2 18.4Q147 17.1 146.7 15.5L146.7 15.5Q146.6 14.9 147.1 14.2Q147.5 13.5 148.2 13.3Q148.8 13 149.3 13.6L149.3 13.6Q150.1 14.1 152.2 14.9Q154.3 15.6 156.9 15.1L156.9 15.1Q159.2 14.6 161.4 12.4Q163.7 10.2 165.1 8.3L165.1 8.3Q165.9 7.1 167.8 4Q169.7 0.9 171.8-2.9Q173.8-6.6 175.2-9.8L175.2-9.8Q175.5-10.6 175.9-11.7Q176.3-12.8 176.9-13.5L176.9-13.5Q177.5-14.7 177.9-15.8Q178.4-16.8 178.5-17.2L178.5-17.2Q178.6-17.7 179.4-19.2Q180.2-20.7 180.9-22.2L180.9-22.2Q181.4-23.7 182.4-26.6Q183.4-29.5 184.4-31.3L184.4-31.3Q185.6-33.6 186.3-35.1Q187.1-36.5 188-36.8L188-36.8L188-36.8L188-36.8Q188.9-37.5 189.3-37.5Q189.6-37.5 190.7-36.9L190.7-36.9Q191.9-35.7 192.2-34.6Q192.5-33.4 191.9-31.8Q191.4-30.1 189.9-27.3L189.9-27.3Q189.1-24.9 188.2-23.0Q187.2-21 186.7-20.4L186.7-20.4Q186.2-19.2 185.6-17.8Q184.9-16.3 184.4-15.1L184.4-15.1Q182.6-11.1 181.3-8.6Q180-6.1 179-4Q178-1.9 176.9 0.9L176.9 0.9Q174.6 4.6 172.4 8.0Q170.3 11.3 167.9 14.2L167.9 14.2Q166.9 15.1 165.4 16.3Q163.9 17.5 162.3 18.5Q160.8 19.5 159.4 19.9ZM172.9-4.1L172.9-4.1Q171.4-4.3 169.9-5.9Q168.5-7.5 167.7-9.3Q166.9-11.1 167.1-11.9L167.1-11.9Q167.1-12.4 167.1-12.7Q167.1-13 167.1-13L167.1-13Q166.5-13 166.1-14.5Q165.6-16 165.4-18.4Q165.2-20.8 165.2-23.5Q165.1-26.2 165.3-28.6L165.3-28.6Q165.7-30.3 165.7-32.4Q165.7-34.4 165.8-35.6L165.8-35.6Q165.7-37.2 166.1-37.8Q166.5-38.3 166.9-38.6L166.9-38.6L166.9-38.6L166.9-38.6Q169.7-39.8 170.7-37.1Q171.6-34.5 171.1-27.3L171.1-27.3Q170.9-23.3 171.1-19.3Q171.3-15.3 172.3-12.3Q173.2-9.3 174.9-8.2L174.9-8.2Q175.6-7.8 175.6-7.1Q175.6-6.4 175.2-5.7Q174.8-4.9 174.2-4.5Q173.5-4 172.9-4.1Z"/></svg></h1>
+  <h1 class="h blend rise">Unlock your chances</h1>
   <ul class="steps row" id="steps">
    <li><span class="tick"><svg><use href="#i-check"/></svg></span>5 schools compared</li>
    <li><span class="tick"><svg><use href="#i-check"/></svg></span>3 issues flagged</li>
@@ -913,12 +1000,16 @@ body.dark .tools{color:#fff}body:not(.dark) .tools{color:var(--ink)}
 
 <div class="tools" aria-label="Prototype controls">
  <button type="button" data-nav="s1" title="1">1 Check</button>
- <button type="button" data-nav="s2" title="2">2 Paywall</button>
- <button type="button" data-nav="s3" title="3">3 Build</button>
- <button type="button" data-nav="s4" title="4">4 Schools</button>
- <button type="button" data-nav="s5" title="5">5 Home</button>
- <button type="button" data-nav="s6" title="6">6 Workshop</button>
- <button type="button" data-nav="s7" title="7">7 Tasks</button>
+ <button type="button" data-nav="sc" title="2">2 Color</button>
+ <button type="button" data-nav="si" title="3">3 Image</button>
+ <button type="button" data-nav="sg" title="4">4 Creating</button>
+ <button type="button" data-nav="sr" title="5">5 Ready</button>
+ <button type="button" data-nav="s2" title="6">6 Paywall</button>
+ <button type="button" data-nav="s3" title="7">7 Build</button>
+ <button type="button" data-nav="s4" title="8">8 Schools</button>
+ <button type="button" data-nav="s5" title="9">9 Home</button>
+ <button type="button" data-nav="s6" title="0">0 Workshop</button>
+ <button type="button" data-nav="s7" title="-">- Tasks</button>
 </div>
 
 <script>
@@ -1039,7 +1130,7 @@ const script=[
 let t0=0,last=0,idx=0,ended=false,endAt=0,raf=0,left=false;
 function swap(el,txt){if(RM||el.textContent===txt){el.textContent=txt;return;}el.classList.add('swap');setTimeout(()=>{el.textContent=txt;el.classList.remove('swap');},180);}
 function apply(ev,t){if(ev.head)setWord(ev.head,false);if(ev.sub!=null)swap(sub,ev.sub);
- if(ev.end){ended=true;endAt=t;swap(sub,'');setTimeout(()=>go('s2'),RM?300:720);}}
+ if(ev.end){ended=true;endAt=t;swap(sub,'');setTimeout(()=>go('sc'),RM?300:720);}}
 function frame(now){const dt=Math.min(0.05,(now-last)/1000),wdt=Math.min(1.5,(now-last)/1000);last=now;const t=(now-t0)/1000;
  while(idx<script.length&&t>=script[idx].t){apply(script[idx],t);idx++;}
  const warp=ended?Math.min(1,(t-endAt)/0.9):0;const mul=1+warp*warp*9;
@@ -1058,11 +1149,28 @@ let readyTimers=[];
 /* confetti for the ready moment: one short burst from behind the headline, brand blues with a little yellow and coral */
 const c2=$('confetti2'),c2x=c2.getContext('2d');let cf=[],cfRaf=0,cfLast=0;const CFC=['#0059FF','#2F6BFF','#00B3FF','#7FD4FF','#BFE3FF','#FFFFFF','#0A3DFF','#FFC53D'];
 function cfSize(){const d=Math.min(2,devicePixelRatio||1);c2.width=innerWidth*d;c2.height=innerHeight*d;c2x.setTransform(d,0,0,d,0,0);}
-function cfBurst(){if(RM)return;cfSize();const h=document.querySelector('#s2 .h').getBoundingClientRect();const y0=h.top+h.height*0.6;for(let i=0;i<150;i++){const left=i%2===0;const a=left?rnd(-0.95,-0.15):Math.PI-rnd(-0.15,0.95)*-1;const ang=left?rnd(-0.9,-0.1):Math.PI+rnd(0.1,0.9);const v=rnd(700,1400);cf.push({x:left?-12:innerWidth+12,y:y0+rnd(-80,120),vx:Math.cos(ang)*v,vy:Math.sin(ang)*v,w:rnd(5,9),h:rnd(3,6),r:rnd(0,6.28),vr:rnd(-9,9),c:CFC[(Math.random()*CFC.length)|0],life:0,ttl:rnd(1.6,2.4),ph:rnd(0,6.28)});}if(!cfRaf){cfLast=performance.now();cfRaf=requestAnimationFrame(cfFrame);}}
+function cfBurst(){if(RM)return;cfSize();const h=(document.querySelector('#sr .pcard')||document.querySelector('#s2 .h')).getBoundingClientRect();const y0=h.top+h.height*0.5;for(let i=0;i<150;i++){const left=i%2===0;const a=left?rnd(-0.95,-0.15):Math.PI-rnd(-0.15,0.95)*-1;const ang=left?rnd(-0.9,-0.1):Math.PI+rnd(0.1,0.9);const v=rnd(700,1400);cf.push({x:left?-12:innerWidth+12,y:y0+rnd(-80,120),vx:Math.cos(ang)*v,vy:Math.sin(ang)*v,w:rnd(5,9),h:rnd(3,6),r:rnd(0,6.28),vr:rnd(-9,9),c:CFC[(Math.random()*CFC.length)|0],life:0,ttl:rnd(1.6,2.4),ph:rnd(0,6.28)});}if(!cfRaf){cfLast=performance.now();cfRaf=requestAnimationFrame(cfFrame);}}
 function cfFrame(now){const dt=Math.min(0.1,(now-cfLast)/1000);cfLast=now;c2x.clearRect(0,0,innerWidth,innerHeight);for(const p of cf){p.life+=dt;p.vy+=1300*dt;p.vx*=Math.exp(-1.6*dt);p.vy*=Math.exp(-0.9*dt);p.x+=p.vx*dt;p.y+=p.vy*dt;p.r+=p.vr*dt;const a=Math.min(1,Math.max(0,(p.ttl-p.life)/0.6));c2x.save();c2x.translate(p.x,p.y);c2x.rotate(p.r);c2x.globalAlpha=a;c2x.fillStyle=p.c;const hh=Math.max(1.2,p.h*Math.abs(Math.cos(p.life*6+p.ph)));c2x.beginPath();c2x.roundRect(-p.w/2,-hh/2,p.w,hh,1.5);c2x.fill();c2x.restore();}cf=cf.filter(p=>p.life<p.ttl&&p.y<innerHeight+40);if(cf.length)cfRaf=requestAnimationFrame(cfFrame);else{cfRaf=0;c2x.clearRect(0,0,innerWidth,innerHeight);}}
 function runReady(){readyTimers.forEach(clearTimeout);readyTimers=[];const sr=$('s2'),lis=[...$('steps').children];sr.classList.remove('ready');lis.forEach(l=>l.classList.remove('live','done'));
  const T=RM?80:420;lis.forEach((li,i)=>{readyTimers.push(setTimeout(()=>{li.classList.add('live');},600+i*T));readyTimers.push(setTimeout(()=>{li.classList.remove('live');li.classList.add('done');},600+i*T+T*0.85));});
- readyTimers.push(setTimeout(()=>{sr.classList.add('ready');cfBurst();},600+lis.length*T+150));}
+ readyTimers.push(setTimeout(()=>{sr.classList.add('ready');},600+lis.length*T+150));}
+
+/* ---------- profile creation ---------- */
+let pcColor='#0059FF',pcEmoji='🎓';
+function luma(h){const n=parseInt(h.slice(1),16);return (0.2126*(n>>16)+0.7152*((n>>8)&255)+0.0722*(n&255))/255;}
+function applyProfile(){document.documentElement.style.setProperty('--pc',pcColor);$('avprev').textContent=pcEmoji;$('pcEm').textContent=pcEmoji;$('pcard').classList.toggle('light',luma(pcColor)>0.7);}
+document.querySelectorAll('.sw').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.sw').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-checked',x===b);});pcColor=b.dataset.c;applyProfile();}));
+document.querySelectorAll('.em').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.em').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-checked',x===b);});pcEmoji=b.textContent;applyProfile();const p=$('avprev');p.classList.remove('bump');void p.offsetWidth;p.classList.add('bump');}));
+applyProfile();
+/* creating: a quiet grid where short dashes travel and fade (Family's "cryptographic magic" moment) */
+const dc=$('dashes'),dctx=dc.getContext('2d');let dRaf=0,dT0=0,dashes=[];
+function newDash(){const h=Math.random()<0.7;return{x:Math.random()*320,y:Math.random()*180,h,l:12+Math.random()*34,v:(h?1:0.6)*(0.4+Math.random()*0.8)*(Math.random()<0.5?-1:1),a:0,t:0,ttl:1.2+Math.random()*1.6};}
+function dFrame(now){if(!dT0){dT0=now;}const dt=Math.min(0.1,(now-(dFrame.last||now))/1000);dFrame.last=now;dctx.setTransform(2,0,0,2,0,0);dctx.clearRect(0,0,320,180);
+ dctx.strokeStyle='#EEF0F3';dctx.lineWidth=1;for(let x=0.5;x<=320;x+=32){dctx.beginPath();dctx.moveTo(x,0);dctx.lineTo(x,180);dctx.stroke();}for(let y=0.5;y<=180;y+=32){dctx.beginPath();dctx.moveTo(0,y);dctx.lineTo(320,y);dctx.stroke();}
+ while(dashes.length<34)dashes.push(newDash());
+ for(const d of dashes){d.t+=dt;const k=d.t/d.ttl;d.a=Math.sin(Math.min(1,k)*Math.PI);if(d.h)d.x+=d.v*40*dt;else d.y+=d.v*40*dt;dctx.strokeStyle='rgba(60,64,72,'+(0.55*d.a).toFixed(3)+')';dctx.lineWidth=3;dctx.lineCap='round';dctx.beginPath();if(d.h){dctx.moveTo(d.x,d.y);dctx.lineTo(d.x+d.l,d.y);}else{dctx.moveTo(d.x,d.y);dctx.lineTo(d.x,d.y+d.l);}dctx.stroke();}
+ dashes=dashes.filter(d=>d.t<d.ttl);dRaf=requestAnimationFrame(dFrame);}
+let sgTimer=0;function runCreating(){cancelAnimationFrame(dRaf);dT0=0;dFrame.last=0;dashes=[];dRaf=requestAnimationFrame(dFrame);const subs=['Putting your transcript, scores and schools together…','Checking 5 schools against last year\'s admits…','Writing your fix plan…'];let i=0;$('sgsub').textContent=subs[0];clearInterval(sgTimer);sgTimer=setInterval(()=>{i++;if(i<subs.length)swap($('sgsub'),subs[i]);},1100);setTimeout(()=>{clearInterval(sgTimer);if(cur==='sg'){cancelAnimationFrame(dRaf);go('sr');}},RM?600:3400);}
 
 /* ---------- 02 · promo ---------- */
 let promoEnd=0,timerId=0;function tick(){const ms=Math.max(0,promoEnd-Date.now());const m=Math.floor(ms/60000),sec=Math.floor(ms/1000)%60;const el=$('timer');el.textContent=String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');(el.closest('.promo')||el.closest('.deal')).classList.toggle('hot',ms<60000);if(ms<=0)clearInterval(timerId);}
@@ -1104,11 +1212,12 @@ function runProc(){procTimers.forEach(clearTimeout);procTimers=[];const ul=$('li
  const step=RM?300:1200;PROC.forEach((row,i)=>{procTimers.push(setTimeout(()=>{$('ptxt').textContent=row[0];const li=document.createElement('li');li.className='live';li.innerHTML=`<span class="tick"><svg><use href="#i-check"/></svg></span><span class="cur">${row[1]}</span><span class="val"></span>`;ul.appendChild(li);requestAnimationFrame(()=>li.classList.add('show'));
   const pct=Math.round((i+0.5)/PROC.length*100);$('pfill').style.width=pct+'%';$('ppct').textContent=pct+'%';
   procTimers.push(setTimeout(()=>{li.classList.remove('live');li.querySelector('.cur').classList.remove('cur');const v=li.querySelector('.val');v.textContent=row[2];v.classList.add('hot');},step*0.75));},300+i*step));});
- procTimers.push(setTimeout(()=>{$('ptxt').textContent='Reveal ready';$('pfill').style.width='100%';$('ppct').textContent='100%';morphDone();$('phead').textContent='Done. Your reveal is ready.';$('plead').textContent='Opening your chances…';},300+PROC.length*step));
- procTimers.push(setTimeout(()=>{if(cur==='s3'){go('s4');setTimeout(morphStop,600);}},300+PROC.length*step+1500));}
+ procTimers.push(setTimeout(()=>{$('ptxt').textContent='Reveal ready';$('pfill').style.width='100%';$('ppct').textContent='100%';morphDone();$('plead').textContent='';},300+PROC.length*step));
+ procTimers.push(setTimeout(()=>{if(cur==='s3'){$('s3').classList.add('reveal');}},300+PROC.length*step+900));
+ procTimers.push(setTimeout(()=>{if(cur==='s3'){$('app').classList.add('enter');go('s5');setTimeout(()=>{morphStop();$('s3').classList.remove('reveal');$('app').classList.remove('enter');},900);}},300+PROC.length*step+1500));}
 
 /* ---------- router ---------- */
-const APP={s4:1,s5:1,s6:1,s7:1};const ORDER={s5:0,s4:1,s6:2,s7:3};let cur='s1';
+const APP={s4:1,s5:1,s6:1,s7:1};const NOGLOW={sc:1,si:1,sg:1};const ORDER={s5:0,s4:1,s6:2,s7:3};let cur='s1';
 let curPg=null;function showPage(id){const next=$('pg-'+id);const prev=curPg;const dir=prev&&ORDER[id]<ORDER[prev.id.slice(3)]?-1:1;document.documentElement.style.setProperty('--dir',dir);if(prev&&prev!==next&&!RM){prev.classList.add('out');setTimeout(()=>{prev.classList.remove('on','out');},150);}else{document.querySelectorAll('.pg').forEach(p=>{if(p!==next)p.classList.remove('on','out');});}next.classList.remove('out');next.classList.add('on');curPg=next;document.querySelectorAll('.rm-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.page===id));let first=true;document.querySelectorAll('.rm-it').forEach(b=>{const on=b.dataset.page===id&&first&&(id!=='s4'||b.dataset.school===curSchool);if(on)first=false;b.classList.toggle('on',on);});$('rmmain').scrollTop=0;
  const pg=$('pg-'+id);[...pg.querySelectorAll('.crumb,.rm-h1,.rm-sub,.nums,.rm-cards .rm-card,.rm-h2,.rm-li,.rm-row,.rm-actions')].forEach((el,i)=>el.style.setProperty('--i',Math.min(i,10)));
  pg.querySelectorAll('.nums [data-v]').forEach(countUp);requestAnimationFrame(moveInd);}
@@ -1146,10 +1255,10 @@ $('contSat').addEventListener('click',()=>toast('SAT plan · next session Tuesda
 function go(id){if(cur===id&&id!=='s1')return;const prev=cur;cur=id;
  document.querySelectorAll('.tools button').forEach(b=>b.classList.toggle('on',b.dataset.nav===id));
  if(id==='s1'){glow.classList.remove('on');document.body.classList.add('dark');document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id==='s1'));startCheck();return;}
- document.body.classList.remove('dark');glow.classList.toggle('on',!APP[id]);
+ document.body.classList.remove('dark');glow.classList.toggle('on',!APP[id]&&!NOGLOW[id]);
  const sec=x=>APP[x]?'app':x;if(prev==='s1'){s1.classList.add('leave');setTimeout(()=>{s1.classList.remove('on');stopCheck();},RM?0:560);}else if(sec(prev)!==sec(id)){$(sec(prev)).classList.remove('on');}
  if(APP[id])showPage(id);requestAnimationFrame(()=>{$(sec(id)).classList.add('on');});
- if(id==='s2'){runReady();startPromo();}if(id==='s3')runProc();}
+ if(id==='s2'){runReady();startPromo();}if(id==='s3')runProc();if(id==='sg')runCreating();if(id==='sr'&&!RM)setTimeout(cfBurst,900);if(id==='sc'||id==='si')glow.classList.remove('on');}
 document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.nav)));
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
@@ -1160,7 +1269,7 @@ $('startfix').addEventListener('click',()=>{go('s6');toast('Opened the Yale fix 
 document.querySelectorAll('.switch').forEach(sw=>sw.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{sw.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');})));
 document.querySelectorAll('.task').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('done')));
 addEventListener('pointermove',e=>{mx=(e.clientX/W-0.5)*2;my=(e.clientY/H-0.5)*2;},{passive:true});addEventListener('pointerleave',()=>{mx=my=0;});
-addEventListener('keydown',e=>{if(e.target===cmdkIn)return;const map={'1':'s1','2':'s2','3':'s3','4':'s4','5':'s5','6':'s6','7':'s7'};if(map[e.key])go(map[e.key]);if(e.key==='r'||e.key==='R')go('s1');});
+addEventListener('keydown',e=>{if(e.target===cmdkIn)return;const map={'1':'s1','2':'sc','3':'si','4':'sg','5':'sr','6':'s2','7':'s3','8':'s4','9':'s5','0':'s6','-':'s7'};if(map[e.key])go(map[e.key]);if(e.key==='r'||e.key==='R')go('s1');});
 function start(){buildSprites();fit();document.querySelector('.tools button').classList.add('on');startCheck();}
 const ready=[loadLogos()];if(document.fonts&&document.fonts.load)ready.push(document.fonts.load('600 64px "Inter Tight"'),document.fonts.load('700 34px "Inter Tight"'),document.fonts.load('500 14px Inter'));Promise.all(ready).then(start,start);
 })();
