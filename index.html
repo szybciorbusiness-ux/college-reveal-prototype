@@ -1134,7 +1134,8 @@ button.ws-row{cursor:pointer}
 .ed-bar b{font-size:14.5px}
 @media (max-width:1180px){.muted.inline{display:none}.sc-hero{align-items:flex-start;flex-direction:column;gap:14px}}
 #s2{background:#FAFAFA}
-#s2 .plans3 .chk .ico{display:block;width:12px;height:12px;transform:translateY(1px)}
+#s2 .plans3 .chk{display:block;line-height:0}
+#s2 .plans3 .chk .ico{position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;display:block;transform:none}
 .rc-actions{position:relative;z-index:2}
 </style>
 </head>
@@ -1243,9 +1244,9 @@ button.ws-row{cursor:pointer}
    <div class="card checkout">
     <div class="just" id="just">Just <s id="jold">$92</s> <b id="jnew">$49</b> <span class="off" id="joff">−47%</span></div>
         <div class="plans3" role="radiogroup" aria-label="Choose your plan"><i class="psel" aria-hidden="true"></i>
-     <button type="button" class="plan" role="radio" aria-checked="false" data-cta="Start Monthly · $19.99" data-sub="Billed $19.99 every month" data-old="30.75" data-new="19.99" data-off="35"><span class="chk"><svg class="ico"><use href="#i-check"/></svg></span><span class="pn">Monthly</span><span class="pp">$19.99<small> / month</small></span><span class="pd">Billed $19.99 every month</span></button>
-     <button type="button" class="plan on" role="radio" aria-checked="true" data-cta="Start Quarterly · $49" data-sub="Billed $49 every 3 months" data-old="92" data-new="49" data-off="47"><span class="tag">Most popular</span><span class="chk"><svg class="ico"><use href="#i-check"/></svg></span><span class="pn">Quarterly</span><span class="pp">$16.33<small> / month</small></span><span class="pd">Billed $49 every 3 months</span></button>
-     <button type="button" class="plan" role="radio" aria-checked="false" data-cta="Start Yearly · $149" data-sub="Billed $149 every year" data-old="369" data-new="149" data-off="60"><span class="chk"><svg class="ico"><use href="#i-check"/></svg></span><span class="pn">Yearly</span><span class="pp">$12.42<small> / month</small></span><span class="pd">Billed $149 every year</span></button>
+     <button type="button" class="plan" role="radio" aria-checked="false" data-cta="Start Monthly · $19.99" data-sub="Billed $19.99 every month" data-old="30.75" data-new="19.99" data-off="35"><span class="chk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span class="pn">Monthly</span><span class="pp">$19.99<small> / month</small></span><span class="pd">Billed $19.99 every month</span></button>
+     <button type="button" class="plan on" role="radio" aria-checked="true" data-cta="Start Quarterly · $49" data-sub="Billed $49 every 3 months" data-old="92" data-new="49" data-off="47"><span class="tag">Most popular</span><span class="chk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span class="pn">Quarterly</span><span class="pp">$16.33<small> / month</small></span><span class="pd">Billed $49 every 3 months</span></button>
+     <button type="button" class="plan" role="radio" aria-checked="false" data-cta="Start Yearly · $149" data-sub="Billed $149 every year" data-old="369" data-new="149" data-off="60"><span class="chk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span class="pn">Yearly</span><span class="pp">$12.42<small> / month</small></span><span class="pd">Billed $149 every year</span></button>
     </div>
     <button class="cta glossy" id="unlock" type="button"><span id="ctatxt">Start Quarterly · $49</span><small id="ctasub">Billed $49 every 3 months</small></button>
     <div class="reas"><span><svg class="ico"><use href="#i-check"/></svg>Instant access</span><span><svg class="ico"><use href="#i-check"/></svg>Cancel anytime</span><span><svg class="ico"><use href="#i-check"/></svg>Secure checkout</span></div>
