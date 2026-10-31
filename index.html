@@ -1156,6 +1156,34 @@ button.ws-row{cursor:pointer}
 @media (max-height:820px){.rc-wrap{zoom:.9}}
 @media (max-height:720px){.rc-wrap{zoom:.8}}
 @media (max-height:600px){.rc-wrap{zoom:.7}}
+
+/* fix40: school page v2 */
+#pg-s4{max-width:1280px}
+.sc-hero{align-items:center;margin-top:4px;padding-bottom:24px}
+.sc-cta{display:flex;gap:10px;align-items:center}
+.sc-cta .btn{padding:12px 18px;font-size:14px;border-radius:11px}
+.sc2{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;margin-top:22px;align-items:start}
+.sc2-col{display:grid;gap:16px;min-width:0}
+#pg-s4 .hm-card{padding:18px 20px 20px;gap:14px}
+#pg-s4 .plan-steps{margin:0 -8px}
+button.pstep{width:100%;border:0;background:transparent;font-family:var(--sans);text-align:left;cursor:pointer;color:inherit;padding:13px 8px;border-radius:12px;border-top:1px solid #EEEEEE;margin:0}
+button.pstep:first-child{border-top:0}
+button.pstep:hover{background:#F7F7F7}
+#pg-s4 .pstep{grid-template-columns:28px 1fr auto;gap:14px;align-items:start}
+#pg-s4 .pnum{margin-top:-6px}
+#pg-s4 .pstep b{font-size:15px}
+#pg-s4 .pstep span{font-size:13px;margin-top:2px}
+#pg-s4 .pstep .mini-bar{margin-top:9px;max-width:260px;height:6px}
+#pg-s4 .pstep em{font-size:16px;padding-top:2px}
+#pg-s4 .cmp{gap:2px}
+#pg-s4 .cmp-row{grid-template-columns:118px 1fr 180px;padding:9px 0}
+#pg-s4 .chk{padding:10px 0}
+#pg-s4 .chk:first-child{padding-top:2px}
+#pg-s4 .snap-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#pg-s4 .snap-grid div{padding:12px 12px;border-radius:12px;background:#F4F4F4;gap:3px}
+#pg-s4 .snap-grid b{font-size:18px}#pg-s4 .snap-grid span{font-size:12px;line-height:1.25}
+@media (max-width:1180px){.sc2{grid-template-columns:1fr}#pg-s4 .cmp-row{grid-template-columns:100px 1fr 150px}}
+@media (max-width:820px){#pg-s4 .cmp-row{grid-template-columns:90px 1fr 130px}.sc-hero{align-items:flex-start}}
 </style>
 </head>
 <body class="dark">
@@ -1732,54 +1760,49 @@ function renderSchool(k){const d=SD[k];if(!d)return;const gain=d.after-d.now,dSa
  </div>
  <div class="sc-hero">
   <div class="nums"><span class="now" data-v="${d.now}">${d.now}%</span><span class="arr">→</span><span class="after" data-v="${d.after}">${d.after}%</span><span class="cap">after your 3 fixes</span></div>
-  <div class="sc-stats"><div><b>${d.admit}</b><span>admit rate</span></div><div><b>${d.sat[0]}–${d.sat[1]}</b><span>middle 50% SAT</span></div><div><b>${d.apps}</b><span>applicants last year</span></div><div><b>${d.due}</b><span>${d.round.replace('Restrictive ','').replace('Single-Choice ','')} deadline</span></div></div>
+  <div class="sc-cta"><button class="btn ghost" type="button" data-act="editor">Open editor</button><button class="btn" type="button" data-act="fix" id="startfix">Start fixing <svg class="ico"><use href="#i-arrow"/></svg></button></div>
  </div>
- <div class="sc-grid">
-  <section class="hm-card span2">
-   <div class="hm-ch"><h2>How you compare with ${d.short} admits</h2><span class="hm-leg"><i class="now"></i>you <i class="rng"></i>admitted middle 50%</span></div>
-   <div class="cmp">
-    <div class="cmp-row"><span class="cmp-k">SAT</span><div class="cmp-bar"><i class="rng" style="left:${px(d.sat[0])};width:calc(${px(d.sat[1])} - ${px(d.sat[0])})"></i><b class="you ${satNow<d.sat[0]?'bad':'good'}" style="left:${px(satNow)}"></b></div><span class="cmp-v ${satNow<d.sat[0]?'red':''}">${satNow} <small>vs ${d.sat[0]}–${d.sat[1]}</small></span></div>
-    <div class="cmp-row"><span class="cmp-k">GPA</span><div class="cmp-bar"><i class="rng" style="left:86%;width:12%"></i><b class="you good" style="left:98%"></b></div><span class="cmp-v">4.0 <small>vs ${d.gpa} median</small></span></div>
-    <div class="cmp-row"><span class="cmp-k">Class rank</span><div class="cmp-bar"><i class="rng" style="left:80%;width:20%"></i><b class="you good" style="left:96%"></b></div><span class="cmp-v">Top 3% <small>vs ${d.top10} in top 10%</small></span></div>
-    <div class="cmp-row"><span class="cmp-k">AP courses</span><div class="cmp-bar"><i class="rng" style="left:58%;width:26%"></i><b class="you warn" style="left:50%"></b></div><span class="cmp-v">6 <small>vs ${d.aps} typical</small></span></div>
-    <div class="cmp-row"><span class="cmp-k">Leadership</span><div class="cmp-bar"><i class="rng" style="left:33%;width:40%"></i><b class="you bad" style="left:2%"></b></div><span class="cmp-v red">0 roles <small>vs 1–2 typical</small></span></div>
-    <div class="cmp-row"><span class="cmp-k">Recommendations</span><div class="cmp-bar"><i class="rng" style="left:60%;width:40%"></i><b class="you good" style="left:90%"></b></div><span class="cmp-v">2 confirmed <small>teacher + counselor</small></span></div>
-   </div>
-  </section>
-  <section class="hm-card">
-   <div class="hm-ch"><h2>Costing you points</h2><em class="red tot">−${gain.toFixed(1)}</em></div>
-   <div class="hm-rows">
-    <button class="hm-row" type="button" data-act="workshop"><div><b>SAT ${satNow} is below the 25th percentile</b><span>Retake booked · Dec 6</span></div><em class="red">−${dSat}</em></button>
-    <button class="hm-row" type="button" data-act="workshop"><div><b>No leadership signal</b><span>Not started · pick one project</span></div><em class="red">−${dLead}</em></button>
-    <button class="hm-row" type="button" data-act="editor"><div><b>Essay opening reads generic</b><span>Rewrite waiting in the editor</span></div><em class="red">−${dEss}</em></button>
-   </div>
-   <button class="btn sm" type="button" data-act="fix" id="startfix">Start fixing <svg class="ico"><use href="#i-arrow"/></svg></button>
-  </section>
-  <section class="hm-card span2">
-   <div class="hm-ch"><h2>Your plan for ${d.short}</h2><span class="muted inline">Biggest first</span></div>
-   <div class="plan-steps">
-    <div class="pstep"><span class="pnum">1</span><div><b>Retake the SAT · target 1350+</b><span>Six-week plan · 4 sessions a week · seat booked Dec 6</span><div class="mini-bar"><i style="--v:40"></i></div></div><em class="good">+${dSat}</em></div>
-    <div class="pstep"><span class="pnum">2</span><div><b>Lead one project by Dec 15</b><span>Founder role on the activities list</span><div class="mini-bar"><i style="--v:10"></i></div></div><em class="good">+${dLead}</em></div>
-    <div class="pstep"><span class="pnum">3</span><div><b>Rewrite the essay opening</b><span>One suggestion ready in the editor</span><div class="mini-bar"><i style="--v:0"></i></div></div><em class="good">+${dEss}</em></div>
-    <div class="pstep"><span class="pnum">4</span><div><b>${d.sup[0]} supplement</b><span>Due ${d.due} · ${d.round}</span><div class="mini-bar"><i style="--v:${Math.round(d.sup[1]/d.sup[2]*100)}"></i></div></div><em class="muted">${d.sup[1]} / ${d.sup[2]}</em></div>
-   </div>
-  </section>
-  <section class="hm-card">
-   <div class="hm-ch"><h2>${d.short} checklist</h2><span class="pill b">3 of 7</span></div>
-   <div class="chk-list">
-    <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Common App</b><span>Submitted draft · 487 words</span></div>
-    <div class="chk"><i></i><b>${d.sup[0]}</b><span>${d.sup[1]} / ${d.sup[2]} words · due ${d.due}</span></div>
-    <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Teacher recommendations</b><span>2 of 2 confirmed</span></div>
-    <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Counselor report</b><span>Requested Oct 12</span></div>
-    <div class="chk"><i></i><b>SAT score report</b><span>Send after the Dec 6 retake</span></div>
-    <div class="chk"><i></i><b>Alumni interview</b><span>Offered after submission</span></div>
-    <div class="chk"><i></i><b>CSS Profile</b><span>Financial aid · due ${d.due}</span></div>
-   </div>
-  </section>
-  <section class="hm-card span3 snap">
-   <div class="hm-ch"><h2>Admitted class snapshot</h2><span class="muted inline">Latest cycle · Common Data Set</span></div>
-   <div class="snap-grid"><div><b>${d.admit}</b><span>overall admit rate</span></div><div><b>${d.early}</b><span>early round admit rate</span></div><div><b>${d.med}</b><span>median SAT</span></div><div><b>${d.top10}</b><span>ranked in top 10%</span></div><div><b>${d.gpa}</b><span>median GPA</span></div><div><b>${d.apps}</b><span>applications</span></div></div>
-  </section>
+ <div class="sc2">
+  <div class="sc2-col">
+   <section class="hm-card">
+    <div class="hm-ch"><h2>Your plan for ${d.short}</h2><span class="pill g">+${gain.toFixed(1)} if you do all three</span></div>
+    <div class="plan-steps">
+     <button class="pstep" type="button" data-act="workshop"><span class="pnum">1</span><div><b>SAT ${satNow} is below the 25th percentile</b><span>Retake booked Dec 6 · target 1350+</span><div class="mini-bar"><i style="--v:40"></i></div></div><em class="good">+${dSat}</em></button>
+     <button class="pstep" type="button" data-act="workshop"><span class="pnum">2</span><div><b>No leadership signal</b><span>Lead one project by Dec 15 · founder role</span><div class="mini-bar"><i style="--v:10"></i></div></div><em class="good">+${dLead}</em></button>
+     <button class="pstep" type="button" data-act="editor"><span class="pnum">3</span><div><b>Essay opening reads generic</b><span>One rewrite ready in the editor</span><div class="mini-bar"><i style="--v:0"></i></div></div><em class="good">+${dEss}</em></button>
+     <button class="pstep" type="button" data-act="editor"><span class="pnum">4</span><div><b>${d.sup[0]} supplement</b><span>Due ${d.due} · ${d.round}</span><div class="mini-bar"><i style="--v:${Math.round(d.sup[1]/d.sup[2]*100)}"></i></div></div><em class="muted">${d.sup[1]} / ${d.sup[2]}</em></button>
+    </div>
+   </section>
+   <section class="hm-card">
+    <div class="hm-ch"><h2>How you compare with ${d.short} admits</h2><span class="hm-leg"><i class="now"></i>you <i class="rng"></i>admitted middle 50%</span></div>
+    <div class="cmp">
+     <div class="cmp-row"><span class="cmp-k">SAT</span><div class="cmp-bar"><i class="rng" style="left:${px(d.sat[0])};width:calc(${px(d.sat[1])} - ${px(d.sat[0])})"></i><b class="you ${satNow<d.sat[0]?'bad':'good'}" style="left:${px(satNow)}"></b></div><span class="cmp-v ${satNow<d.sat[0]?'red':''}">${satNow} <small>vs ${d.sat[0]}–${d.sat[1]}</small></span></div>
+     <div class="cmp-row"><span class="cmp-k">GPA</span><div class="cmp-bar"><i class="rng" style="left:86%;width:12%"></i><b class="you good" style="left:98%"></b></div><span class="cmp-v">4.0 <small>vs ${d.gpa} median</small></span></div>
+     <div class="cmp-row"><span class="cmp-k">Class rank</span><div class="cmp-bar"><i class="rng" style="left:80%;width:20%"></i><b class="you good" style="left:96%"></b></div><span class="cmp-v">Top 3% <small>vs ${d.top10} in top 10%</small></span></div>
+     <div class="cmp-row"><span class="cmp-k">AP courses</span><div class="cmp-bar"><i class="rng" style="left:58%;width:26%"></i><b class="you warn" style="left:50%"></b></div><span class="cmp-v">6 <small>vs ${d.aps} typical</small></span></div>
+     <div class="cmp-row"><span class="cmp-k">Leadership</span><div class="cmp-bar"><i class="rng" style="left:33%;width:40%"></i><b class="you bad" style="left:2%"></b></div><span class="cmp-v red">0 roles <small>vs 1–2 typical</small></span></div>
+     <div class="cmp-row"><span class="cmp-k">Recommendations</span><div class="cmp-bar"><i class="rng" style="left:60%;width:40%"></i><b class="you good" style="left:90%"></b></div><span class="cmp-v">2 confirmed <small>teacher + counselor</small></span></div>
+    </div>
+   </section>
+  </div>
+  <div class="sc2-col">
+   <section class="hm-card">
+    <div class="hm-ch"><h2>${d.short} checklist</h2><span class="pill b">3 of 7</span></div>
+    <div class="chk-list">
+     <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Common App</b><span>Submitted draft · 487 words</span></div>
+     <div class="chk"><i></i><b>${d.sup[0]}</b><span>${d.sup[1]} / ${d.sup[2]} words · due ${d.due}</span></div>
+     <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Teacher recommendations</b><span>2 of 2 confirmed</span></div>
+     <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Counselor report</b><span>Requested Oct 12</span></div>
+     <div class="chk"><i></i><b>SAT score report</b><span>Send after the Dec 6 retake</span></div>
+     <div class="chk"><i></i><b>Alumni interview</b><span>Offered after submission</span></div>
+     <div class="chk"><i></i><b>CSS Profile</b><span>Financial aid · due ${d.due}</span></div>
+    </div>
+   </section>
+   <section class="hm-card snap">
+    <div class="hm-ch"><h2>Admitted class</h2><span class="muted inline">Latest cycle</span></div>
+    <div class="snap-grid"><div><b>${d.med}</b><span>median SAT</span></div><div><b>${d.gpa}</b><span>median GPA</span></div><div><b>${d.top10}</b><span>in top 10% of class</span></div><div><b>${d.early}</b><span>early round admit rate</span></div><div><b>${d.apps}</b><span>applications</span></div><div><b>${d.aps}</b><span>AP courses typical</span></div></div>
+   </section>
+  </div>
  </div>`;
  document.querySelectorAll('#pg-s4 .hm-card').forEach((c,i)=>c.style.setProperty('--i',i));}
 renderSchool('yale');
