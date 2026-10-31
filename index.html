@@ -1694,6 +1694,39 @@ button.pstep:hover{background:#F7F7F7}
 .ac-btn .ico{width:15px;height:15px}
 .ac-spin{width:14px;height:14px;box-sizing:border-box;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
 @media (max-width:720px){.ac-head{flex-direction:column;gap:12px}.ac-head,.ac-body,.ac-meter,.ac-foot{padding-left:16px;padding-right:16px}.ac-sugbox{margin-left:16px;margin-right:16px}}
+
+/* fix62: add activity */
+.ac-card{overflow:hidden;transition:height .45s cubic-bezier(.45,0,.1,1)}
+.aw-chips button{white-space:nowrap}
+.aw-chips button.grow{overflow:hidden;opacity:0;transform:scale(.94);transition:max-width .5s cubic-bezier(.45,0,.1,1),opacity .3s ease .18s,transform .45s cubic-bezier(.25,.8,.25,1) .12s}
+.aw-chips button.grow.in{opacity:1;transform:none}
+.aw-chips button.add[data-open]{background:#EAF0FF;border-style:solid;border-color:#CFE0FF}
+.ac-form{padding:20px 22px 0;transition:opacity .17s ease,transform .3s cubic-bezier(.25,.8,.25,1)}
+.ac-form[hidden]{display:none}
+.ac-form.out{opacity:0;transform:translateY(6px);transition:opacity .15s ease,transform .15s ease}
+.ac-fhead{display:flex;justify-content:space-between;align-items:center;margin:-4px -8px 16px 0}
+.ac-x{width:32px;height:32px;border:0;border-radius:8px;background:transparent;color:#8C8C8C;font:400 22px/1 var(--sans);cursor:pointer;transition:background-color .15s,color .15s}
+.ac-x:hover{background:#F2F2F2;color:#1A1A1A}
+.ac-f{display:grid;gap:8px;margin:0 0 16px;min-width:0}
+.ac-f>span{font:600 13px/1.2 var(--sans);color:#1A1A1A}
+.ac-f>span em{font-style:normal;font-weight:400;color:#8C8C8C;margin-left:4px}
+.ac-f>input,.ac-f>textarea{width:100%;box-sizing:border-box;height:42px;padding:0 13px;border:1px solid #E2E2E2;border-radius:10px;background:#fff;font:400 15px/1.4 var(--sans);color:#1A1A1A;outline:none;transition:border-color .15s,box-shadow .15s}
+.ac-f>textarea{height:auto;padding:11px 13px;line-height:1.55;resize:vertical;min-height:92px}
+.ac-f>input::placeholder,.ac-f>textarea::placeholder{color:#A0A0A0}
+.ac-f>input:focus,.ac-f>textarea:focus,.ac-num:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,89,255,.12)}
+.ac-frow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px}
+.ac-seg{position:relative;display:flex;gap:0;padding:3px;height:42px;box-sizing:border-box;border-radius:10px;background:#F0F0F0}
+.ac-seg i{position:absolute;top:3px;bottom:3px;left:3px;width:0;border-radius:8px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.09);transition:left .35s cubic-bezier(.45,0,.1,1),width .35s cubic-bezier(.45,0,.1,1)}
+.ac-seg button{position:relative;flex:1;border:0;background:transparent;border-radius:8px;padding:0 14px;font:500 13.5px/1 var(--sans);color:#6E6E6E;cursor:pointer;transition:color .2s ease}
+.ac-seg button.on{color:#1A1A1A}
+.ac-num{display:flex;align-items:center;height:42px;box-sizing:border-box;border:1px solid #E2E2E2;border-radius:10px;overflow:hidden;background:#fff;transition:border-color .15s,box-shadow .15s}
+.ac-num button{width:38px;height:100%;border:0;background:transparent;font:500 18px/1 var(--sans);color:#3D3D3D;cursor:pointer;transition:background-color .15s}
+.ac-num button:hover{background:#F5F5F5}
+.ac-num input{width:40px;height:100%;border:0;padding:0;text-align:center;font:500 15px/1 var(--sans);color:#1A1A1A;font-variant-numeric:tabular-nums;outline:none;background:transparent}
+.ac-form .ac-foot{padding:4px 0 20px}
+.btn.ac-add{height:42px;padding:0 18px;font:600 14px/1 var(--sans);transition:opacity .2s ease,background-color .2s ease}
+.btn.ac-add:disabled{opacity:.45;cursor:default;box-shadow:none}
+@media (max-width:720px){.ac-form{padding-left:16px;padding-right:16px}.ac-frow{grid-template-columns:1fr;gap:0}}
 </style>
 </head>
 <body class="dark">
@@ -1978,8 +2011,18 @@ button.pstep:hover{background:#F7F7F7}
      </div>
 
      <div class="aw-pane" id="awActs">
-      <div class="aw-chips" id="awActChips" role="tablist" aria-label="Activities"><button type="button" role="tab" class="on" data-act-i="0">Library tutoring program<svg class="ck"><use href="#i-check"/></svg></button><button type="button" role="tab" data-act-i="1">Robotics club<svg class="ck"><use href="#i-check"/></svg></button><button type="button" role="tab" data-act-i="2">Debate<svg class="ck"><use href="#i-check"/></svg></button><button type="button" class="add" data-toast="Add an activity · name, role and hours">+ Add activity</button></div>
-      <section class="ac-card">
+      <div class="aw-chips" id="awActChips" role="tablist" aria-label="Activities"><button type="button" role="tab" class="on" data-act-i="0">Library tutoring program<svg class="ck"><use href="#i-check"/></svg></button><button type="button" role="tab" data-act-i="1">Robotics club<svg class="ck"><use href="#i-check"/></svg></button><button type="button" role="tab" data-act-i="2">Debate<svg class="ck"><use href="#i-check"/></svg></button><button type="button" class="add" id="acAddBtn" aria-expanded="false">+ Add activity</button></div>
+      <section class="ac-card" id="acCard">
+       <form class="ac-form" id="acForm" hidden autocomplete="off">
+        <div class="ac-fhead"><div class="ac-title">New activity</div><button class="ac-x" type="button" id="afClose" aria-label="Close">×</button></div>
+        <label class="ac-f"><span>Activity name</span><input id="afName" maxlength="60" placeholder="e.g. Varsity soccer, food bank volunteer"></label>
+        <div class="ac-frow">
+         <div class="ac-f"><span>Your role</span><div class="ac-seg" id="afRole" role="radiogroup" aria-label="Your role"><i></i><button type="button" role="radio" data-r="Founder">Founder</button><button type="button" role="radio" data-r="Leader">Leader</button><button type="button" role="radio" data-r="Member" class="on" aria-checked="true">Member</button></div></div>
+         <div class="ac-f"><span>Hours per week</span><div class="ac-num"><button type="button" data-d="-1" aria-label="Fewer hours">−</button><input id="afHours" inputmode="numeric" value="3" aria-label="Hours per week"><button type="button" data-d="1" aria-label="More hours">+</button></div></div>
+        </div>
+        <label class="ac-f"><span>What did you do? <em>Optional</em></span><textarea id="afText" rows="3" maxlength="600" placeholder="What you did, what you owned, and any outcomes you can support."></textarea></label>
+        <div class="ac-foot"><button class="ac-alt" type="button" id="afCancel">Cancel</button><button class="btn ac-add" type="submit" id="afAdd" disabled>Add activity</button></div>
+       </form>
        <div class="ac-in" id="acIn">
         <div class="ac-head">
          <div><div class="ac-title" id="awActTitle">Library tutoring program</div><div class="ac-tags" id="awActCtx"><span>Founder</span><span>6 hours / week</span></div></div>
@@ -2420,7 +2463,7 @@ $('pg-s4').addEventListener('click',e=>{const b=e.target.closest('[data-act]');i
 document.querySelectorAll('.switch').forEach(sw=>sw.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{sw.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');})));
 document.querySelectorAll('.task').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('done')));
 addEventListener('pointermove',e=>{mx=(e.clientX/W-0.5)*2;my=(e.clientY/H-0.5)*2;pmx=e.clientX;pmy=e.clientY;},{passive:true});addEventListener('pointerleave',()=>{mx=my=0;pmx=pmy=-9999;});
-addEventListener('keydown',e=>{if(e.target===cmdkIn)return;const map={'1':'s1','2':'sE','3':'sB','4':'s2','5':'s3','6':'sR','7':'s5','8':'s4','9':'s6','0':'s8'};if(map[e.key])go(map[e.key]);if(e.key==='r'||e.key==='R')go('s1');});
+addEventListener('keydown',e=>{if(e.target===cmdkIn||e.target.closest('input,textarea,select,[contenteditable]')||e.metaKey||e.ctrlKey||e.altKey)return;const map={'1':'s1','2':'sE','3':'sB','4':'s2','5':'s3','6':'sR','7':'s5','8':'s4','9':'s6','0':'s8'};if(map[e.key])go(map[e.key]);if(e.key==='r'||e.key==='R')go('s1');});
 
 /* ---------- application workshop ---------- */
 const AW_PS="Ever since I was young, I have always been passionate about helping others. Community service has taught me the value of giving back, and through my experiences I have learned that one person really can make a difference in the world.\n\nLast spring I started a free tutoring program at the public library near my school. What began as two of us at a folding table turned into fourteen tutors and forty regular students by June. I built the schedule, trained the new tutors, and spent most Saturdays explaining fractions with pizza slices drawn on napkins.\n\nThe hardest part was not the math. It was the afternoon Maria's mother told me, in careful English, that Maria had stopped hiding her report card. I had been measuring the program in hours and headcounts. She was measuring it in a kid who no longer felt behind.\n\nI still run the program, and I still draw the pizzas. But I understand now that the thing I built was not a tutoring schedule. It was a room where being confused was allowed, and that is the thing I want to keep building, wherever I end up next.";
@@ -2536,22 +2579,58 @@ function acSwap(t,fromLen){const w=$('acTxt'),h0=w.offsetHeight,g=document.creat
  w.style.height=h0+'px';void w.offsetHeight;w.style.height=h1+'px';acTa.classList.remove('in');void acTa.offsetWidth;acTa.classList.add('in');requestAnimationFrame(()=>g.classList.add('go'));
  setTimeout(()=>{g.remove();w.style.height='';},RM?0:600);acCount(fromLen);}
 function acFind(){const i=awAct,s=AS[i];if(s.phase!=='find')return;s.phase='busy';acState();
- setTimeout(()=>{if(s.phase!=='busy')return;const ed=(AW_ACTS[i].edits||[]).find(e=>AW_ACTS[i].text.includes(e.before));if(ed){s.sug=ed;s.phase='sug';}else{s.phase='find';toast('Looks good. Nothing to change here.');}if(awAct===i)acState();},RM?0:1100);}
+ setTimeout(()=>{if(s.phase!=='busy')return;const ed=(AW_ACTS[i].edits||[]).find(e=>AW_ACTS[i].text.includes(e.before))||acHeur(AW_ACTS[i].text);if(ed){s.sug=ed;s.phase='sug';}else{s.phase='find';toast('Looks good. Nothing to change here.');}if(awAct===i)acState();},RM?0:1100);}
 function acApply(){const i=awAct,s=AS[i],ed=s.sug;if(s.phase!=='sug'||!ed)return;const before=acTa.value,after=before.replace(ed.before,ed.after);
  s.undo={before,after};s.phase='done';s.sug=null;AW_ACTS[i].text=after;acSwap(after,before.length);acState();
- setTimeout(()=>{s.fixed=true;if(awAct===i)acState();if(ACT_ISSUE[i]&&typeof onWorkshopChange==='function')onWorkshopChange('activity');},RM?0:420);}
+ setTimeout(()=>{s.fixed=true;if(awAct===i)acState();if(ACT_ISSUE[i])acLeadSync();},RM?0:420);}
 function acUndo(){const i=awAct,s=AS[i];if(!s.undo||acTa.value!==s.undo.after)return;const from=acTa.value.length;AW_ACTS[i].text=s.undo.before;acSwap(s.undo.before,from);s.undo=null;s.phase='find';s.fixed=false;acState();
- if(ACT_ISSUE[i]&&typeof offWorkshopChange==='function')offWorkshopChange('activity');}
+ if(ACT_ISSUE[i])acLeadSync();}
 function awLoadAct(i,instant){$('awActChips').querySelectorAll('[data-act-i]').forEach(b=>b.classList.toggle('on',+b.dataset.actI===i));
  const load=()=>{awAct=i;const a=AW_ACTS[i];$('awActTitle').textContent=a.name;$('awActCtx').innerHTML='<span>'+awEsc(a.role)+'</span><span>'+awEsc(a.hours)+' hours / week</span>';acTa.value=a.text;acRefresh();acState();};
  if(instant||RM){load();return;}const inn=$('acIn');inn.classList.add('out');setTimeout(()=>{load();inn.classList.remove('out');},170);}
 acTa.addEventListener('input',()=>{const s=AS[awAct];AW_ACTS[awAct].text=acTa.value;acAuto();acCount();if(s.phase!=='busy')s.phase=acTa.value.trim()?'find':'empty';s.sug=null;acState();});
 $('awActFind').addEventListener('click',()=>{const s=AS[awAct];if(s.phase==='find')acFind();else if(s.phase==='sug')acApply();});
 $('acAlt').addEventListener('click',()=>{const a=$('acAlt').dataset.act;if(a==='dismiss'){AS[awAct].phase='find';AS[awAct].sug=null;acState();}else if(a==='undo')acUndo();});
-$('awActChips').addEventListener('click',e=>{const b=e.target.closest('[data-act-i]');if(b&&+b.dataset.actI!==awAct)awLoadAct(+b.dataset.actI);});
+$('awActChips').addEventListener('click',e=>{const b=e.target.closest('[data-act-i]');if(!b)return;if(!$('acForm').hidden){acClose(+b.dataset.actI);return;}if(+b.dataset.actI!==awAct)awLoadAct(+b.dataset.actI);});
+function acHeur(t){if(!t||t.trim().length<12)return null;const src=t.trim();let a=src;
+ a=a.replace(/\b(really|very|basically|just|actually|definitely|literally) /gi,'').replace(/\ba lot of\b/gi,'many').replace(/,? and I (?:also )?/g,' and ').replace(/\bI also /g,'I ');
+ a=a.replace(/(^|[.!?]\s+)I (?:was |am |have |had )?(?:the |a |an )?/g,'$1');
+ a=a.replace(/(^|[.!?]\s+)([a-z])/g,(m,p,c)=>p+c.toUpperCase()).replace(/\s{2,}/g,' ').trim();
+ if(a===src)return null;const over=a.length-150;
+ return {title:'Lead with what you did',before:src,after:a,reason:'Drops “I” and filler words so every character carries a fact.'+(over>0?' Still '+over+' characters over, so cut one detail.':'')};}
+function acLeadSync(){const has=AS.some((s,i)=>ACT_ISSUE[i]&&s.fixed)||AW_ACTS.some(a=>a.added&&a.role!=='Member');
+ if(has){if(typeof onWorkshopChange==='function')onWorkshopChange('activity');}else if(typeof offWorkshopChange==='function')offWorkshopChange('activity');}
+/* add activity form */
+let afRoleV='Member';
+function afSeg(){const s=$('afRole'),b=s.querySelector('button.on'),i=s.querySelector('i');if(!b||!b.offsetWidth)return;i.style.left=b.offsetLeft+'px';i.style.width=b.offsetWidth+'px';}
+function afValid(){$('afAdd').disabled=$('afName').value.trim().length<2;}
+function afReset(){$('afName').value='';$('afText').value='';$('afHours').value='3';afRoleV='Member';$('afRole').querySelectorAll('button').forEach(x=>{x.classList.toggle('on',x.dataset.r==='Member');x.setAttribute('aria-checked',x.dataset.r==='Member');});afValid();}
+function acMorph(show,hide,after){const card=$('acCard');if(RM){hide.hidden=true;show.hidden=false;after&&after();return;}
+ const h0=card.offsetHeight;hide.classList.add('out');
+ setTimeout(()=>{hide.hidden=true;hide.classList.remove('out');show.hidden=false;show.classList.add('out');after&&after();card.style.height='';const h1=card.offsetHeight;card.style.height=h0+'px';void card.offsetHeight;card.style.height=h1+'px';
+  requestAnimationFrame(()=>show.classList.remove('out'));setTimeout(()=>{card.style.height='';},480);},150);}
+function acOpen(){if(!$('acForm').hidden)return;const b=$('acAddBtn');b.dataset.open='';b.setAttribute('aria-expanded','true');$('awActChips').querySelectorAll('[data-act-i]').forEach(x=>x.classList.remove('on'));
+ acMorph($('acForm'),$('acIn'),()=>{afSeg();setTimeout(()=>$('afName').focus({preventScroll:true}),RM?0:200);});}
+function acClose(to){const b=$('acAddBtn');delete b.dataset.open;b.setAttribute('aria-expanded','false');const i=to==null?awAct:to;
+ $('awActChips').querySelectorAll('[data-act-i]').forEach(x=>x.classList.toggle('on',+x.dataset.actI===i));
+ acMorph($('acIn'),$('acForm'),()=>{if(i!==awAct)awLoadAct(i,true);acRefresh();afReset();});}
+function acChip(i,name){const b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.dataset.actI=i;b.textContent=name;b.insertAdjacentHTML('beforeend','<svg class="ck"><use href="#i-check"/></svg>');
+ $('acAddBtn').before(b);if(RM)return b;const w=b.offsetWidth;b.classList.add('grow');b.style.maxWidth='0px';void b.offsetWidth;b.style.maxWidth=w+'px';b.classList.add('in');setTimeout(()=>{b.classList.remove('grow','in');b.style.maxWidth='';},560);return b;}
+function acAdd(){const name=$('afName').value.trim();if(name.length<2)return;const hrs=Math.max(1,Math.min(40,parseInt($('afHours').value,10)||1)),text=$('afText').value.trim();
+ AW_ACTS.push({name,role:afRoleV,hours:String(hrs),text,edits:[],questions:[],added:true});AS.push({phase:text?'find':'empty',fixed:false,undo:null,sug:null});ACT_ISSUE.push(null);
+ const i=AW_ACTS.length-1;acChip(i,name);acClose(i);
+ if(afRoleV!=='Member'&&RP.lead<1)setTimeout(acLeadSync,RM?0:500);else setTimeout(()=>toast('Activity added'),RM?0:500);}
+$('acAddBtn').addEventListener('click',()=>{$('acForm').hidden?acOpen():acClose();});
+$('afClose').addEventListener('click',()=>acClose());$('afCancel').addEventListener('click',()=>acClose());
+$('acForm').addEventListener('submit',e=>{e.preventDefault();acAdd();});
+$('acForm').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();acClose();}});
+$('afName').addEventListener('input',afValid);
+$('afRole').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;afRoleV=b.dataset.r;$('afRole').querySelectorAll('button').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-checked',x===b);});afSeg();});
+document.querySelector('.ac-num').addEventListener('click',e=>{const b=e.target.closest('[data-d]');if(!b)return;const v=Math.max(1,Math.min(40,(parseInt($('afHours').value,10)||0)+ +b.dataset.d));$('afHours').value=v;});
+$('afHours').addEventListener('input',()=>{$('afHours').value=$('afHours').value.replace(/\D/g,'').slice(0,2);});
 awLoadAct(0,true);
 const QP=new URLSearchParams(location.search),QS=QP.get('s')||location.hash.slice(1);
-function start(){buildSprites();fit();document.querySelector('.tools button').classList.add('on');if(QS&&QS!=='s1'&&(document.getElementById(QS)||document.getElementById('pg-'+QS))){go(QS);if(QP.has('find'))setTimeout(()=>{(QS==='s8'?$('awActFind'):$('awFind')).click();},300);return;}startCheck();}
+function start(){buildSprites();fit();document.querySelector('.tools button').classList.add('on');if(QS&&QS!=='s1'&&(document.getElementById(QS)||document.getElementById('pg-'+QS))){go(QS);if(QP.has('find'))setTimeout(()=>{(QS==='s8'?$('awActFind'):$('awFind')).click();},300);if(QP.has('add'))setTimeout(()=>{$('acAddBtn').click();$('afName').value='Varsity soccer';$('afAdd').disabled=false;},300);return;}startCheck();}
 const ready=[loadLogos()];if(document.fonts&&document.fonts.load)ready.push(document.fonts.load('600 64px "Inter Tight"'),document.fonts.load('700 34px "Inter Tight"'),document.fonts.load('500 14px Inter'));Promise.all(ready).then(start,start);
 /* dev deep link: ?s=<screen>&static=1 */
 if(QP.has('static')){const st=document.createElement('style');st.textContent='*{transition-duration:0s!important;transition-delay:0s!important;animation:none!important}';document.head.appendChild(st);}
