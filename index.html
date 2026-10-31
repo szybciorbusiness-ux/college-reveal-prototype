@@ -1573,11 +1573,8 @@ button.pstep:hover{background:#F7F7F7}
 /* reveal celebration */
 .rc{position:relative}
 @keyframes rcRipple{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.22)}}
-#sR.final .rc{animation:rcBump .6s var(--ease) both}
 @keyframes rcBump{0%{transform:scale(1)}35%{transform:scale(1.025)}100%{transform:scale(1)}}
-.rc-row.on em{animation:rcPop .55s var(--ease) .15s both}
 @keyframes rcPop{0%{transform:scale(.7);opacity:.2}60%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
-.rc-row.on .rc-up{animation:rcPop .5s var(--ease) .55s both}
 @media (prefers-reduced-motion:reduce){.rc::before,.rc::after,#sR.final .rc,.rc-row.on em,.rc-row.on .rc-up{animation:none}}
 
 /* fix53: shorter paywall preview, scores only */
@@ -2278,7 +2275,7 @@ function runReveal(){rvTimers.forEach(clearTimeout);rvTimers=[];const sec=$('sR'
  RV.forEach((x,i)=>{const w=document.createElement('div');w.className='rc-rw';const r=document.createElement('div');r.className='rc-row';w.appendChild(r);r.innerHTML='<img src="logos/'+x[0]+'.png" alt=""><div class="rc-nm"><b>'+x[1]+'</b><i class="rc-bar"><u class="aft" style="--v:'+x[3]+'"></u><u class="now" style="--v:'+x[2]+'"></u></i></div><em>0%</em><small class="rc-up">→ '+x[3]+'%</small>';rows.appendChild(w);
   rvTimers.push(setTimeout(()=>{w.classList.add('on');r.classList.add('on');roll(r.querySelector('em'),x[2],900);},(RM?0:700)+i*per));});
  rvTimers.push(setTimeout(()=>card.classList.add('on'),RM?0:120));
- rvTimers.push(setTimeout(()=>{if(cur!=='sR')return;sec.classList.add('final');cfBurst(320,true);setTimeout(()=>{if(cur==='sR')cfBurst(220,true);},450);},(RM?0:700)+RV.length*per+500));}
+ rvTimers.push(setTimeout(()=>{if(cur!=='sR')return;sec.classList.add('final');},(RM?0:700)+RV.length*per+500));}
 $('rvOpen').addEventListener('click',()=>{$('app').classList.add('enter');go('s5');setTimeout(()=>$('app').classList.remove('enter'),900);});
 $('rvShare').addEventListener('click',()=>toast('Link copied · collegereveal.app/r/evan'));
 function boostCount(){const el=$('boostNum');if(!el)return;setTimeout(()=>{const t0=performance.now();if(RM){el.textContent='+86%';return;}(function f(now){const k=Math.max(0,Math.min(1,(now-t0)/1100)),e=1-Math.pow(1-k,3);el.textContent='+'+Math.round(86*e)+'%';if(k<1)requestAnimationFrame(f);})(t0);},350);}
