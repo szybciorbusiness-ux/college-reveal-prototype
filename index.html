@@ -1631,55 +1631,69 @@ button.pstep:hover{background:#F7F7F7}
 #sE .iss-row.locked>div>b .blur{filter:blur(5px);user-select:none;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:clip;max-width:min(360px,100%)}
 #sE .iss-row.locked>div>b .ico{width:14px;height:14px;color:#8C8C8C;flex:none}
 
-/* fix60: activities tab */
+
+/* fix61: activities tab, one card */
 .aw-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.aw-chips button{border:1px solid #E6E6E6;background:#fff;border-radius:999px;padding:0 14px;height:36px;font:500 13.5px/1 var(--sans);color:#3D3D3D;cursor:pointer;transition:border-color .15s,background .15s,color .15s}
+.aw-chips button{display:inline-flex;align-items:center;border:1px solid #E6E6E6;background:#fff;border-radius:999px;padding:0 14px;height:36px;font:500 13.5px/1 var(--sans);color:#3D3D3D;cursor:pointer;transition:border-color .15s,background-color .2s,color .2s}
 .aw-chips button:hover{border-color:#CFCFCF}
 .aw-chips button.on{background:#1A1A1A;border-color:#1A1A1A;color:#fff}
 .aw-chips button.add{border-style:dashed;color:var(--blue)}
-.aw-actwrap{display:grid;gap:14px;max-width:820px}
-.aw-impact{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 18px;border:1px solid #E6E6E6;border-radius:16px;background:#fff}
-.aw-impact div>b{display:block;font:600 15px/1.3 var(--sans);color:#1A1A1A}
-.aw-impact div>span{display:block;margin-top:3px;font:400 13px/1.4 var(--sans);color:#6E6E6E}
-.aw-impact em{font:700 20px/1 var(--head);font-style:normal;color:#D4383E;letter-spacing:-.02em}
-.aw-impact.done .iss-st{background:var(--blue)}
-.aw-impact.done em{color:var(--blue)}
-.aw-acttop{align-items:flex-start;padding:16px 20px 14px}
-.aw-actid{display:grid;gap:9px}
-.aw-actid b{font-size:16px}
-.aw-actid .aw-ctx{padding:0}
-.aw-doc-act,.aw-ta-act{min-height:140px;padding:18px 20px;font:400 16px/1.65 var(--sans)}
-.aw-meter{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:12px 20px;border-top:1px solid #EEEEEE;font:400 13px/1 var(--sans);color:#6E6E6E}
-.aw-bar{position:relative;height:6px;border-radius:999px;background:#EEEEEE}
-.aw-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:var(--blue);width:0;transition:width .3s ease}
-.aw-bar.over i{background:#D4383E}
-.aw-bar u{position:absolute;left:75%;top:-3px;width:2px;height:12px;background:#B8B8B8;border-radius:1px}
-#awActFit{font:600 12px/1 var(--sans);padding:5px 8px;border-radius:999px;background:#EAF0FF;color:var(--blue)}
-#awActFit.over{background:#FDECEC;color:#C8313A}
-#awActFit:empty{display:none}
-.aw-actfoot{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 20px 14px;border-top:1px solid #EEEEEE;flex-wrap:wrap}
-.aw-actfoot .aw-extra{flex:1 1 240px}
-.aw-actgo{display:flex;align-items:center;gap:12px;margin-left:auto}
-.aw-actgo .aw-find{width:auto;padding:11px 18px}
-.aw-actgo .aw-ready{max-width:260px;text-align:right}
-.aw-sugs{border:1px solid #E6E6E6;border-radius:16px;background:#fff;overflow:hidden}
-.aw-sugs[hidden]{display:none}
-.aw-sughead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;border-bottom:1px solid #EEEEEE}
-.aw-sughead b{font:600 14.5px/1.3 var(--sans);color:#1A1A1A}
-.aw-sughead span{font:400 13px/1 var(--sans);color:#8C8C8C}
-.aw-sug{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;padding:16px 20px;border-top:1px solid #EEEEEE}
-.aw-sughead+.aw-sug{border-top:0}
-.aw-sugt{display:inline-block;font:600 12px/1 var(--sans);color:var(--blue);background:#EAF0FF;padding:5px 8px;border-radius:6px;margin-bottom:10px}
-.aw-sugafter{margin:0;padding:12px 14px;border-radius:10px;background:#F7F7F7;font:400 15px/1.55 var(--sans);color:#1A1A1A}
-.aw-sugwhy{margin:8px 0 0;font:400 13px/1.5 var(--sans);color:#6E6E6E}
-.aw-sugact{display:grid;gap:8px;justify-items:center;padding-top:28px}
-.aw-sugs .aw-busy,.aw-sugs .aw-stale{margin:16px 20px}
-.aw-sugq{padding:14px 20px;border-top:1px solid #EEEEEE}
-.aw-sugq b{font:600 13.5px/1.3 var(--sans);color:#1A1A1A}
-.aw-sugq ul{margin:6px 0 0;padding-left:18px;font:400 13px/1.5 var(--sans);color:#3D3D3D}
-.aw-acthist summary{color:#6E6E6E}
-#awActs .aw-priv{margin-top:-4px}
-@media (max-width:720px){.aw-impact{grid-template-columns:1fr auto}.aw-impact .iss-st{grid-column:1/-1;justify-self:start}.aw-sug{grid-template-columns:1fr}.aw-sugact{padding-top:0;grid-auto-flow:column;justify-content:start}.aw-meter{grid-template-columns:1fr auto}.aw-meter .aw-bar{grid-column:1/-1}}
+.aw-chips svg.ck{width:0;height:14px;margin-left:0;opacity:0;fill:none;stroke:currentColor;flex:none;transition:width .4s cubic-bezier(.45,0,.1,1),margin-left .4s cubic-bezier(.45,0,.1,1),opacity .25s ease .15s}
+.aw-chips button:not(.on) svg.ck{color:var(--blue)}
+.aw-chips button.fixed svg.ck{width:14px;margin-left:7px;opacity:1}
+.ac-card{max-width:760px;border:1px solid #E6E6E6;border-radius:18px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.03),0 14px 34px -22px rgba(0,0,0,.14)}
+.ac-in{transition:opacity .17s ease,transform .3s cubic-bezier(.25,.8,.25,1)}
+.ac-in.out{opacity:0;transform:translateY(6px);transition:opacity .15s ease,transform .15s ease}
+.ac-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 22px 0}
+.ac-title{font:600 17px/1.3 var(--sans);color:#1A1A1A;letter-spacing:-.01em}
+.ac-tags{display:flex;gap:6px;margin-top:8px}
+.ac-tags span{font:500 12.5px/1 var(--sans);color:#6E6E6E;background:#F2F2F2;border-radius:7px;padding:6px 8px}
+.ac-pill{display:inline-grid;align-items:center;flex:none;height:28px;padding:0 12px;border-radius:999px;background:#FDECEC;color:#C8313A;font:600 12.5px/1 var(--sans);overflow:hidden;transition:background-color .22s ease,color .22s ease}
+.ac-pill[hidden]{display:none}
+.ac-pill>span{grid-area:1/1;text-align:center;white-space:nowrap;transition:opacity .22s ease,transform .45s cubic-bezier(.25,.8,.25,1)}
+.ac-pill [data-s=good]{opacity:0;transform:translateY(10px)}
+.ac-pill.good{background:#EAF0FF;color:var(--blue)}
+.ac-pill.good [data-s=bad]{opacity:0;transform:translateY(-10px)}
+.ac-pill.good [data-s=good]{opacity:1;transform:none}
+.ac-body{padding:16px 22px 0}
+.ac-txt{position:relative;transition:height .5s cubic-bezier(.45,0,.1,1)}
+.ac-txt textarea,.ac-ghost{display:block;width:100%;box-sizing:border-box;margin:0;padding:0;border:0;font:400 16px/1.65 var(--sans);color:#1A1A1A;background:transparent}
+.ac-txt textarea{outline:none;resize:none;overflow:hidden;min-height:53px}
+.ac-txt textarea::placeholder{color:#A0A0A0}
+.ac-txt textarea.in{animation:acIn .55s cubic-bezier(.25,.8,.25,1) .12s backwards}
+@keyframes acIn{from{opacity:0;transform:translateY(8px)}}
+.ac-ghost{position:absolute;left:0;right:0;top:0;pointer-events:none;white-space:pre-wrap;transition:opacity .2s ease,transform .35s cubic-bezier(.45,0,.1,1)}
+.ac-ghost.go{opacity:0;transform:translateY(-8px)}
+.ac-meter{display:flex;align-items:center;gap:14px;padding:18px 22px 0}
+.ac-bar{flex:1;height:4px;border-radius:999px;background:#EFEFEF;overflow:hidden}
+.ac-bar i{display:block;height:100%;width:0;border-radius:inherit;background:var(--blue);transition:width .65s cubic-bezier(.45,0,.1,1),background-color .22s ease}
+.ac-bar.over i{background:#D4383E}
+.ac-cnt{font:500 12.5px/1 var(--sans);color:#8C8C8C;font-variant-numeric:tabular-nums;transition:color .22s ease;white-space:nowrap}
+.ac-cnt b{font-weight:600;color:#3D3D3D;transition:color .22s ease}
+.ac-cnt.over b{color:#C8313A}
+.ac-sug{display:grid;grid-template-rows:0fr;transition:grid-template-rows .42s cubic-bezier(.45,0,.1,1) .14s}
+.ac-sug.on{grid-template-rows:1fr;transition-delay:0s}
+.ac-sugin{min-height:0;overflow:hidden;opacity:0;transform:translateY(-6px);transition:opacity .16s ease,transform .25s ease}
+.ac-sug.on .ac-sugin{opacity:1;transform:none;transition:opacity .3s ease .22s,transform .5s cubic-bezier(.25,.8,.25,1) .22s}
+.ac-sugbox{margin:20px 22px 0;padding:14px 16px 15px;border-radius:12px;background:#F4F7FF}
+.ac-sugl{font:600 12.5px/1 var(--sans);color:var(--blue)}
+.ac-sugbox p{margin:9px 0 0;font:400 15px/1.55 var(--sans);color:#1A1A1A}
+.ac-sugbox p.ac-why{margin-top:6px;font-size:13px;line-height:1.45;color:#6E6E6E}
+.ac-foot{display:flex;align-items:center;justify-content:flex-end;gap:16px;padding:20px 22px 20px}
+.ac-alt{margin-right:auto;border:0;background:none;padding:6px 0;font:500 13.5px/1 var(--sans);color:#6E6E6E;cursor:pointer}
+.ac-alt:hover{color:#1A1A1A}
+.ac-alt:empty{display:none}
+.ac-hint{margin-right:auto;font:400 13px/1.3 var(--sans);color:#8C8C8C}
+.ac-hint:empty{display:none}
+.btn.ac-btn{display:inline-grid;justify-items:center;align-items:center;height:42px;padding:0 18px;font:600 14px/1 var(--sans);transition:background-color .22s ease,color .22s ease,box-shadow .22s ease,opacity .2s ease}
+.ac-btn>span{grid-area:1/1;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;opacity:0;transform:scale(.96);transition:opacity .18s ease,transform .3s cubic-bezier(.25,.8,.25,1)}
+.ac-btn[data-st=find]>[data-st=find],.ac-btn[data-st=busy]>[data-st=busy],.ac-btn[data-st=sug]>[data-st=sug],.ac-btn[data-st=done]>[data-st=done]{opacity:1;transform:none;transition-delay:.06s}
+.ac-btn[data-st=busy]{cursor:default}
+.ac-btn[data-st=done]{background:#EAF0FF;color:var(--blue);box-shadow:none;cursor:default}
+.ac-btn[data-st=find]:disabled{opacity:.45;cursor:default}
+.ac-btn .ico{width:15px;height:15px}
+.ac-spin{width:14px;height:14px;box-sizing:border-box;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+@media (max-width:720px){.ac-head{flex-direction:column;gap:12px}.ac-head,.ac-body,.ac-meter,.ac-foot{padding-left:16px;padding-right:16px}.ac-sugbox{margin-left:16px;margin-right:16px}}
 </style>
 </head>
 <body class="dark">
@@ -1964,30 +1978,19 @@ button.pstep:hover{background:#F7F7F7}
      </div>
 
      <div class="aw-pane" id="awActs">
-      <div class="aw-chips" id="awActChips" role="tablist" aria-label="Activities"><button type="button" role="tab" class="on" data-act-i="0">Library tutoring program</button><button type="button" role="tab" data-act-i="1">Robotics club</button><button type="button" role="tab" data-act-i="2">Debate</button><button type="button" class="add" data-toast="Add an activity · name, role and hours">+ Add activity</button></div>
-      <div class="aw-actwrap">
-       <div class="aw-impact" id="awImpact"><span class="iss-st"><i></i>Unresolved</span><div><b>No leadership signal in your activities</b><span>Fixing this is worth about +2.3 points at every school.</span></div><em>−2.3</em></div>
-       <section class="aw-paper aw-actcard">
-        <div class="aw-ptop aw-acttop"><div class="aw-actid"><b id="awActTitle">Library tutoring program</b><div class="aw-ctx" id="awActCtx"><span>Founder</span><span>6 hours / week</span></div></div><button class="lnk" type="button" data-toast="Edit details · name, role, hours">Edit details</button></div>
-        <div class="aw-tool" id="awActTool" hidden>
-         <div class="aw-switch" role="group" aria-label="Draft view"><button type="button" data-view="review" class="on">Review <span id="awActRevN">1</span></button><button type="button" data-view="edit">Edit draft</button></div>
-         <div class="aw-bulk"><button class="lnk" type="button" id="awActUndo" hidden>Undo</button><button class="btn sm" type="button" id="awActApplyAll">Apply all changes (1)</button></div>
+      <div class="aw-chips" id="awActChips" role="tablist" aria-label="Activities"><button type="button" role="tab" class="on" data-act-i="0">Library tutoring program<svg class="ck"><use href="#i-check"/></svg></button><button type="button" role="tab" data-act-i="1">Robotics club<svg class="ck"><use href="#i-check"/></svg></button><button type="button" role="tab" data-act-i="2">Debate<svg class="ck"><use href="#i-check"/></svg></button><button type="button" class="add" data-toast="Add an activity · name, role and hours">+ Add activity</button></div>
+      <section class="ac-card">
+       <div class="ac-in" id="acIn">
+        <div class="ac-head">
+         <div><div class="ac-title" id="awActTitle">Library tutoring program</div><div class="ac-tags" id="awActCtx"><span>Founder</span><span>6 hours / week</span></div></div>
+         <span class="ac-pill" id="acPill"><span data-s="bad">Costs 2.3 points</span><span data-s="good">Fixed · +2.3 points</span></span>
         </div>
-        <div class="aw-frame aw-frame-act">
-         <div class="aw-doc aw-doc-act" id="awActDoc" tabindex="0" hidden></div>
-         <textarea class="aw-ta aw-ta-act" id="awActEditor" maxlength="600" aria-label="Activity description" placeholder="Describe what you did, what you owned, and any outcomes you can support." spellcheck="false"></textarea>
-        </div>
-        <div class="aw-meter"><div class="aw-bar" id="awActBar"><i></i><u></u></div><span id="awActCount">0 / 150 characters</span><b id="awActFit"></b></div>
-        <div class="aw-actfoot">
-         <details class="aw-extra"><summary>Extra details <span>Optional</span></summary><textarea rows="3" aria-label="Extra details" placeholder="Facts or context to include. Only add things that really happened."></textarea></details>
-         <div class="aw-actgo"><small class="aw-ready" id="awActReady"></small><button class="btn aw-find" type="button" id="awActFind">Find improvements</button></div>
-        </div>
-       </section>
-       <section class="aw-sugs" id="awActSugs" hidden></section>
-       <div class="aw-out" id="awActOut" hidden></div>
-       <details class="aw-hist aw-acthist"><summary>Saved originals &amp; undo</summary><div id="awActHist"><p>Your last 20 originals are saved when you apply changes.</p></div></details>
-       <small class="aw-priv">Sends this description and any extra details to OpenAI when you ask. Review for accuracy before applying. Your original is saved with every edit.</small>
-      </div>
+        <div class="ac-body"><div class="ac-txt" id="acTxt"><textarea id="awActEditor" rows="2" maxlength="600" aria-label="Activity description" placeholder="Describe what you did, what you owned, and any outcomes you can support." spellcheck="false"></textarea></div></div>
+        <div class="ac-meter"><div class="ac-bar" id="acBar"><i></i></div><span class="ac-cnt" id="acCnt"><b id="acCntN">0</b> / 150</span></div>
+        <div class="ac-sug" id="acSug"><div class="ac-sugin"><div class="ac-sugbox"><div class="ac-sugl" id="acSugT">Suggested rewrite</div><p id="acSugA"></p><p class="ac-why" id="acSugW"></p></div></div></div>
+        <div class="ac-foot"><button class="ac-alt" type="button" id="acAlt"></button><small class="ac-hint" id="acHint"></small><button class="btn ac-btn" type="button" id="awActFind" data-st="find"><span data-st="find">Find improvements</span><span data-st="busy"><i class="ac-spin"></i>Reviewing</span><span data-st="sug">Apply rewrite</span><span data-st="done"><svg class="ico"><use href="#i-check"/></svg>Applied</span></button></div>
+       </div>
+      </section>
      </div>
     </div>
    </main>
@@ -2384,6 +2387,7 @@ function startCooldown(){rpNextAt=Date.now()+86400000;clearInterval(updT);updTic
 function onWorkshopChange(kind){let changed=false;if(kind==='essay'&&RP.essay!=='rewritten'){RP.essay='rewritten';$('essayChips').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.essay==='rewritten'));changed=true;}
  if(kind==='activity'&&RP.lead<1){RP.lead=1;$('leadChips').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.lead==='1'));changed=true;}
  if(!changed)return;const before=SCH.yale?+SCH.yale.now:9;renderReport();$('rpWhen').textContent='Updated just now from your workshop edit.';setTimeout(()=>toast('Chances updated from your workshop edit · Yale '+before+'% → '+SCH.yale.now+'%'),1400);}
+function offWorkshopChange(kind){if(kind==='activity'&&RP.lead>=1){RP.lead=0;$('leadChips').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.lead==='0'));renderReport();$('rpWhen').textContent='Updated just now from your workshop edit.';}}
 function applyScore(){if($('satGo').disabled)return;startCooldown();RP.sat=Math.max(400,Math.min(1600,+$('satIn').value||900));RP.gpa=Math.max(0,Math.min(5,parseFloat($('gpaIn').value)||4.0));RP.ap=Math.max(0,+$('apIn').value||0);RP.acts=Math.max(0,+$('actIn').value||0);const before=SCH.yale?+SCH.yale.now:9,sb=rpScore(RP);renderReport();$('rpWhen').textContent='Updated just now.';pop.classList.remove('on');toast('Chances updated · Yale '+before+'% → '+SCH.yale.now+'% · score '+sb+'/100');}
 $('leadChips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;RP.lead=+b.dataset.lead;$('leadChips').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));});
 $('essayChips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;RP.essay=b.dataset.essay;$('essayChips').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));});
@@ -2438,7 +2442,7 @@ const AW_ACTS=[
  {name:'Debate',role:'Member',hours:'2',text:'',edits:[],questions:[]}];
 const awWords=t=>t.trim()?t.trim().split(/\s+/).length:0;
 function awEsc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function awTab(t){document.querySelectorAll('.aw-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.wstab===t));$('awEssays').classList.toggle('on',t==='essays');$('awActs').classList.toggle('on',t==='activities');awPopClose();}
+function awTab(t){document.querySelectorAll('.aw-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.wstab===t));$('awEssays').classList.toggle('on',t==='essays');$('awActs').classList.toggle('on',t==='activities');awPopClose();if(t==='activities'&&typeof acRefresh==='function')requestAnimationFrame(acRefresh);}
 document.querySelectorAll('.aw-tabs button').forEach(b=>b.addEventListener('click',()=>awTab(b.dataset.wstab)));
 /* custom selects */
 document.querySelectorAll('.aw-sel').forEach(sel=>{const trig=sel.querySelector('.aw-trig');trig.addEventListener('click',e=>{e.stopPropagation();const open=sel.classList.contains('open');document.querySelectorAll('.aw-sel.open').forEach(x=>x.classList.remove('open'));if(!open)sel.classList.add('open');});
@@ -2513,22 +2517,39 @@ $('awRunChecks').addEventListener('click',()=>{const t=AW.common.text,w=awWords(
 awLoadDraft('common');
 /* activities */
 let awAct=0;
-function awActMeter(t){const n=t.length,over=n>150;$('awActCount').textContent=n+' / 150 characters';const bar=$('awActBar');bar.classList.toggle('over',over);bar.querySelector('i').style.width=Math.min(100,n/200*100)+'%';const f=$('awActFit');f.className=over?'over':'';f.textContent=n?(over?(n-150)+' over':'Fits'):'';}
-function awActSugs(S,pend,v){const w=$('awActSugs');if(!w)return;
- const imp=$('awImpact');if(imp){const done=typeof RP!=='undefined'&&RP.lead>=1;imp.classList.toggle('done',done);imp.querySelector('.iss-st').innerHTML='<i></i>'+(done?'Updated':'Unresolved');imp.querySelector(':scope>div>b').textContent=done?'Leadership signal added':'No leadership signal in your activities';imp.querySelector(':scope>div>span').textContent=done?'Your chances at every school were updated from this edit.':'Fixing this is worth about +2.3 points at every school.';imp.querySelector('em').textContent=done?'+2.3':'−2.3';}
- if(S.pending){w.hidden=false;w.innerHTML='<div class="aw-busy"><span class="spin"></span><b>Finding useful edits…</b><p>Looking for what you owned, numbers you can support, and words to cut.</p></div>';return;}
- if(!S.snapshot){w.hidden=true;w.innerHTML='';return;}
- if(S.stale){w.hidden=false;w.innerHTML='<p class="aw-stale">Your description changed. Press Find improvements for fresh suggestions.</p>';return;}
- const qs=(AW_ACTS[awAct].questions||[]);w.hidden=false;
- w.innerHTML='<div class="aw-sughead"><b>'+(pend.length?pend.length+' suggested '+(pend.length===1?'change':'changes'):'All suggestions reviewed')+'</b>'+(pend.length>1?'<button class="lnk" type="button" data-sug-all>Apply all</button>':(pend.length?'':'<span>Your latest wording is saved.</span>'))+'</div>'
- +pend.map(({ed,i})=>'<div class="aw-sug"><div class="aw-sugtxt"><span class="aw-sugt">'+awEsc(ed.title)+'</span><p class="aw-sugafter">'+awEsc(ed.after)+'</p><p class="aw-sugwhy">'+awEsc(ed.reason)+'</p></div><div class="aw-sugact"><button class="btn sm" type="button" data-sug-apply="'+i+'">Apply</button><button class="lnk" type="button" data-sug-dismiss="'+i+'">Dismiss</button></div></div>').join('')
- +(qs.length?'<div class="aw-sugq"><b>A few details would help</b><ul>'+qs.map(q=>'<li>'+awEsc(q)+'</li>').join('')+'</ul></div>':'');}
-const act=awSession({kind:'activity',editor:$('awActEditor'),doc:$('awActDoc'),tool:$('awActTool'),revN:$('awActRevN'),applyAll:$('awActApplyAll'),undo:$('awActUndo'),find:$('awActFind'),ready:$('awActReady'),out:$('awActOut'),hist:$('awActHist'),questions:()=>AW_ACTS[awAct].questions,after:awActSugs,
- count:t=>{awActMeter(t);AW_ACTS[awAct].text=t;}});
-function awLoadAct(i){awAct=i;const a=AW_ACTS[i];$('awActTitle').textContent=a.name;$('awActChips').querySelectorAll('[data-act-i]').forEach(b=>b.classList.toggle('on',+b.dataset.actI===i));$('awActCtx').innerHTML='<span>'+awEsc(a.role)+'</span><span>'+awEsc(a.hours)+' hours / week</span>';act.load(i,a.text,a.edits);}
-$('awActChips').addEventListener('click',e=>{const b=e.target.closest('[data-act-i]');if(b)awLoadAct(+b.dataset.actI);});
-$('awActSugs').addEventListener('click',e=>{const a=e.target.closest('[data-sug-apply]'),d=e.target.closest('[data-sug-dismiss]'),al=e.target.closest('[data-sug-all]');if(a)act.apply(+a.dataset.sugApply);else if(d)act.dismiss(+d.dataset.sugDismiss);else if(al)$('awActApplyAll').click();});
-awLoadAct(0);
+const ACT_ISSUE=[{pts:'2.3'},null,null];
+const AS=AW_ACTS.map(a=>({phase:a.text.trim()?'find':'empty',fixed:false,undo:null,sug:null}));
+const acTa=$('awActEditor');
+function acAuto(){acTa.style.height='auto';acTa.style.height=acTa.scrollHeight+'px';}
+function acMeter(n){const over=n>150;$('acBar').classList.toggle('over',over);$('acBar').firstElementChild.style.width=Math.min(100,n/150*100)+'%';$('acCnt').classList.toggle('over',over);}
+function acCount(from){const n=acTa.value.length;acMeter(n);if(from!=null&&from!==n)roll($('acCntN'),n,650,'',from);else $('acCntN').textContent=n;}
+function acRefresh(){acAuto();acCount();}
+function acState(){const i=awAct,s=AS[i],iss=ACT_ISSUE[i],btn=$('awActFind'),alt=$('acAlt');
+ btn.dataset.st=s.phase==='empty'?'find':s.phase;btn.disabled=s.phase==='empty'||s.phase==='busy'||s.phase==='done';
+ const und=s.undo&&acTa.value===s.undo.after;alt.dataset.act=s.phase==='sug'?'dismiss':(und?'undo':'');alt.textContent=s.phase==='sug'?'Dismiss':(und?'Undo':'');
+ $('acHint').textContent=s.phase==='empty'?'Write a sentence or two first':'';
+ if(s.phase==='sug'&&s.sug){$('acSugT').textContent=s.sug.title;$('acSugA').textContent=s.sug.after;$('acSugW').textContent=s.sug.reason;}
+ $('acSug').classList.toggle('on',s.phase==='sug');
+ const pill=$('acPill');pill.hidden=!iss;if(iss){pill.querySelector('[data-s=bad]').textContent='Costs '+iss.pts+' points';pill.querySelector('[data-s=good]').textContent='Fixed · +'+iss.pts+' points';}pill.classList.toggle('good',!!(iss&&s.fixed));
+ $('awActChips').querySelectorAll('[data-act-i]').forEach(b=>b.classList.toggle('fixed',AS[+b.dataset.actI].fixed));}
+function acSwap(t,fromLen){const w=$('acTxt'),h0=w.offsetHeight,g=document.createElement('div');g.className='ac-ghost';g.textContent=acTa.value;w.appendChild(g);acTa.value=t;acAuto();const h1=acTa.offsetHeight;
+ w.style.height=h0+'px';void w.offsetHeight;w.style.height=h1+'px';acTa.classList.remove('in');void acTa.offsetWidth;acTa.classList.add('in');requestAnimationFrame(()=>g.classList.add('go'));
+ setTimeout(()=>{g.remove();w.style.height='';},RM?0:600);acCount(fromLen);}
+function acFind(){const i=awAct,s=AS[i];if(s.phase!=='find')return;s.phase='busy';acState();
+ setTimeout(()=>{if(s.phase!=='busy')return;const ed=(AW_ACTS[i].edits||[]).find(e=>AW_ACTS[i].text.includes(e.before));if(ed){s.sug=ed;s.phase='sug';}else{s.phase='find';toast('Looks good. Nothing to change here.');}if(awAct===i)acState();},RM?0:1100);}
+function acApply(){const i=awAct,s=AS[i],ed=s.sug;if(s.phase!=='sug'||!ed)return;const before=acTa.value,after=before.replace(ed.before,ed.after);
+ s.undo={before,after};s.phase='done';s.sug=null;AW_ACTS[i].text=after;acSwap(after,before.length);acState();
+ setTimeout(()=>{s.fixed=true;if(awAct===i)acState();if(ACT_ISSUE[i]&&typeof onWorkshopChange==='function')onWorkshopChange('activity');},RM?0:420);}
+function acUndo(){const i=awAct,s=AS[i];if(!s.undo||acTa.value!==s.undo.after)return;const from=acTa.value.length;AW_ACTS[i].text=s.undo.before;acSwap(s.undo.before,from);s.undo=null;s.phase='find';s.fixed=false;acState();
+ if(ACT_ISSUE[i]&&typeof offWorkshopChange==='function')offWorkshopChange('activity');}
+function awLoadAct(i,instant){$('awActChips').querySelectorAll('[data-act-i]').forEach(b=>b.classList.toggle('on',+b.dataset.actI===i));
+ const load=()=>{awAct=i;const a=AW_ACTS[i];$('awActTitle').textContent=a.name;$('awActCtx').innerHTML='<span>'+awEsc(a.role)+'</span><span>'+awEsc(a.hours)+' hours / week</span>';acTa.value=a.text;acRefresh();acState();};
+ if(instant||RM){load();return;}const inn=$('acIn');inn.classList.add('out');setTimeout(()=>{load();inn.classList.remove('out');},170);}
+acTa.addEventListener('input',()=>{const s=AS[awAct];AW_ACTS[awAct].text=acTa.value;acAuto();acCount();if(s.phase!=='busy')s.phase=acTa.value.trim()?'find':'empty';s.sug=null;acState();});
+$('awActFind').addEventListener('click',()=>{const s=AS[awAct];if(s.phase==='find')acFind();else if(s.phase==='sug')acApply();});
+$('acAlt').addEventListener('click',()=>{const a=$('acAlt').dataset.act;if(a==='dismiss'){AS[awAct].phase='find';AS[awAct].sug=null;acState();}else if(a==='undo')acUndo();});
+$('awActChips').addEventListener('click',e=>{const b=e.target.closest('[data-act-i]');if(b&&+b.dataset.actI!==awAct)awLoadAct(+b.dataset.actI);});
+awLoadAct(0,true);
 const QP=new URLSearchParams(location.search),QS=QP.get('s')||location.hash.slice(1);
 function start(){buildSprites();fit();document.querySelector('.tools button').classList.add('on');if(QS&&QS!=='s1'&&(document.getElementById(QS)||document.getElementById('pg-'+QS))){go(QS);if(QP.has('find'))setTimeout(()=>{(QS==='s8'?$('awActFind'):$('awFind')).click();},300);return;}startCheck();}
 const ready=[loadLogos()];if(document.fonts&&document.fonts.load)ready.push(document.fonts.load('600 64px "Inter Tight"'),document.fonts.load('700 34px "Inter Tight"'),document.fonts.load('500 14px Inter'));Promise.all(ready).then(start,start);
