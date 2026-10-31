@@ -710,7 +710,7 @@ hr.fade{border:0;height:1px;margin:2px 0;background:linear-gradient(90deg,rgba(2
 @media (prefers-reduced-motion:reduce){.pg.on .rm-card,.pg.on .rm-li,.pg.on .rm-row,.pg.on .rm-h2,.pg.on .nums,.pg.on .rm-h1,.pg.on .rm-sub,.pg.on .crumb,.pg.on .rm-actions{animation:none}.toast{transition:none}}
 /* page switch: outgoing slides 10 px against the direction with a 2 px blur, incoming slides in */
 .pg.on{animation:pgin .22s var(--ease) both}
-.pg.out{animation:pgout .15s var(--ease) both;position:absolute;inset:44px 56px auto;pointer-events:none}
+.pg.out{animation:pgout .15s var(--ease) both;position:absolute;inset:44px 56px 0;overflow:hidden;pointer-events:none}
 @keyframes pgin{from{opacity:0;transform:translateX(calc(var(--dir,1) * 12px));filter:blur(2px)}to{opacity:1;transform:none;filter:blur(0)}}
 @keyframes pgout{from{opacity:1;transform:none;filter:blur(0)}to{opacity:0;transform:translateX(calc(var(--dir,1) * -10px));filter:blur(2px)}}
 .rm-main{position:relative}
@@ -1185,6 +1185,446 @@ button.pstep:hover{background:#F7F7F7}
 @media (max-width:1180px){.sc2{grid-template-columns:1fr}#pg-s4 .cmp-row{grid-template-columns:100px 1fr 150px}}
 @media (max-width:820px){#pg-s4 .cmp-row{grid-template-columns:90px 1fr 130px}.sc-hero{align-items:flex-start}}
 .rc-f2 span{color:var(--blue);opacity:.62}
+
+/* fix44: critical issues, deadline urgency */
+.crit{color:#D4383E}
+#sE .h2x{max-width:20ch}
+#sE .lead{margin-top:16px;color:#3D3D3D}
+#sE .lead b{font-weight:600;color:#1A1A1A}
+#sE .iss{width:min(660px,100%);margin-top:26px;border:0;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 40px -18px rgba(0,0,0,.16)}
+.iss-clock{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 22px;background:#D4383E;color:#fff}
+.iss-clk{display:inline-flex;align-items:center;gap:8px;font:600 13.5px/1 var(--sans)}
+.iss-clk .ico{width:16px;height:16px}
+.iss-cd{font:700 18px/1 var(--head);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.iss-cd span{display:inline-block;min-width:1.15em;text-align:right}
+.iss-cd small{font:600 12px/1 var(--sans);opacity:.8;margin:0 6px 0 2px}
+#sE .iss-row{grid-template-columns:auto 1fr auto;gap:16px;padding:16px 22px}
+.iss-st{display:inline-flex;align-items:center;gap:7px;font:600 12px/1 var(--sans);color:#C8313A;background:#FDECEC;border-radius:999px;padding:6px 10px 6px 8px;white-space:nowrap}
+.iss-st i{width:7px;height:7px;border-radius:50%;background:#D4383E;box-shadow:0 0 0 0 rgba(229,72,77,.5);animation:flagping2 1.6s ease-out infinite}
+#sE .iss-row span:not(.iss-st) b{display:inline;font:inherit;font-weight:600;color:#1A1A1A}
+#sE .h2x{max-width:none}
+#sE .iss-row em{font-size:21px}
+.iss-foot{padding:16px 22px 18px;border-top:1px solid #EEEEEE;background:#FAFAFA}
+.iss-ft{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.iss-ft span{font:500 14px/1.3 var(--sans);color:#6E6E6E}
+.iss-ft b{font:700 24px/1 var(--head);color:#D4383E;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.iss-seg{display:flex;gap:3px;height:8px;margin-top:12px;border-radius:99px;overflow:hidden}
+.iss-seg i{display:block;height:100%;width:0;transition:width .8s var(--ease) .55s;background:#D4383E}
+.iss-seg i:nth-child(2){background:#E8777B;transition-delay:.7s}.iss-seg i:nth-child(3){background:#F2A9AC;transition-delay:.85s}
+#sE.on .iss-seg i{width:calc(var(--w) * 1%)}
+.iss-keys{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font:500 12.5px/1 var(--sans);color:#6E6E6E}
+.iss-keys span{display:inline-flex;align-items:center;gap:6px}
+.iss-keys i{width:8px;height:8px;border-radius:2px;background:#D4383E}
+.iss-keys span:nth-child(2) i{background:#E8777B}.iss-keys span:nth-child(3) i{background:#F2A9AC}
+.iss-hit{margin-left:auto;font-weight:400;color:#8C8C8C}
+#sE .btn.xl{margin-top:26px}
+.iss-note{margin:12px 0 0;font:400 13.5px/1.4 var(--sans);color:#8C8C8C}
+@media (max-width:720px){#sE .iss-row{grid-template-columns:1fr auto;padding:14px 16px}#sE .iss-row .iss-st{grid-column:1/-1;justify-self:start}.iss-clock{flex-wrap:wrap}}
+.ba.xl{width:min(760px,100%);margin-top:30px;gap:16px}
+.ba.xl .ba-leg{font-size:14px}
+.ba.xl .ba-leg i{width:12px;height:12px}
+.ba.xl .ba-row{grid-template-columns:32px 180px 1fr auto;gap:16px}
+.ba.xl .ba-row img{width:28px;height:28px}
+.ba.xl .ba-row b{font:500 17px/1.2 var(--sans)}
+.ba.xl .ba-bars{height:14px}
+.ba.xl .ba-n{min-width:84px}
+.ba.xl .ba-n small{font:600 16px/1 var(--sans)}
+#sB .chips{margin-top:26px;gap:10px}
+#sB .chips span{font-size:14.5px;padding:11px 15px}
+@media (max-width:720px){.ba.xl .ba-row{grid-template-columns:28px 120px 1fr auto;gap:12px}.ba.xl .ba-row b{font-size:15px}#sE .iss-row{grid-template-columns:34px 1fr auto;padding:14px 16px}.iss-ic{width:34px;height:34px}.crit{font-size:40px}}
+/* fix41b: paywall preview, blur numbers only */
+#s2 .prev::after{display:none}
+#s2 .prev-row img,#s2 .prev-row span{filter:none;opacity:1}
+#s2 .prev-lock{top:50%}
+/* fix41c: finalizing labels bigger */
+#s3 .lines li{font-size:15px}
+#s3 .lines .val{font:600 15px/1 var(--mono)}
+#s3 .proc .pct{font-size:15px}
+
+/* fix42: application workshop (mirrors collegereveal #/essay) */
+.aw-head{align-items:flex-start}
+.aw-sub{margin-top:6px;font-size:15px;color:#6E6E6E}
+.aw-headact{position:relative;flex:none}
+.aw-vers{position:absolute;right:0;top:calc(100% + 8px);z-index:6;width:280px;display:none;padding:6px;border:1px solid #E6E6E6;border-radius:14px;background:#fff;box-shadow:0 20px 50px -24px rgba(0,0,40,.35)}
+.aw-vers.on{display:grid}
+.aw-vrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px;border-radius:10px}
+.aw-vrow:hover{background:#F7F7F7}
+.aw-vrow b{display:block;font:500 13.5px/1.3 var(--sans);color:#1A1A1A}
+.aw-vrow span{font:400 12.5px/1.3 var(--sans);color:#8C8C8C}
+.aw-tabs{display:flex;gap:26px;border-bottom:1px solid #E6E6E6;margin:22px 0 24px}
+.aw-tabs button{border:0;background:transparent;padding:12px 0 14px;margin-bottom:-1px;font:600 14.5px/1 var(--sans);color:#8C8C8C;border-bottom:2px solid transparent;cursor:pointer}
+.aw-tabs button.on{color:#1A1A1A;border-color:var(--blue)}
+.aw-pane{display:none}.aw-pane.on{display:block}
+.aw-pick{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.aw-pick label{font:600 13.5px/1 var(--sans);color:#1A1A1A}
+.aw-muted{font:400 13px/1 var(--sans);color:#8C8C8C}
+.aw-sel{position:relative;min-width:0}
+.aw-trig{display:inline-flex;align-items:center;justify-content:space-between;gap:10px;min-width:240px;max-width:100%;height:40px;padding:0 12px 0 14px;border:1px solid #E6E6E6;border-radius:10px;background:#fff;font:500 13.5px/1 var(--sans);color:#1A1A1A;cursor:pointer;text-align:left}
+.aw-trig:hover{border-color:#CFCFCF}
+.aw-trig .ico{width:16px;height:16px;color:#8C8C8C;flex:none}
+.aw-trig span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aw-menu{position:absolute;left:0;top:calc(100% + 6px);z-index:7;min-width:100%;width:max-content;max-width:min(360px,calc(100vw - 48px));display:none;padding:6px;border:1px solid #E6E6E6;border-radius:12px;background:#fff;box-shadow:0 20px 50px -24px rgba(0,0,40,.35)}
+.aw-sel.open .aw-menu{display:grid}
+.aw-menu button{border:0;background:transparent;text-align:left;padding:9px 10px;border-radius:8px;font:500 13.5px/1.2 var(--sans);color:#1A1A1A;cursor:pointer;white-space:nowrap}
+.aw-menu button:hover{background:#F5F5F5}
+.aw-menu button[aria-selected="true"]{background:#F0F0F0}
+.aw-work{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:18px;align-items:start}
+.aw-paper{border:1px solid #E6E6E6;border-radius:16px;background:#fff;overflow:hidden;min-width:0}
+.aw-ptop{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 20px;border-bottom:1px solid #EEEEEE}
+.aw-ptop b{font:600 15px/1.3 var(--sans);color:#1A1A1A}
+.aw-ptop span{font:400 13px/1 var(--sans);color:#8C8C8C}
+.aw-prompt{padding:12px 20px;border-bottom:1px solid #EEEEEE}
+.aw-prompt summary{cursor:pointer;font:500 13.5px/1.3 var(--sans);color:#1A1A1A}
+.aw-prompt p{margin:10px 0 6px;font:400 14px/1.6 var(--sans);color:#3D3D3D}
+.aw-tool{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px 10px 14px;background:#FAFAFA;border-bottom:1px solid #EEEEEE;flex-wrap:wrap}
+.aw-tool[hidden]{display:none}
+.aw-switch{display:flex;gap:3px;padding:3px;background:#EEEEEE;border-radius:9px}
+.aw-switch button{border:0;background:transparent;padding:7px 10px;border-radius:7px;font:600 12.5px/1 var(--sans);color:#6E6E6E;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.aw-switch button.on{background:#fff;color:#1A1A1A;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.aw-switch button span{padding:2px 5px;background:#E8F0FF;color:var(--blue);border-radius:4px;font-size:11px}
+.aw-bulk{display:flex;align-items:center;gap:14px}
+.aw-bulk .btn.sm:disabled{opacity:.45;cursor:default}
+.aw-frame{position:relative}
+.aw-doc,.aw-ta{display:block;width:100%;box-sizing:border-box;padding:26px 32px 28px;font:400 16.5px/1.75 Georgia,"Times New Roman",serif;color:#1A1A1A;background:#fff;border:0;outline:none;resize:none;white-space:pre-wrap;overflow-wrap:anywhere;min-height:430px}
+.aw-doc[hidden],.aw-ta[hidden]{display:none}
+.aw-ta{font-family:Georgia,"Times New Roman",serif}
+.aw-ta:focus{background:#FFFFFF}
+.aw-doc-act,.aw-ta-act{min-height:150px;padding:18px 20px 20px;font:400 15.5px/1.65 var(--sans)}
+.aw-doc mark{background:#E8F0FF;color:inherit;border-bottom:2px solid #9DBBFF;padding:2px 0;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;cursor:pointer;transition:background .15s}
+.aw-doc mark:hover,.aw-doc mark.on{background:#CFE0FF;border-bottom-color:var(--blue)}
+.aw-pbot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;border-top:1px solid #EEEEEE;font:400 13px/1 var(--sans);color:#6E6E6E}
+.aw-checks{padding:12px 20px 14px;border-top:1px solid #EEEEEE}
+.aw-checks summary{cursor:pointer;font:500 13.5px/1.3 var(--sans);color:#1A1A1A}
+.aw-checks p{margin:8px 0 10px;font:400 13px/1.5 var(--sans);color:#6E6E6E}
+.aw-checkout{display:grid;gap:8px;margin-top:12px}
+.aw-checkout:empty{display:none}
+.aw-cstat{display:flex;gap:14px;flex-wrap:wrap;font:400 13px/1 var(--sans);color:#6E6E6E}
+.aw-cstat b{font-weight:600;color:#1A1A1A}
+.aw-crow{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;padding:9px 12px;border-radius:10px;background:#F5F5F5;font:400 13px/1.45 var(--sans);color:#3D3D3D}
+.aw-crow b{display:block;font-weight:600;color:#1A1A1A}
+.aw-crow .sev{font-size:11px}
+.aw-review{position:sticky;top:0}
+.aw-rev{border:1px solid #E6E6E6;border-radius:16px;background:#fff;padding:20px 20px 18px;display:grid;gap:10px}
+.aw-eye{font:600 11.5px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.aw-rev h2{margin:0;font:600 20px/1.2 var(--head);letter-spacing:-.02em;color:#1A1A1A}
+.aw-rev>p{margin:-4px 0 4px;font:400 13.5px/1.5 var(--sans);color:#6E6E6E}
+.aw-lbl{font:600 13px/1 var(--sans);color:#1A1A1A;margin-top:4px}
+.aw-lbl-pad{padding:14px 20px 0}
+.aw-goal{margin:0;padding:10px 12px;border-radius:10px;background:#F5F5F5;font:500 13.5px/1.3 var(--sans);color:#1A1A1A}
+.aw-rev .aw-trig{width:100%;min-width:0}
+.aw-extra summary{cursor:pointer;font:500 13px/1 var(--sans);color:#1A1A1A;display:flex;gap:6px;align-items:center}
+.aw-extra summary span{font-weight:400;color:#8C8C8C}
+.aw-extra textarea{width:100%;box-sizing:border-box;margin-top:8px;padding:10px 12px;border:1px solid #E6E6E6;border-radius:10px;font:400 13.5px/1.5 var(--sans);color:#1A1A1A;resize:vertical;outline:none}
+.aw-extra textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,89,255,.12)}
+.aw-ready{font:400 12px/1.4 var(--sans);color:#8C8C8C;min-height:0}
+.aw-ready:empty{display:none}
+.aw-find{width:100%;justify-content:center;padding:12px 16px;font-size:14px;border-radius:11px}
+.aw-find:disabled{opacity:.5;cursor:default}
+.aw-out{border-top:1px solid #EEEEEE;padding-top:12px}
+.aw-help,.aw-status p{margin:0;font:400 13px/1.6 var(--sans);color:#6E6E6E}
+.aw-status b{display:block;font:600 14px/1.3 var(--sans);color:#1A1A1A;margin-bottom:4px}
+.aw-stale{margin:0;padding:10px 12px;border-radius:10px;background:#FFF7E8;color:#8A5A12;font:500 13px/1.45 var(--sans)}
+.aw-busy{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center}
+.aw-busy .spin{width:16px;height:16px;border:2px solid rgba(0,89,255,.2);border-top-color:var(--blue);border-radius:50%;animation:spin .9s linear infinite;grid-row:span 2}
+.aw-busy b{font:600 14px/1.3 var(--sans);color:#1A1A1A}
+.aw-busy p{margin:0;font:400 13px/1.4 var(--sans);color:#6E6E6E}
+.aw-qs{margin-top:10px}
+.aw-qs summary{cursor:pointer;font:500 13px/1 var(--sans);color:#1A1A1A}
+.aw-qs ul{margin:8px 0 4px;padding-left:18px;font:400 13px/1.5 var(--sans);color:#3D3D3D}
+.aw-qs p{margin:4px 0 0;font:400 12.5px/1.4 var(--sans);color:#8C8C8C}
+.aw-priv{font:400 12px/1.5 var(--sans);color:#8C8C8C}
+.aw-hist summary{cursor:pointer;font:500 13px/1 var(--sans);color:#1A1A1A}
+.aw-hist p{margin:8px 0 0;font:400 12.5px/1.5 var(--sans);color:#8C8C8C}
+.aw-hrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid #EEEEEE;font:400 12.5px/1.4 var(--sans);color:#6E6E6E}
+.aw-hrow:first-child{border-top:0}
+.aw-hrow b{display:block;font-weight:500;color:#1A1A1A}
+.aw-ctx{display:flex;gap:8px;flex-wrap:wrap;padding:14px 20px 0}
+.aw-ctx span{font:500 12.5px/1 var(--sans);color:#3D3D3D;background:#F2F2F2;border-radius:7px;padding:6px 9px}
+.aw-hint{margin:0;padding:0 20px 16px;font:400 12.5px/1.5 var(--sans);color:#8C8C8C}
+.aw-pop{position:fixed;z-index:60;width:min(380px,calc(100vw - 24px));padding:16px 16px 14px;background:#fff;border:1px solid #E6E6E6;border-radius:14px;box-shadow:0 24px 60px -24px rgba(0,0,40,.4);display:none}
+.aw-pop.on{display:block}
+.aw-pop .ph{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.aw-pop .ph b{font:600 14.5px/1.4 var(--sans);color:#1A1A1A}
+.aw-pop .ph button{border:0;background:#F2F2F2;border-radius:7px;width:26px;height:26px;color:#6E6E6E;cursor:pointer;font:400 16px/1 var(--sans);flex:none}
+.aw-pop .pl{font:700 10.5px/1 var(--sans);letter-spacing:.08em;color:#2F7A4F}
+.aw-pop .pr{margin:6px 0 10px;padding:10px 12px;border-left:3px solid #7FC29B;border-radius:6px;background:#EEF8F1;font:400 14px/1.6 var(--sans);color:#1F4D33;white-space:pre-wrap}
+.aw-pop .pe{margin:0 0 12px;font:400 13px/1.55 var(--sans);color:#6E6E6E}
+.aw-pop .pa{display:flex;align-items:center;gap:14px}
+@media (max-width:1180px){.aw-work{grid-template-columns:1fr}.aw-review{position:static}}
+
+/* fix45: fix screen bars, more schools, big % */
+.ba.xl{width:min(860px,100%);margin-top:28px;gap:14px}
+.ba.xl .ba-leg{font-size:14px;flex-wrap:wrap}
+.ba-avg{margin-left:auto;color:#8C8C8C;font-size:13px}
+.ba.xl .ba-row{grid-template-columns:34px 210px 1fr auto;gap:16px}
+.ba.xl .ba-row img{width:30px;height:30px}
+.ba.xl .ba-row b{font:500 17px/1.2 var(--sans)}
+.ba.xl .ba-bars{height:16px}
+.ba.xl .ba-n{min-width:112px}
+.ba.xl .ba-n em{font:700 26px/1 var(--head);color:var(--blue);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+#sB .chips{margin-top:24px}
+@media (max-height:900px){.ba.xl{gap:10px;margin-top:22px}.ba.xl .ba-bars{height:14px}.ba.xl .ba-n em{font-size:23px}.ba.xl .ba-row img{width:26px;height:26px}.ba.xl .ba-row b{font-size:16px}#sB .lead{margin-top:12px}}
+@media (max-width:720px){.ba.xl .ba-row{grid-template-columns:28px 130px 1fr auto;gap:12px}.ba.xl .ba-row b{font-size:15px}.ba.xl .ba-n em{font-size:20px}.ba-avg{display:none}}
+
+/* fix46: reveal rows grow in */
+.rc-rw{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.rc-rw.on{grid-template-rows:1fr}
+.rc-rw>.rc-row{min-height:0;overflow:hidden}
+.rc-rows{display:block}
+
+/* fix48: issues screen red accents */
+#sE .btn.xl{background:#D4383E;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 8px 20px -8px rgba(212,56,62,.6)}
+#glow .board{transition:transform 1s var(--ease-sky),filter 1s var(--ease)}
+#glow.red .board{filter:hue-rotate(147deg) saturate(.7)}
+/* fix48: results page as application report + matching paywall preview + full update panel */
+.rp-head{align-items:flex-start}
+.rp-sub{margin:10px 0 0;font:400 14.5px/1.5 var(--sans);color:#6E6E6E;max-width:60ch}
+.rp-sub span{color:#8C8C8C}
+.rp-card{margin-top:22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.9fr);gap:28px 40px;padding:26px 30px 26px}
+.rp-left{display:flex;flex-direction:column;min-width:0}
+.rp-eyebrow{font:500 13px/1 var(--sans);color:#8C8C8C}
+.rp-name{margin:8px 0 0;font:600 28px/1.15 var(--sans);letter-spacing:-.02em;color:#1A1A1A}
+.rp-line{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:22px;font:500 15px/1 var(--sans);color:#3D3D3D}
+.rp-line+.rp-bar{margin-top:10px}
+.rp-line b{font:700 24px/1 var(--head);letter-spacing:-.03em;color:#1A1A1A;font-variant-numeric:tabular-nums}
+.rp-line b small{font:500 14px/1 var(--sans);color:#8C8C8C;margin-left:1px}
+.rp-line b em{font-style:normal}
+.rp-line b.pot{color:var(--blue)}
+.rp-bar{height:10px;border-radius:99px;background:#F0F0F0;overflow:hidden}
+.rp-bar i{display:block;height:100%;width:calc(var(--v) * 1%);border-radius:99px;background:var(--blue);transition:width .8s var(--ease)}
+.rp-bar.light i{background:#BFD3FF}
+.rp-subs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px}
+.rp-subs div{display:grid;gap:6px;padding:10px 12px;border-radius:12px;background:#F7F7F7}
+.rp-subs span{font:500 12px/1.2 var(--sans);color:#6E6E6E}
+.rp-subs b{font:700 18px/1 var(--head);color:#1A1A1A;letter-spacing:-.02em}
+.rp-subs b small{font:500 12px/1 var(--sans);color:#8C8C8C}
+.rp-cta{padding-top:18px;padding-bottom:18px;font-size:15.5px;border-radius:12px;width:100%;justify-content:center}
+.rp-left .rp-cta{margin-top:24px}
+.rp-cta span{opacity:.75;font-weight:400}
+.rp-right{display:grid;place-items:center;min-width:0}
+.rp-svg{width:min(340px,100%);height:auto;display:block;overflow:visible}
+.rp-svg .grid{fill:none;stroke:#E6E6E6;stroke-width:1}
+.rp-svg .grid.f{fill:#F7F7F7}
+.rp-svg .axis{stroke:#E6E6E6;stroke-width:1}
+.rp-svg .you{fill:rgba(0,89,255,.14);stroke:var(--blue);stroke-width:2;stroke-linejoin:round}
+.rp-svg .chip{fill:var(--blue)}
+.rp-svg .cv{font:700 12px var(--sans);fill:#fff}
+.rp-svg .lbl{font:500 13px var(--sans);fill:#3D3D3D}
+.rp-sch-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:30px 0 12px}
+.rp-sch-head h2{margin:0;font:600 18px/1.2 var(--sans);color:#1A1A1A}
+.rp-sch-head span{font:400 13.5px/1.3 var(--sans);color:#8C8C8C}
+.rp-sch-head b{font-weight:600;color:#D4383E}
+.rp-list{display:grid;gap:12px}
+.rr{border:1px solid #E6E6E6;border-radius:16px;background:#fff;overflow:hidden;animation:rise .26s var(--ease) backwards;animation-delay:calc(var(--i,0) * 40ms)}
+.rr-top{display:grid;grid-template-columns:minmax(200px,1.1fr) auto minmax(150px,.8fr) auto;align-items:center;gap:20px 28px;padding:18px 22px}
+.rr-id{display:flex;align-items:center;gap:14px;min-width:0;cursor:pointer}
+.rr-id img{width:44px;height:44px;object-fit:contain;flex:none}
+.rr-id b{display:block;font:600 19px/1.2 var(--sans);letter-spacing:-.01em;color:#1A1A1A}
+.rr-id span{display:block;margin-top:3px;font:400 13.5px/1.2 var(--sans);color:#8C8C8C}
+.rr-gauges{display:flex;align-items:flex-end;gap:22px}
+.rr-g{position:relative;display:grid;justify-items:center;width:var(--w)}
+.rr-g svg{width:100%;height:auto;display:block}
+.rr-g .trk{fill:none;stroke:#EFEFEF;stroke-width:9;stroke-linecap:round}
+.rr-g .val{fill:none;stroke:var(--blue);stroke-width:9;stroke-linecap:round;transition:stroke-dasharray .9s var(--ease)}
+.rr-g.avg .val{stroke:#E5484D}.rr-g.pot .val{stroke:#BFD3FF}
+.rr-g b{position:absolute;left:0;right:0;top:46%;text-align:center;font:700 22px/1 var(--head);letter-spacing:-.03em;color:#1A1A1A;font-variant-numeric:tabular-nums}
+.rr-g.lg b{font-size:32px;top:44%}
+.rr-g.avg b{font-size:17px}
+.rr-g span{margin-top:-4px;font:500 12px/1 var(--sans);color:#8C8C8C;white-space:nowrap}
+.rr-g.sm{--w:92px}.rr-g.lg{--w:150px}.rr-g.md{--w:112px}
+.rr-meta{display:grid;gap:7px;justify-items:start;align-content:center}
+.rr-meta .sev{align-self:auto;margin:0}
+.rr-meta small{font:400 13px/1.3 var(--sans);color:#6E6E6E}
+.rr-meta small b{font-weight:600;color:#1A1A1A}
+.rr-more{border:1px solid #E6E6E6;background:#fff;border-radius:10px;padding:10px 14px;font:500 13.5px/1 var(--sans);color:#1A1A1A;cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;justify-self:end}
+.rr-more .ico{width:14px;height:14px;transition:transform .25s var(--ease)}
+.rr.open .rr-more .ico{transform:rotate(180deg)}
+.rr-det{display:none;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0 22px 20px}
+.rr.open .rr-det{display:grid;animation:rise .24s var(--ease) both}
+.rr-t{border:1px solid #ECECEC;border-radius:14px;padding:14px 16px 16px;min-width:0;display:flex;flex-direction:column}
+.rr-t h3{margin:0;font:600 15px/1.25 var(--sans);color:#1A1A1A;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rr-t h3 small{font:500 13px/1 var(--sans);color:#8C8C8C}
+.rr-t .sev{font-size:11.5px;padding:4px 8px}
+.rr-fit{display:grid;gap:9px;margin-top:12px}
+.rr-fit div{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font:500 12.5px/1 var(--sans);color:#6E6E6E}
+.rr-fit div b{font:600 12.5px/1 var(--sans);color:#1A1A1A}
+.rr-fit .mini-bar{grid-column:1/-1;height:6px}
+.rr-fit .mini-bar i{width:calc(var(--v) * 1%);transition:none}
+.rr-sat{margin-top:auto;padding-top:16px}
+.rr-sat .scale{position:relative;height:8px;border-radius:99px;background:#F0F0F0;margin:26px 0 8px}
+.rr-sat .scale .band{position:absolute;top:0;bottom:0;left:calc(var(--a) * 1%);width:calc((var(--b) - var(--a)) * 1%);background:#BFD3FF;border-radius:99px}
+.rr-sat .scale .you{position:absolute;top:50%;left:calc(var(--p) * 1%);transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 0 0 1px #D5D5D5}
+.rr-sat .scale .you::after{content:'You';position:absolute;left:50%;bottom:calc(100% + 5px);transform:translateX(-50%);font:600 10.5px/1 var(--sans);color:#fff;background:var(--blue);padding:4px 6px;border-radius:6px}
+.rr-sat .ticks{display:flex;justify-content:space-between;font:500 11.5px/1 var(--sans);color:#8C8C8C}
+.rr-sat .ticks b{font-weight:600;color:#1A1A1A}
+.rr-gpa{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end;margin-top:auto;padding-top:14px;height:118px}
+.rr-gpa div{display:grid;justify-items:center;gap:6px;height:100%;align-content:end}
+.rr-gpa i{display:block;width:34px;height:calc(var(--v) * 1%);border-radius:8px 8px 3px 3px;background:#E3E3E3}
+.rr-gpa div.you i{background:var(--blue)}
+.rr-gpa b{font:700 15px/1 var(--head);color:#1A1A1A}
+.rr-gpa span{font:500 11.5px/1 var(--sans);color:#8C8C8C}
+.rr-next{margin:12px 0 0;font:400 13.5px/1.5 var(--sans);color:#3D3D3D;flex:1}
+.rr-next b{font-weight:600;color:#1A1A1A}
+.rr-links{display:flex;gap:14px;margin-top:12px}
+.rr-links button{border:0;background:transparent;padding:0;font:500 13px/1 var(--sans);color:var(--blue);cursor:pointer}
+.rp-note{margin:16px 0 0;font:400 13px/1.5 var(--sans);color:#8C8C8C;max-width:70ch}
+.rp-aside{margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 28px;border-radius:16px;background:#F5F5F5}
+.rp-aside h2{margin:8px 0 0;font:600 22px/1.2 var(--sans);letter-spacing:-.01em;color:#1A1A1A}
+.rp-aside p{margin:8px 0 0;font:400 14px/1.5 var(--sans);color:#6E6E6E;max-width:46ch}
+.rp-aside .btn{flex:none}
+/* update panel */
+.pop.upd{width:380px;padding:16px 16px 14px;gap:12px}
+.upd-help{margin:-4px 0 0;font:400 12.5px/1.5 var(--sans);color:#6E6E6E}
+.upd-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.upd-grid label{display:grid;gap:6px;font:500 12px/1 var(--sans);color:#6E6E6E}
+.pop .upd-grid input{height:40px;font-size:17px;padding:0 10px;width:100%;box-sizing:border-box}
+.upd-row{display:grid;gap:6px;font:500 12px/1 var(--sans);color:#6E6E6E}
+.pop-chips button.on{background:#E8F0FF;color:#1E63FF}
+.upd-note{font:400 11.5px/1.45 var(--sans);color:#8C8C8C}
+/* paywall preview (same report, blurred numbers) */
+#s2 .prev{width:min(720px,100%);padding:16px 22px 16px;flex:none}
+.prev-rep{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:12px 28px;align-items:center;text-align:left}
+.prev-name{display:block;margin-top:6px;font:600 20px/1.15 var(--sans);letter-spacing:-.02em;color:#1A1A1A}
+.prev-sc .rp-line{margin-top:14px;font-size:13.5px}
+.prev-sc .rp-line b{font-size:19px}
+.prev-sc .rp-line+.rp-bar{margin-top:8px;height:8px}
+.prev-sc .rp-bar i{filter:blur(4px)}
+.prev-rd .rp-svg{width:170px}
+.prev-rd .rp-svg .you,.prev-rd .rp-svg .chip,.prev-rd .rp-svg .cv{filter:blur(4px)}
+.prev-rd .rp-svg .lbl{font-size:11px}
+.prev-sch{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid #EEEEEE}
+.prev-sch div{display:grid;justify-items:center;gap:2px;padding:8px 6px 8px;border-radius:12px;background:#F7F7F7}
+.prev-sch img{width:22px;height:22px;object-fit:contain}
+.prev-sch span{font:500 12px/1.2 var(--sans);color:#1A1A1A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.prev-sch b{font:700 22px/1 var(--head);color:#1A1A1A;letter-spacing:-.03em;margin-top:6px}
+.prev-sch .rr-g b{font-size:17px;filter:blur(4px)}
+.prev-sch .rr-g .val{filter:blur(3px)}
+.prev-sch .rr-g span{font-size:11px}
+.prev-sch small{font:600 11px/1 var(--sans);color:#1E63FF;background:#E8F0FF;border-radius:999px;padding:4px 7px;margin-top:6px}
+@media (max-width:1280px){.rr-top{grid-template-columns:minmax(180px,1fr) auto;gap:14px 20px}.rr-meta{grid-column:1;grid-row:2}.rr-more{grid-column:2;grid-row:2}.rr-det{grid-template-columns:1fr 1fr}}
+@media (max-width:1100px){.rp-card{grid-template-columns:1fr;gap:18px}.rp-right{order:-1}}
+@media (max-width:820px){.rr-top{grid-template-columns:1fr}.rr-gauges{justify-content:space-between;gap:10px}.rr-g.lg{--w:120px}.rr-g.md{--w:96px}.rr-g.sm{--w:80px}.rr-meta,.rr-more{grid-column:1;grid-row:auto}.rr-more{justify-self:start}.rr-det{grid-template-columns:1fr}.rp-aside{flex-direction:column;align-items:flex-start}.pop.upd{width:min(380px,calc(100vw - 48px))}.rp-subs{grid-template-columns:1fr}.prev-rep{grid-template-columns:1fr}.prev-rd{display:none}.prev-sch{grid-template-columns:repeat(3,1fr)}}
+
+/* fix49: issues screen, tighter and quieter */
+.iss-st{color:#fff;background:#D4383E;font-size:11.5px;padding:6px 10px 6px 8px}
+.iss-st i{background:#fff;box-shadow:none;animation:none;opacity:.85}
+#sE .iss{width:min(620px,100%);margin-top:24px}
+#sE .iss-row{gap:14px;padding:14px 18px}
+#sE .iss-row>div>b{font-size:15.5px}
+#sE .iss-row>div>span{font-size:13.5px;color:#6E6E6E}
+#sE .iss-row em{font-size:20px}
+.iss-foot{padding:14px 18px 16px}
+.iss-ft b{font-size:22px}
+.iss-seg{margin-top:10px;height:7px}
+.iss-keys{margin-top:9px}
+#sE .lead{margin-top:14px}
+#sE .btn.xl{margin-top:24px}
+
+/* fix50 */
+#sB .btn.xl{margin-top:26px}
+#sB .h2x{max-width:none}
+
+/* fix51 */
+#sE .iss-row .iss-st{color:#fff;font:600 11.5px/1 var(--sans)}
+#s3 .lines .val,#s3 .proc .pct{font:500 15px/1 var(--sans);letter-spacing:0}
+/* paywall */
+.h .hl{font-style:normal;color:var(--blue)}
+.pw-sub{margin:14px 0 0;font:400 16px/1.4 var(--sans);color:#6E6E6E;text-align:center}
+#s2 .steps.miss{margin-top:12px;gap:10px 26px}
+#s2 .steps.miss li{color:#1A1A1A;font-weight:500}
+#s2 .steps.miss li .tick{width:22px;height:22px;background:#FDECEC;border-color:#FDECEC;color:#D4383E}
+#s2 .steps.miss li.done .tick{background:#D4383E;border-color:#D4383E;color:#fff}
+#s2 .steps.miss li .tick svg{width:11px;height:11px;opacity:1}
+#s2 .plans3 .pd{display:none}
+#s2 .plans3 .plan{padding:16px 16px 14px;gap:6px;min-width:0;width:100%;box-sizing:border-box;border-radius:16px}
+#s2 .plans3 .pp{font-size:19px}
+/* reveal card */
+.rc-rows{margin-top:16px;border-top:1px solid #EDEDED}
+.rc-row{grid-template-columns:32px 1fr auto auto;column-gap:14px;padding:14px 0}
+.rc-row img{width:30px;height:30px}
+.rc-row b{font-size:15px}
+.rc-row em{font-size:32px;min-width:66px}
+.rc-row .rc-up{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:999px;background:#EAF0FF;color:var(--blue);font:600 13px/1 var(--sans);min-width:70px;justify-content:center}
+.rc-boost{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:18px;padding:16px 18px;border-radius:16px;background:var(--blue);color:#fff}
+.rc-boost span{display:block;font:500 12.5px/1 var(--sans);opacity:.78}
+.rc-boost b{display:block;margin-top:6px;font:700 22px/1 var(--head);letter-spacing:-.03em}
+.rc-boost em{font:500 13px/1.35 var(--sans);font-style:normal;opacity:.9;text-align:right;max-width:170px}
+.rc-url{margin-top:14px}
+/* school page */
+.sc-hero{align-items:center}
+.sc-nums{display:flex;align-items:flex-end;gap:18px}
+.sc-n{display:grid;gap:8px}
+.sc-l{font:500 13px/1 var(--sans);color:#6E6E6E}
+.sc-nums .now,.sc-nums .after{font:700 52px/1 var(--sans);letter-spacing:-.035em;color:#1A1A1A}
+.sc-nums .after{color:var(--blue)}
+.sc-nums .arr{font:300 30px/1 var(--sans);color:#A0A4AC;padding-bottom:8px}
+#pg-s4 .pstep{grid-template-columns:1fr auto;gap:14px}
+#pg-s4 .pnum{display:none}
+/* update panel */
+.btn:disabled{opacity:.45;cursor:default;transform:none;box-shadow:none}
+.upd-cd{display:block;margin-top:-4px;font:500 12px/1.3 var(--sans);color:var(--blue);min-height:0}
+.upd-cd:empty{display:none}
+
+/* fix52 */
+.sc-hero{align-items:center}
+@media (max-width:1180px){.sc-hero{align-items:flex-start}}
+.btn.cool,.btn:disabled{opacity:1;background:#F2F2F2;color:#6E6E6E;box-shadow:none;cursor:default;transform:none;font-variant-numeric:tabular-nums}
+.btn.sm:disabled{background:#F2F2F2;color:#6E6E6E}
+/* reveal celebration */
+.rc{position:relative}
+@keyframes rcRipple{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.22)}}
+#sR.final .rc{animation:rcBump .6s var(--ease) both}
+@keyframes rcBump{0%{transform:scale(1)}35%{transform:scale(1.025)}100%{transform:scale(1)}}
+.rc-row.on em{animation:rcPop .55s var(--ease) .15s both}
+@keyframes rcPop{0%{transform:scale(.7);opacity:.2}60%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
+.rc-row.on .rc-up{animation:rcPop .5s var(--ease) .55s both}
+@media (prefers-reduced-motion:reduce){.rc::before,.rc::after,#sR.final .rc,.rc-row.on em,.rc-row.on .rc-up{animation:none}}
+
+/* fix53: shorter paywall preview, scores only */
+.prev-rep{grid-template-columns:1fr}
+.prev-sc{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:center}
+.prev-sc .rp-eyebrow{grid-column:1}
+.prev-name{grid-column:2;margin:0;font-size:16px;justify-self:end}
+.prev-sc .rp-line,.prev-sc .rp-bar{grid-column:1/-1}
+.prev-sc .rp-line{margin-top:12px}
+.prev-sch{margin-top:14px;padding-top:12px}
+.prev-sch div{padding:8px 6px}
+.prev-sch b{font-size:20px;margin-top:4px}
+.prev-sch img{width:20px;height:20px}
+/* fix54: preview and checkout share one width and radius */
+#s2 .prev,#s2 .pay1{width:min(680px,100%)}
+#s2 .prev{border-radius:20px}
+#s2 .pay1 .checkout{border-radius:20px}
+/* fix55: readable width on wide screens */
+#pg-s5,#pg-s4{max-width:1080px;margin:0 auto}
+.rp-card{grid-template-columns:minmax(0,1fr) minmax(280px,.8fr);gap:24px 36px}
+.rr-top{grid-template-columns:minmax(180px,.9fr) auto minmax(150px,.7fr) auto;gap:16px 24px}
+#s2 .steps.row{width:min(680px,100%);gap:10px 24px;justify-content:center}
+
+/* fix56: expanded school row */
+.rr-det{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease);padding:0 22px}
+.rr.open .rr-det{grid-template-rows:1fr;animation:none}
+.rr-detin{min-height:0;overflow:hidden;opacity:0;transform:translateY(-4px);transition:opacity .3s var(--ease),transform .4s var(--ease)}
+.rr.open .rr-detin{opacity:1;transform:none;transition-delay:.08s}
+.rr-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:2px 0 20px;padding:18px 20px;border-radius:14px;background:#F7F7F7}
+.rr-s{display:grid;align-content:start;gap:6px;min-width:0}
+.rr-s+.rr-s{padding-left:20px;border-left:1px solid #E8E8E8}
+.rr-sl{font:500 12.5px/1 var(--sans);color:#8C8C8C}
+.rr-s>b{font:700 26px/1 var(--head);letter-spacing:-.03em;color:#1A1A1A;font-variant-numeric:tabular-nums;margin-top:2px}
+.rr-s>b small{font:500 13px/1 var(--sans);color:#8C8C8C;margin-left:2px}
+.rr-sc{font:400 13px/1.3 var(--sans);color:#6E6E6E}
+.rr-s .sev{justify-self:start;font-size:11.5px;padding:4px 8px;margin-top:2px}
+.rr-s .rr-fit{margin-top:6px;gap:7px}
+.rr-s .rr-fit div{font-size:12px}
+.rr-s .rr-fit div b{font-size:12px}
+.rr-s.next p{margin:2px 0 0;font:400 13px/1.45 var(--sans);color:#3D3D3D;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rr-s.next button{justify-self:start;border:0;background:transparent;padding:0;font:600 13px/1 var(--sans);color:var(--blue);cursor:pointer;margin-top:4px}
+@media (max-width:1280px){.rr-stats{grid-template-columns:1fr 1fr}.rr-s:nth-child(3){padding-left:0;border-left:0}}
+@media (max-width:820px){.rr-stats{grid-template-columns:1fr}.rr-s+.rr-s{padding-left:0;border-left:0;padding-top:12px;border-top:1px solid #E8E8E8}}
+/* fix57 */
+#pg-s4 .sc-hero{margin-top:26px;padding-bottom:26px}
+#pg-s4 .sc-n{gap:10px}
+#rpCards .rr-det{grid-template-columns:minmax(0,1fr)}
 </style>
 </head>
 <body class="dark">
@@ -1209,7 +1649,7 @@ button.pstep:hover{background:#F7F7F7}
   <symbol id="i-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2" /><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" /><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" /></symbol>
   <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /><path d="M20 3v4" /><path d="M22 5h-4" /><path d="M4 17v2" /><path d="M5 18H3" /></symbol>
   <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></symbol>
-  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></symbol>
  </defs>
 </svg>
 
@@ -1235,34 +1675,38 @@ button.pstep:hover{background:#F7F7F7}
 <!-- 01b · Critical issues -->
 <section class="screen lightpg" id="sE" aria-label="Critical issues">
  <div class="page narrow">
-  <div class="eyebrow red rise"><i></i>3 critical issues found in your profile</div>
-  <h1 class="h2x rise">They are costing you points at every school</h1>
-  <p class="lead rise">Found while reading your transcript, activities and essays against 2,146 Yale admits and 1,970 Harvard admits.</p>
+  <h1 class="h2x rise"><span class="crit">3 critical errors</span> are still<br>in your application</h1>
+  <p class="lead rise">Unless you fix them, they go into every application you send.</p>
   <div class="iss rise">
-   <div class="iss-row"><span class="sev">Critical</span><div><b>SAT 900 is below Yale's 25th percentile</b><span>Admits sit at 1480 to 1560. This alone is your largest loss.</span></div><em>−6.8</em></div>
-   <div class="iss-row"><span class="sev">Critical</span><div><b>No leadership signal in your activities</b><span>Two clubs, no role. Readers look for one thing you led.</span></div><em>−2.3</em></div>
-   <div class="iss-row"><span class="sev">Critical</span><div><b>Essay opening reads generic</b><span>Your first 80 words match one in four applicants.</span></div><em>−1.8</em></div>
+   <div class="iss-row"><span class="iss-st"><i></i>Unresolved</span><div><b>SAT 900 is below Yale's 25th percentile</b><span>Admits sit at 1480 to 1560.</span></div><em>−6.8</em></div>
+   <div class="iss-row"><span class="iss-st"><i></i>Unresolved</span><div><b>No leadership signal in your activities</b><span>Two clubs, no role.</span></div><em>−2.3</em></div>
+   <div class="iss-row"><span class="iss-st"><i></i>Unresolved</span><div><b>Essay opening reads generic</b><span>Matches one in four applicants.</span></div><em>−1.8</em></div>
+   <div class="iss-foot">
+    <div class="iss-ft"><span>Cost to your chances</span><b>−10.9 points</b></div>
+    <div class="iss-seg"><i style="--w:62.4"></i><i style="--w:21.1"></i><i style="--w:16.5"></i></div>
+    <div class="iss-keys"><span><i></i>SAT 6.8</span><span><i></i>Leadership 2.3</span><span><i></i>Essay 1.8</span></div>
+   </div>
   </div>
-  <div class="iss-total rise"><span>Impact today</span><b>−10.9 points</b><span class="muted">Yale takes the biggest hit</span></div>
-  <button class="btn xl rise" type="button" data-go="sB">See how to fix them <svg class="ico"><use href="#i-arrow"/></svg></button>
+  <button class="btn xl rise" type="button" data-go="sB">Fix all three <svg class="ico"><use href="#i-arrow"/></svg></button>
  </div>
 </section>
 
 <!-- 01c · The fix -->
 <section class="screen lightpg" id="sB" aria-label="How College Reveal helps">
  <div class="page narrow">
-  <div class="eyebrow rise"><i></i>Fixable before you apply</div>
-  <h1 class="h2x rise">Students who fix these gain <span class="boost" id="boostNum">+24%</span> on average</h1>
-  <p class="lead rise">College Reveal gives you the exact chances today, a fix plan for each issue, and the boost per step. Across your five schools it looks like this.</p>
-  <div class="ba rise" id="ba">
-   <div class="ba-leg"><i class="now"></i>today <i class="aft"></i>after the fixes</div>
-   <div class="ba-row"><img src="logos/yale.png" alt=""><b>Yale University</b><div class="ba-bars"><i class="aft" style="--v:21"></i><i class="now" style="--v:9"></i></div><span class="ba-n"><small>+12 pts</small></span></div>
-   <div class="ba-row"><img src="logos/harvard.png" alt=""><b>Harvard University</b><div class="ba-bars"><i class="aft" style="--v:18"></i><i class="now" style="--v:7"></i></div><span class="ba-n"><small>+11 pts</small></span></div>
-   <div class="ba-row"><img src="logos/stanford.png" alt=""><b>Stanford University</b><div class="ba-bars"><i class="aft" style="--v:15"></i><i class="now" style="--v:6"></i></div><span class="ba-n"><small>+9 pts</small></span></div>
-   <div class="ba-row"><img src="logos/mit.png" alt=""><b>MIT</b><div class="ba-bars"><i class="aft" style="--v:19"></i><i class="now" style="--v:11"></i></div><span class="ba-n"><small>+8 pts</small></span></div>
-   <div class="ba-row"><img src="logos/princeton.png" alt=""><b>Princeton University</b><div class="ba-bars"><i class="aft" style="--v:20"></i><i class="now" style="--v:8"></i></div><span class="ba-n"><small>+12 pts</small></span></div>
+    <h1 class="h2x rise">Students who fix these<br>gain <span class="boost" id="boostNum">+86%</span> on average</h1>
+  <p class="lead rise">Your exact chances today, a fix plan for each issue, and the lift per step. Here is the average gain at your schools and three you may add.</p>
+  <div class="ba xl rise" id="ba">
+   <div class="ba-leg"><i class="now"></i>today <i class="aft"></i>after the fixes <span class="ba-avg">gain for students who fixed all three</span></div>
+   <div class="ba-row"><img src="logos/yale.png" alt=""><b>Yale University</b><div class="ba-bars"><i class="aft" style="--v:21"></i><i class="now" style="--v:9"></i></div><span class="ba-n"><em>+88%</em></span></div>
+   <div class="ba-row"><img src="logos/harvard.png" alt=""><b>Harvard University</b><div class="ba-bars"><i class="aft" style="--v:18"></i><i class="now" style="--v:7"></i></div><span class="ba-n"><em>+92%</em></span></div>
+   <div class="ba-row"><img src="logos/stanford.png" alt=""><b>Stanford University</b><div class="ba-bars"><i class="aft" style="--v:15"></i><i class="now" style="--v:6"></i></div><span class="ba-n"><em>+85%</em></span></div>
+   <div class="ba-row"><img src="logos/mit.png" alt=""><b>MIT</b><div class="ba-bars"><i class="aft" style="--v:19"></i><i class="now" style="--v:11"></i></div><span class="ba-n"><em>+64%</em></span></div>
+   <div class="ba-row"><img src="logos/princeton.png" alt=""><b>Princeton University</b><div class="ba-bars"><i class="aft" style="--v:20"></i><i class="now" style="--v:8"></i></div><span class="ba-n"><em>+90%</em></span></div>
+   <div class="ba-row"><img src="logos/brown.png" alt=""><b>Brown University</b><div class="ba-bars"><i class="aft" style="--v:17"></i><i class="now" style="--v:6"></i></div><span class="ba-n"><em>+95%</em></span></div>
+   <div class="ba-row"><img src="logos/duke.png" alt=""><b>Duke University</b><div class="ba-bars"><i class="aft" style="--v:19"></i><i class="now" style="--v:7"></i></div><span class="ba-n"><em>+91%</em></span></div>
+   <div class="ba-row"><img src="logos/northwestern.png" alt=""><b>Northwestern University</b><div class="ba-bars"><i class="aft" style="--v:20"></i><i class="now" style="--v:8"></i></div><span class="ba-n"><em>+86%</em></span></div>
   </div>
-  <div class="chips rise"><span><b>SAT retake</b> +6.8</span><span><b>Lead one project</b> +2.3</span><span><b>Essay rewrite</b> +1.8</span></div>
   <button class="btn xl rise" type="button" data-go="s2">Unlock my results <svg class="ico"><use href="#i-arrow"/></svg></button>
  </div>
 </section>
@@ -1271,21 +1715,21 @@ button.pstep:hover{background:#F7F7F7}
 <canvas id="confetti2" aria-hidden="true"></canvas>
 <section class="screen" id="s2" aria-label="Unlock your chances">
  <div class="page">
-  <div class="deal rise" role="status"><i></i>3 critical issues found · this price ends in <span class="timer" id="timer">15:00</span></div>
-  <h1 class="h blend rise">Your profile is <svg class="rd" viewBox="4.5 -70.0 193.8 96.3" aria-label="ready" role="img"><path class="rdf" style="transition-delay:0.08s" d="M11.9-3.5L11.9-3.5Q11-4.2 10.7-4.9Q10.3-5.6 10.6-7.6L10.6-7.6Q10.9-10.4 11.4-12.6Q11.9-14.7 12.6-17.5L12.6-17.5Q12.8-18.7 13.8-21.6Q14.7-24.5 16.1-27.9Q17.5-31.3 18.9-34.4Q20.3-37.4 21.3-38.9L21.3-38.9Q22.1-39.5 23.3-39.4Q24.4-39.3 25.2-38.5L25.2-38.5Q26.3-37.6 25.6-35.4Q24.8-33.1 22.5-28.3L22.5-28.3Q21.3-25.6 20.7-24.3Q20.1-22.9 20.2-22.7Q20.3-22.4 21.1-22.9L21.1-22.9Q21.7-24 23.3-25.5Q24.9-26.9 26.7-28.3Q28.5-29.7 30.1-30.8Q31.7-31.9 32.3-32.2L32.3-32.2Q33.1-32.7 34.1-33.1Q35.2-33.4 35.6-33.6L35.6-33.6Q37.9-34.7 40.3-34.4Q42.7-34.1 43.3-32.6L43.3-32.6Q43.4-31.8 44.0-31.4Q44.5-31 44.5-31L44.5-31Q44.9-31 45.0-30.7Q45-30.4 45-30.4L45-30.4Q45-29.7 44.0-29.6Q42.9-29.4 41.3-29.3L41.3-29.3Q40-29.2 39-28.8Q38-28.4 36.6-27.8L36.6-27.8Q32.8-25.6 29.4-23.5Q25.9-21.4 22.7-17.9L22.7-17.9Q22-17.1 21.3-16Q20.6-14.9 19.8-13.6L19.8-13.6Q19.3-13.1 18.8-11.4Q18.3-9.7 17.9-8.2Q17.6-6.6 17.6-6.3L17.6-6.3Q17.6-6.3 17.3-5.4Q17-4.4 16.3-3.5L16.3-3.5Q15.1-1.9 14.3-1.9Q13.5-1.9 11.9-3.5Z"/><path class="rdf" style="transition-delay:0.2s" d="M63.6-3.5L63.6-3.5Q61.5-1.7 58.8-1.4Q56-1.1 53.4-2.3Q50.8-3.4 49.1-5.8L49.1-5.8Q47.4-8 46.9-10.9Q46.4-13.7 46.8-18.3L46.8-18.3Q47.1-22.2 49.3-26.2Q51.5-30.1 54.7-33.2Q57.8-36.3 60.9-37.5L60.9-37.5Q62.4-38.5 63.5-38.5Q64.5-38.4 66.7-38.2L66.7-38.2Q69-37.9 70.2-37.3Q71.3-36.7 72-35.7L72-35.7Q73.5-34.2 74-32.8Q74.5-31.3 74.5-29.9L74.5-29.9Q74.1-27.7 71.6-24.6Q69-21.4 64.9-19.4L64.9-19.4Q62.7-18.7 60.1-18.8Q57.5-18.9 55.8-20.1L55.8-20.1Q53.9-20.9 53.3-19.9Q52.7-18.8 52.2-14.8L52.2-14.8Q51.8-11 52.8-9.3Q53.8-7.5 55.5-7.2L55.5-7.2Q57.5-6.8 58.7-6.7Q59.8-6.5 61.5-7.5L61.5-7.5Q63.1-8.5 63.5-8.7Q63.9-8.8 64.2-9.1Q64.4-9.3 65.4-10.3L65.4-10.3Q66.1-11 66.5-11.4Q66.9-11.7 67.4-11.7L67.4-11.7Q67.9-11.7 68.3-11.3Q68.7-10.8 69.1-10.6L69.1-10.6Q70.1-10.6 69.6-9.4Q69-8.2 67.4-6.6Q65.8-4.9 63.6-3.5ZM63.5-24.7L63.5-24.7Q64.6-25.2 65.8-26.2Q67-27.1 67.8-28.3Q68.7-29.4 68.7-30.2L68.7-30.2Q68.7-31.6 67.4-32.6Q66.1-33.5 63.5-32.8L63.5-32.8Q62.4-32.5 61-31.4Q59.6-30.2 58.4-28.8Q57.1-27.4 56.4-26.3Q55.6-25.2 55.8-25L55.8-25Q56.1-24.5 57.5-24.3Q58.9-24 60.7-24.1Q62.4-24.2 63.5-24.7Z"/><path class="rdf" style="transition-delay:0.32s" d="M79.2-3.6L79.2-3.6Q78.8-4.4 78.2-4.9Q77.6-5.3 77.6-5.7L77.6-5.7Q77.6-6.1 77.5-6.6Q77.5-7 77.1-7.4L77.1-7.4Q76.6-8 77.2-10.2Q77.8-12.3 79.2-15.5Q80.6-18.6 82.5-22.1L82.5-22.1Q83.3-22.9 84.1-24.2Q84.9-25.5 85.3-25.9L85.3-25.9Q85.3-26.3 85.6-26.7Q85.9-27 86.3-27L86.3-27L86.3-27.6Q86.3-28.1 87.3-29.3Q88.2-30.5 89.6-32.0Q91-33.4 92.5-34.8Q94-36.1 95-36.7L95-36.7Q97.1-38.1 99.3-38.4Q101.6-38.7 103.2-37.4L103.2-37.4Q103.5-37.1 104.2-36.4Q104.9-35.7 105.8-34.9Q106.8-34 107.8-33.1L107.8-33.1L111.5-29.8L109.7-24.8Q108.4-20.8 109.1-17.8Q109.7-14.8 111-12.6L111-12.6Q111.5-11.5 113.1-10.5Q114.6-9.5 116-9.3L116-9.3Q116.8-9.2 117.5-8.7Q118.2-8.2 118.2-7.1L118.2-7.1Q118.2-6.1 117.8-5.5Q117.4-4.9 116.4-4.7L116.4-4.7Q113.1-4.3 110.3-6.3Q107.4-8.3 105-12.9L105-12.9Q104.6-13.5 104.0-15.2Q103.3-16.8 103.2-17.3L103.2-17.3Q102.8-16.8 101.7-15.5Q100.6-14.1 100-13.5L100-13.5Q92.9-6.3 87.8-3.9Q82.6-1.4 79.2-3.6ZM82.8-9.2L82.8-9.2Q82.8-8.5 85.0-9.3Q87.1-10 89.6-12L89.6-12Q93-14.9 96.5-18.4Q99.9-21.9 102-24.9L102-24.9L104.2-28.5Q103.2-30.8 102.1-31.7Q100.9-32.5 100.1-32.5L100.1-32.5Q98.8-32.5 96.3-30.1Q93.7-27.7 90.8-23.7Q87.9-19.7 85.3-14.9L85.3-14.9Q84.3-12.9 83.5-11.1Q82.8-9.2 82.8-9.2Z"/><path class="rdf" style="transition-delay:0.44s" d="M148.4 1.9L148.4 1.9Q147.1 2.2 146.3 1.6Q145.4 0.9 145-0.3L145-0.3Q144.2-2.6 143.8-5.4Q143.5-8.1 143.7-10.2L143.7-10.2L143.9-12.3L140-9.2Q136.6-6.2 133.4-4.9Q130.3-3.6 127.9-3.6L127.9-3.6Q126.8-3.8 125.7-4.4Q124.6-5 123.8-5.9Q122.9-6.8 122.4-7.8L122.4-7.8Q121.8-9.2 122.1-11.6Q122.3-14 123.3-16.9Q124.2-19.7 125.7-22.5Q127.1-25.2 129-27.3L129-27.3Q132.3-32.3 136.1-33.4Q139.9-34.5 143.6-32.3L143.6-32.3Q146.2-31.2 146.8-31.3Q147.5-31.4 148-33.6L148-33.6Q148.4-35.2 148.8-36.9Q149.2-38.5 150.1-41.3L150.1-41.3Q152.6-48.9 154.4-53.2Q156.3-57.5 157.8-60.7L157.8-60.7Q158.9-63 159.7-63.6Q160.4-64.1 161.2-64L161.2-64Q162.3-64 163.2-63.2Q164.1-62.4 164.6-61L164.6-61Q165-60.1 164.9-59.5Q164.9-58.8 164.3-57.7L164.3-57.7Q163-55.3 161.3-51.4Q159.5-47.4 157.8-42.7Q156-38 154.5-33.4Q153-28.8 152-25.3L152-25.3Q151.4-23.1 150.9-19.7Q150.5-16.3 150.2-12.8Q149.9-9.2 149.8-6.5Q149.8-3.7 150-2.9L150-2.9Q150.6-0.9 150.6 0.1Q150.5 1.1 150 1.5Q149.5 1.8 148.4 1.9ZM131.5-9.2L131.5-9.2Q132.9-9.5 134.3-10.3Q135.6-11.1 137.1-12.2L137.1-12.2Q140.1-14.5 142.3-16.4Q144.5-18.3 145.2-22.2L145.2-22.2Q145.4-24.1 144.8-25.3Q144.3-26.4 143.1-27.4L143.1-27.4Q141.9-28.2 139.8-28.1Q137.8-27.9 135.6-25.9L135.6-25.9Q133.2-23.7 130.9-20Q128.7-16.3 127.6-10.9L127.6-10.9Q127.4-9.9 128.2-9.3Q129-8.7 131.5-9.2Z"/><path class="rdf" style="transition-delay:0.56s" d="M159.4 19.9L159.4 19.9Q157 20.6 154.2 20.2Q151.3 19.7 149.2 18.4Q147 17.1 146.7 15.5L146.7 15.5Q146.6 14.9 147.1 14.2Q147.5 13.5 148.2 13.3Q148.8 13 149.3 13.6L149.3 13.6Q150.1 14.1 152.2 14.9Q154.3 15.6 156.9 15.1L156.9 15.1Q159.2 14.6 161.4 12.4Q163.7 10.2 165.1 8.3L165.1 8.3Q165.9 7.1 167.8 4Q169.7 0.9 171.8-2.9Q173.8-6.6 175.2-9.8L175.2-9.8Q175.5-10.6 175.9-11.7Q176.3-12.8 176.9-13.5L176.9-13.5Q177.5-14.7 177.9-15.8Q178.4-16.8 178.5-17.2L178.5-17.2Q178.6-17.7 179.4-19.2Q180.2-20.7 180.9-22.2L180.9-22.2Q181.4-23.7 182.4-26.6Q183.4-29.5 184.4-31.3L184.4-31.3Q185.6-33.6 186.3-35.1Q187.1-36.5 188-36.8L188-36.8L188-36.8L188-36.8Q188.9-37.5 189.3-37.5Q189.6-37.5 190.7-36.9L190.7-36.9Q191.9-35.7 192.2-34.6Q192.5-33.4 191.9-31.8Q191.4-30.1 189.9-27.3L189.9-27.3Q189.1-24.9 188.2-23.0Q187.2-21 186.7-20.4L186.7-20.4Q186.2-19.2 185.6-17.8Q184.9-16.3 184.4-15.1L184.4-15.1Q182.6-11.1 181.3-8.6Q180-6.1 179-4Q178-1.9 176.9 0.9L176.9 0.9Q174.6 4.6 172.4 8.0Q170.3 11.3 167.9 14.2L167.9 14.2Q166.9 15.1 165.4 16.3Q163.9 17.5 162.3 18.5Q160.8 19.5 159.4 19.9ZM172.9-4.1L172.9-4.1Q171.4-4.3 169.9-5.9Q168.5-7.5 167.7-9.3Q166.9-11.1 167.1-11.9L167.1-11.9Q167.1-12.4 167.1-12.7Q167.1-13 167.1-13L167.1-13Q166.5-13 166.1-14.5Q165.6-16 165.4-18.4Q165.2-20.8 165.2-23.5Q165.1-26.2 165.3-28.6L165.3-28.6Q165.7-30.3 165.7-32.4Q165.7-34.4 165.8-35.6L165.8-35.6Q165.7-37.2 166.1-37.8Q166.5-38.3 166.9-38.6L166.9-38.6L166.9-38.6L166.9-38.6Q169.7-39.8 170.7-37.1Q171.6-34.5 171.1-27.3L171.1-27.3Q170.9-23.3 171.1-19.3Q171.3-15.3 172.3-12.3Q173.2-9.3 174.9-8.2L174.9-8.2Q175.6-7.8 175.6-7.1Q175.6-6.4 175.2-5.7Q174.8-4.9 174.2-4.5Q173.5-4 172.9-4.1Z"/></svg></h1>
+  <h1 class="h blend rise">Unlock your <em class="hl">full potential</em></h1>
   <ul class="steps row" id="steps">
-   <li><span class="tick"><svg><use href="#i-check"/></svg></span>5 schools compared</li>
-   <li><span class="tick"><svg><use href="#i-check"/></svg></span>3 issues flagged</li>
-   <li><span class="tick"><svg><use href="#i-check"/></svg></span>Fix plan · up to +24%</li>
+   <li><span class="tick"><svg><use href="#i-check"/></svg></span>Exact chances, 5 schools</li>
+   <li><span class="tick"><svg><use href="#i-check"/></svg></span>A fix plan per issue</li>
+   <li><span class="tick"><svg><use href="#i-check"/></svg></span>Updates as you edit</li>
   </ul>
   <div class="prev rise" aria-hidden="true">
-   <div class="prev-h"><span>School</span><span>today</span><span>after fixes</span></div>
-   <div class="prev-row"><img src="logos/yale.png" alt=""><span>Yale University</span><em class="blur">9%</em><em class="blur b">21%</em></div>
-   <div class="prev-row"><img src="logos/harvard.png" alt=""><span>Harvard University</span><em class="blur">7%</em><em class="blur b">18%</em></div>
-   <div class="prev-row"><img src="logos/stanford.png" alt=""><span>Stanford University</span><em class="blur">6%</em><em class="blur b">15%</em></div>
-   <div class="prev-row"><img src="logos/mit.png" alt=""><span>MIT</span><em class="blur">11%</em><em class="blur b">19%</em></div>
-   <div class="prev-row"><img src="logos/princeton.png" alt=""><span>Princeton University</span><em class="blur">8%</em><em class="blur b">20%</em></div>
-   <div class="prev-iss"><span class="sev">Critical</span><span class="blur">SAT 900 is below Yale's 25th percentile</span><em class="blur red">−6.8</em></div>
+   <div class="prev-rep">
+    <div class="prev-sc">
+     <span class="rp-eyebrow">Application report</span><b class="prev-name">Evan Carter</b>
+     <div class="rp-line"><span>Overall score</span><b><em class="blur">61</em><small>/100</small></b></div><div class="rp-bar"><i class="blur" style="--v:61"></i></div>
+     <div class="rp-line"><span>Your potential</span><b class="pot"><em class="blur">76</em><small>/100</small></b></div><div class="rp-bar light"><i class="blur" style="--v:76"></i></div>
+    </div>
+   </div>
+   <div class="prev-sch" id="pvCards"></div>
    <div class="prev-lock"><svg class="ico"><use href="#i-lock"/></svg>Unlock to see your exact numbers</div>
   </div>
   <div class="pay1" id="pay1">
@@ -1330,9 +1774,8 @@ button.pstep:hover{background:#F7F7F7}
   <div class="rc-head" id="rcHead"><div class="rc-eye">Your College Reveal</div><h1 class="rc-h">Evan, here are your chances</h1></div>
   <div class="rc" id="rc">
    <div class="rc-top"><div class="rc-who"><img src="pfp/1.jpg" alt=""><div><b>Evan Carter</b><span>Class of 2027 · 5 schools · Oct 30, 2026</span></div></div><span class="rc-brand"><svg class="ico"><use href="#i-cap"/></svg>College Reveal</span></div>
-   <div class="rc-cols"><span>School</span><span>today</span><span>after fixes</span></div>
-   <div class="rc-rows" id="rcRows"></div>
-   <div class="rc-foot" id="rcFoot"><div class="rc-f1"><span>Best shot today</span><b id="rcBest">MIT · 11%</b></div><div class="rc-f2"><span>Fix the 3 critical issues</span><b>up to +24% at every school</b></div></div>
+      <div class="rc-rows" id="rcRows"></div>
+   <div class="rc-boost" id="rcFoot"><div><span>Fix the 3 critical issues</span><b>+86% average gain</b></div><em>Chances nearly double at every school</em></div>
    <div class="rc-url">collegereveal.app/r/evan</div>
   </div>
   <div class="rc-actions" id="rcActions"><button class="btn light" type="button" id="rvShare"><svg class="ico"><use href="#i-copy"/></svg>Share my reveal</button><button class="btn" type="button" id="rvOpen">Open my dashboard <svg class="ico"><use href="#i-arrow"/></svg></button></div>
@@ -1345,10 +1788,9 @@ button.pstep:hover{background:#F7F7F7}
   <header class="rm-top">
    <span class="rm-logo"><svg class="ico"><use href="#i-cap"/></svg></span><span class="rm-div"></span>
    <nav class="rm-tabs"><i class="ind" aria-hidden="true"></i>
-    <button data-page="s5"><svg class="ico"><use href="#i-home"/></svg>Home</button>
+    <button data-page="s5"><svg class="ico"><use href="#i-home"/></svg>Results</button>
     <button data-page="s4"><svg class="ico"><use href="#i-chart"/></svg>Schools</button>
     <button data-page="s6"><svg class="ico"><use href="#i-pen"/></svg>Workshop</button>
-    <button data-page="s8"><svg class="ico"><use href="#i-doc"/></svg>Editor</button>
    </nav>
    <div class="rm-right"><div class="rm-search"><svg class="ico"><use href="#i-search"/></svg><span>Search</span><kbd>⌘K</kbd></div></div>
   </header>
@@ -1364,53 +1806,40 @@ button.pstep:hover{background:#F7F7F7}
    </aside>
    <main class="rm-main" id="rmmain">
     <div class="pg home" id="pg-s5">
-     <div class="hm-head">
-      <div><div class="crumb">Home</div><h1 class="rm-h1">Good evening, Evan</h1></div>
-      <div class="hm-tools"><button class="btn ghost" type="button" id="updScore"><svg class="ico"><use href="#i-refresh"/></svg>Update score</button>
-       <div class="pop" id="scorePop"><div class="pop-t">New SAT score</div><input id="satIn" type="number" value="900" min="400" max="1600" step="10" inputmode="numeric"><div class="pop-chips"><button type="button" data-sat="1200">1200</button><button type="button" data-sat="1350">1350</button><button type="button" data-sat="1500">1500</button></div><button class="btn sm" type="button" id="satGo">Recalculate</button></div></div>
+     <div class="hm-head rp-head">
+      <div><div class="crumb">Results</div><h1 class="rm-h1">Your college results</h1><p class="rp-sub">Your chances, what's behind them, and what to work on next. <span id="rpWhen">Last calculated Oct 30.</span></p></div>
+      <div class="hm-tools"><button class="btn" type="button" id="updScore"><svg class="ico"><use href="#i-refresh"/></svg>Update chances</button>
+       <div class="pop upd" id="scorePop">
+        <div class="pop-t">Update your profile</div>
+        <p class="upd-help">Workshop edits update your chances on their own. Manual updates are limited to one every 24 hours.</p>
+        <div class="upd-grid">
+         <label>SAT<input id="satIn" type="number" value="900" min="400" max="1600" step="10" inputmode="numeric"></label>
+         <label>Weighted GPA<input id="gpaIn" type="number" value="4.0" min="0" max="5" step="0.1" inputmode="decimal"></label>
+         <label>AP courses<input id="apIn" type="number" value="6" min="0" max="20" step="1" inputmode="numeric"></label>
+         <label>Activities<input id="actIn" type="number" value="3" min="0" max="10" step="1" inputmode="numeric"></label>
+        </div>
+        <div class="upd-row"><span>SAT quick set</span><div class="pop-chips"><button type="button" data-sat="1200">1200</button><button type="button" data-sat="1350">1350</button><button type="button" data-sat="1500">1500</button></div></div>
+        <div class="upd-row"><span>Leadership roles</span><div class="pop-chips" id="leadChips"><button type="button" data-lead="0" class="on">None</button><button type="button" data-lead="1">1</button><button type="button" data-lead="2">2+</button></div></div>
+        <div class="upd-row"><span>Essay opening</span><div class="pop-chips" id="essayChips"><button type="button" data-essay="draft" class="on">Current draft</button><button type="button" data-essay="rewritten">Rewritten</button></div></div>
+        <button class="btn sm" type="button" id="satGo">Update chances</button>
+        <small class="upd-note">Grades and course history stay fixed. Finished tasks don't add points on their own.</small>
+       </div></div>
      </div>
-     <div class="hm-grid">
-      <section class="hm-card wide">
-       <div class="hm-ch"><h2>Your chances</h2><span class="hm-leg"><i class="now"></i>today <i class="aft"></i>after fixes</span></div>
-       <div class="ch-list" id="chList">
-        <button class="ch-row" type="button" data-page="s4" data-school="yale"><img src="logos/yale.png" alt=""><b>Yale</b><div class="ch-bar"><i class="aft" style="--v:21"></i><i class="now" style="--v:9"></i></div><em class="ch-now">9%</em><small class="ch-aft">→ 21%</small></button>
-        <button class="ch-row" type="button" data-page="s4" data-school="harvard"><img src="logos/harvard.png" alt=""><b>Harvard</b><div class="ch-bar"><i class="aft" style="--v:18"></i><i class="now" style="--v:7"></i></div><em class="ch-now">7%</em><small class="ch-aft">→ 18%</small></button>
-        <button class="ch-row" type="button" data-page="s4" data-school="stanford"><img src="logos/stanford.png" alt=""><b>Stanford</b><div class="ch-bar"><i class="aft" style="--v:15"></i><i class="now" style="--v:6"></i></div><em class="ch-now">6%</em><small class="ch-aft">→ 15%</small></button>
-        <button class="ch-row" type="button" data-page="s4" data-school="mit"><img src="logos/mit.png" alt=""><b>MIT</b><div class="ch-bar"><i class="aft" style="--v:19"></i><i class="now" style="--v:11"></i></div><em class="ch-now">11%</em><small class="ch-aft">→ 19%</small></button>
-        <button class="ch-row" type="button" data-page="s4" data-school="princeton"><img src="logos/princeton.png" alt=""><b>Princeton</b><div class="ch-bar"><i class="aft" style="--v:20"></i><i class="now" style="--v:8"></i></div><em class="ch-now">8%</em><small class="ch-aft">→ 20%</small></button>
-       </div>
-      </section>
-      <section class="hm-card">
-       <div class="hm-ch"><h2>Biggest lever</h2><span class="sev">−6.8</span></div>
-       <div class="lv"><b>SAT 900 → 1350</b><div class="mini-bar"><i style="--v:40"></i></div><span class="muted">Dec 6 · 40% through the plan</span></div>
-       <button class="btn sm" type="button" data-page="s6">Continue plan <svg class="ico"><use href="#i-arrow"/></svg></button>
-      </section>
-      <section class="hm-card wide">
-       <div class="hm-ch"><h2>Workshop</h2><button class="lnk" type="button" data-page="s6">Open</button></div>
-       <div class="ws-tiles">
-        <button class="ws-tile" type="button" data-page="s8"><svg class="ico"><use href="#i-doc"/></svg><b>Essay</b><span>487 / 650 words</span><i style="--v:70"></i></button>
-        <button class="ws-tile" type="button" data-page="s8"><svg class="ico"><use href="#i-pen"/></svg><b>Personal statement</b><span>Draft 2 of 3</span><i style="--v:55"></i></button>
-        <button class="ws-tile" type="button" data-page="s6"><svg class="ico"><use href="#i-users"/></svg><b>Activities</b><span>2 of 10 entries</span><i style="--v:20"></i></button>
-        <button class="ws-tile" type="button" data-page="s6"><svg class="ico"><use href="#i-shield"/></svg><b>Recommendations</b><span>2 of 2 confirmed</span><i style="--v:100"></i></button>
-        <button class="ws-tile" type="button" data-page="s8"><svg class="ico"><use href="#i-spark"/></svg><b>Supplements</b><span>0 of 5 started</span><i style="--v:0"></i></button>
-        <button class="ws-tile" type="button" data-page="s6"><svg class="ico"><use href="#i-chart"/></svg><b>SAT plan</b><span>Dec 6 · 40%</span><i style="--v:40"></i></button>
-       </div>
-      </section>
-      <section class="hm-card">
-       <div class="hm-ch"><h2>Critical issues</h2><button class="lnk" type="button" data-page="s4">Details</button></div>
-       <div class="hm-rows">
-        <button class="hm-row" type="button" data-page="s6"><b>SAT below 25th percentile</b><em class="red">−6.8</em></button>
-        <button class="hm-row" type="button" data-page="s6"><b>No leadership signal</b><em class="red">−2.3</em></button>
-        <button class="hm-row" type="button" data-page="s8"><b>Generic essay opening</b><em class="red">−1.8</em></button>
-       </div>
-       <div class="hm-ch sub"><h2>This week</h2></div>
-       <div class="hm-rows dl">
-        <div class="hm-row"><b>Yale Early Action closes</b><em>Nov 1</em></div>
-        <div class="hm-row"><b>Harvard supplement draft</b><em>Nov 3</em></div>
-        <div class="hm-row"><b>SAT registration closes</b><em>Nov 7</em></div>
-       </div>
-      </section>
-     </div>
+     <section class="hm-card rp-card" style="--i:0">
+      <div class="rp-left">
+       <span class="rp-eyebrow">Application report</span>
+       <h2 class="rp-name">Evan Carter</h2>
+       <div class="rp-line"><span>Overall score</span><b><em id="rpNow">61</em><small>/100</small></b></div>
+       <div class="rp-bar"><i id="rpNowBar" style="--v:61"></i></div>
+       <div class="rp-line"><span>Your potential</span><b class="pot"><em id="rpPot">76</em><small>/100</small></b></div>
+       <div class="rp-bar light"><i id="rpPotBar" style="--v:76"></i></div>
+       <div class="rp-subs" id="rpSubs"></div>
+       <button class="btn rp-cta" type="button" data-page="s6">Fix the 3 critical errors <span id="rpGain">· +15 points</span><svg class="ico"><use href="#i-arrow"/></svg></button>
+      </div>
+      <div class="rp-right"><svg viewBox="0 0 320 272" class="rp-svg" id="rpRadar" aria-hidden="true"></svg></div>
+     </section>
+     <div class="rp-sch-head"><h2>Your schools</h2><span>All five Early Action rounds close <b>Nov 1</b></span></div>
+     <div class="rp-list" id="rpCards"></div>
     </div>
     <div class="pg" id="pg-s4"></div>
     <div class="pg" id="pg-s8">
@@ -1440,68 +1869,76 @@ button.pstep:hover{background:#F7F7F7}
      </div>
     </div>
     <div class="pg" id="pg-s6">
-     <div class="hm-head">
-      <div><div class="crumb">Workshop</div><h1 class="rm-h1">Close the gap</h1></div>
-      <div class="ws-sum"><div><b>+3.9</b><span>of +12 points recovered</span></div><div class="mini-bar wide"><i style="--v:33"></i></div></div>
+     <div class="hm-head aw-head">
+      <div><div class="crumb">Workshop</div><h1 class="rm-h1">Application workshop</h1><p class="rm-sub aw-sub">Get hands-on edits for the writing you submit.</p></div>
+      <div class="aw-headact"><button class="btn sm ghost" type="button" id="awVersions">Version history</button><div class="aw-vers" id="awVers"><div class="aw-vrow"><div><b>Oct 28, 9:14 PM</b><span>461 words</span></div><button class="lnk" type="button" data-toast="Draft restored. Your previous draft is in version history.">Restore</button></div><div class="aw-vrow"><div><b>Oct 21, 6:02 PM</b><span>388 words</span></div><button class="lnk" type="button" data-toast="Draft restored. Your previous draft is in version history.">Restore</button></div></div></div>
      </div>
-     <div class="ws-grid">
-      <section class="hm-card ws-sat">
-       <div class="hm-ch"><h2>SAT plan</h2><span class="pill b">Dec 6</span></div>
-       <div class="ws-big">900 <small>→ 1350 target</small></div>
-       <div class="ws-weeks"><div class="wk done"><i style="--v:62"></i><span>W1</span></div><div class="wk done"><i style="--v:70"></i><span>W2</span></div><div class="wk done"><i style="--v:74"></i><span>W3</span></div><div class="wk done"><i style="--v:81"></i><span>W4</span></div><div class="wk"><i style="--v:0"></i><span>W5</span></div><div class="wk"><i style="--v:0"></i><span>W6</span></div></div>
-       <div class="ws-rows">
-        <div class="ws-row"><b>Reading · 2 sections</b><em>Today</em></div>
-        <div class="ws-row"><b>Math no-calc · timed</b><em>Wed</em></div>
-        <div class="ws-row"><b>Full practice test 3</b><em>Sat</em></div>
-       </div>
-       <button class="btn sm" type="button" id="contSat">Start today's session <svg class="ico"><use href="#i-arrow"/></svg></button>
-      </section>
-      <section class="hm-card">
-       <div class="hm-ch"><h2>Lead one project</h2><span class="sev">+2.3</span></div>
-       <div class="chk-list">
-        <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Pick the project</b><span>Library tutoring program</span></div>
-        <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Draft the pitch</b><span>Title, headcount, one outcome</span></div>
-        <div class="chk"><i></i><b>Get the sign-off</b><span>Ms. Alvarez · Thu</span></div>
-        <div class="chk"><i></i><b>Add it to the activities list</b><span>Founder · 14 tutors · 40 students</span></div>
-       </div>
-      </section>
-      <section class="hm-card">
-       <div class="hm-ch"><h2>Essays</h2><button class="lnk" type="button" data-page="s8">Open editor</button></div>
-       <div class="ws-rows">
-        <button class="ws-row" type="button" data-page="s8"><b>Personal statement</b><span class="wc-mini"><i style="--v:75"></i></span><em>487 / 650</em></button>
-        <button class="ws-row" type="button" data-page="s8"><b>Why Yale?</b><span class="wc-mini"><i style="--v:0"></i></span><em>0 / 200</em></button>
-        <button class="ws-row" type="button" data-page="s8"><b>Harvard · Intellectual experience</b><span class="wc-mini"><i style="--v:56"></i></span><em>112 / 200</em></button>
-        <button class="ws-row" type="button" data-page="s8"><b>Stanford · Roommate letter</b><span class="wc-mini"><i style="--v:0"></i></span><em>0 / 250</em></button>
-        <button class="ws-row" type="button" data-page="s8"><b>MIT · Making & tinkering</b><span class="wc-mini"><i style="--v:0"></i></span><em>0 / 200</em></button>
-        <button class="ws-row" type="button" data-page="s8"><b>Princeton · Why Princeton?</b><span class="wc-mini"><i style="--v:0"></i></span><em>0 / 250</em></button>
-       </div>
-      </section>
-      <section class="hm-card">
-       <div class="hm-ch"><h2>Activities list</h2><span class="pill b">2 of 10</span></div>
-       <div class="ws-rows">
-        <div class="ws-row"><b>Library tutoring program</b><em class="muted-t">Founder · pending</em></div>
-        <div class="ws-row"><b>Robotics club</b><em class="muted-t">Member</em></div>
-        <div class="ws-row"><b>Debate</b><em class="muted-t">Member</em></div>
-        <button class="ws-row add" type="button" data-toast="New activity added">+ Add an activity</button>
-       </div>
-      </section>
-      <section class="hm-card">
-       <div class="hm-ch"><h2>Recommendations</h2><span class="pill g">Done</span></div>
-       <div class="ws-people">
-        <div class="ws-person"><span class="av">RA</span><div><b>Ms. Alvarez</b><span>AP Calc · confirmed</span></div><svg class="ico ok"><use href="#i-check"/></svg></div>
-        <div class="ws-person"><span class="av">JK</span><div><b>Mr. Kim</b><span>English · confirmed</span></div><svg class="ico ok"><use href="#i-check"/></svg></div>
-        <div class="ws-person"><span class="av">CO</span><div><b>Counselor report</b><span>Requested Oct 12</span></div><svg class="ico ok"><use href="#i-check"/></svg></div>
-       </div>
-      </section>
-      <section class="hm-card">
-       <div class="hm-ch"><h2>This week</h2></div>
-       <div class="hm-rows dl">
-        <div class="hm-row"><b>SAT session · Reading</b><em>Mon</em></div>
-        <div class="hm-row"><b>Pitch sign-off</b><em>Thu</em></div>
-        <div class="hm-row"><b>Yale Early Action closes</b><em>Nov 1</em></div>
-        <div class="hm-row"><b>Practice test 3</b><em>Sat</em></div>
-       </div>
-      </section>
+     <nav class="aw-tabs" aria-label="Workshop materials"><button class="on" type="button" data-wstab="essays">Essays &amp; supplements</button><button type="button" data-wstab="activities">Activity descriptions</button></nav>
+
+     <div class="aw-pane on" id="awEssays">
+      <div class="aw-pick"><label>Choose a draft</label><div class="aw-sel" id="awDraftSel"><button class="aw-trig" type="button" aria-haspopup="listbox"><span id="awDraftName">Personal statement</span><svg class="ico"><use href="#i-chev"/></svg></button><div class="aw-menu" role="listbox"><button type="button" role="option" data-draft="common" aria-selected="true">Personal statement</button><button type="button" role="option" data-draft="yale">Yale University · Supplement</button><button type="button" role="option" data-draft="harvard">Harvard University · Supplement</button><button type="button" role="option" data-draft="stanford">Stanford University · Supplement</button><button type="button" role="option" data-draft="mit">MIT · Supplement</button><button type="button" role="option" data-draft="princeton">Princeton University · Supplement</button></div></div><span class="aw-muted">Saved as you write</span></div>
+      <div class="aw-work">
+       <section class="aw-paper">
+        <div class="aw-ptop"><b id="awTitle">Personal statement</b><span id="awSave">Saved</span></div>
+        <details class="aw-prompt" id="awPrompt" hidden><summary>Prompt guidance &amp; requirements</summary><p id="awPromptTxt"></p><span class="aw-muted">Verify the current prompt on the school's site before you submit.</span></details>
+        <div class="aw-tool" id="awTool" hidden>
+         <div class="aw-switch" role="group" aria-label="Draft view"><button type="button" data-view="review" class="on">Review <span id="awRevN">3</span></button><button type="button" data-view="edit">Edit draft</button></div>
+         <div class="aw-bulk"><button class="lnk" type="button" id="awUndo" hidden>Undo</button><button class="btn sm" type="button" id="awApplyAll">Apply all changes (3)</button></div>
+        </div>
+        <div class="aw-frame">
+         <div class="aw-doc" id="awDoc" tabindex="0" aria-label="Draft with suggested changes" hidden></div>
+         <textarea class="aw-ta" id="awEditor" aria-label="Personal statement draft" placeholder="Start your draft here…" spellcheck="false"></textarea>
+        </div>
+        <div class="aw-pbot"><span id="awCount">0 / 650 words</span><button class="lnk" type="button" id="awSaveVer">Save version</button></div>
+        <details class="aw-checks" id="awChecks"><summary>Quick writing checks</summary><p>Basic length, phrase, and sentence checks.</p><button class="btn sm ghost" type="button" id="awRunChecks">Run basic checks</button><div class="aw-checkout" id="awCheckOut"></div></details>
+       </section>
+       <aside class="aw-review">
+        <div class="aw-rev">
+         <div class="aw-eye">Workshop</div><h2>Polish your draft</h2><p>Review improvements right where they belong.</p>
+         <label class="aw-lbl" for="awGoalTrig">Focus on</label>
+         <div class="aw-sel" id="awGoalSel"><button class="aw-trig" type="button" id="awGoalTrig" aria-haspopup="listbox"><span>Make it clearer</span><svg class="ico"><use href="#i-chev"/></svg></button><div class="aw-menu" role="listbox"><button type="button" role="option" aria-selected="true">Make it clearer</button><button type="button" role="option">Cut repetition</button><button type="button" role="option">Strengthen the opening</button><button type="button" role="option">Bring out the meaning</button></div></div>
+         <details class="aw-extra"><summary>Extra details <span>Optional</span></summary><textarea rows="3" aria-label="Extra details" placeholder="Facts or context to include. Only add things that really happened."></textarea></details>
+         <small class="aw-ready" id="awReady"></small>
+         <button class="btn aw-find" type="button" id="awFind">Find improvements</button>
+         <div class="aw-out" id="awOut"><p class="aw-help">Suggested changes will be highlighted in your draft. Hover or tap to review them.</p></div>
+         <small class="aw-priv">Sends this draft and any extra details to OpenAI when you ask. Review for accuracy before applying. Your original is saved with every edit.</small>
+         <details class="aw-hist"><summary>Saved originals &amp; undo</summary><div id="awHist"><p>Your last 20 originals are saved when you apply changes.</p></div></details>
+        </div>
+       </aside>
+      </div>
+     </div>
+
+     <div class="aw-pane" id="awActs">
+      <div class="aw-pick"><label>Choose an activity</label><div class="aw-sel" id="awActSel"><button class="aw-trig" type="button" aria-haspopup="listbox"><span id="awActName">Library tutoring program</span><svg class="ico"><use href="#i-chev"/></svg></button><div class="aw-menu" role="listbox"><button type="button" role="option" data-act-i="0" aria-selected="true">Library tutoring program</button><button type="button" role="option" data-act-i="1">Robotics club</button><button type="button" role="option" data-act-i="2">Debate</button></div></div><button class="lnk" type="button" data-toast="Add an activity · name, role and hours">+ Add another</button></div>
+      <div class="aw-work">
+       <section class="aw-paper">
+        <div class="aw-ptop"><b id="awActTitle">Library tutoring program</b><button class="lnk" type="button" data-toast="Edit details · name, role, hours">Edit details</button></div>
+        <div class="aw-ctx" id="awActCtx"><span>Founder</span><span>6 hours / week</span></div>
+        <label class="aw-lbl aw-lbl-pad" for="awActEditor">What did you do?</label>
+        <div class="aw-tool" id="awActTool" hidden>
+         <div class="aw-switch" role="group" aria-label="Draft view"><button type="button" data-view="review" class="on">Review <span id="awActRevN">1</span></button><button type="button" data-view="edit">Edit draft</button></div>
+         <div class="aw-bulk"><button class="lnk" type="button" id="awActUndo" hidden>Undo</button><button class="btn sm" type="button" id="awActApplyAll">Apply all changes (1)</button></div>
+        </div>
+        <div class="aw-frame aw-frame-act">
+         <div class="aw-doc aw-doc-act" id="awActDoc" tabindex="0" hidden></div>
+         <textarea class="aw-ta aw-ta-act" id="awActEditor" maxlength="600" placeholder="Describe your responsibilities, what you worked on, and any outcomes you can support." spellcheck="false"></textarea>
+        </div>
+        <div class="aw-pbot"><span id="awActCount">0 characters · 150-character goal</span><span>Autosaved</span></div>
+        <p class="aw-hint">Use this space for the details. We'll help you fit them into a 150-character description; check the limit on your application.</p>
+       </section>
+       <aside class="aw-review">
+        <div class="aw-rev">
+         <div class="aw-eye">Workshop</div><h2>Polish your draft</h2><p>Review improvements right where they belong.</p>
+         <p class="aw-goal">A specific description in 150 characters</p>
+         <details class="aw-extra"><summary>Extra details <span>Optional</span></summary><textarea rows="3" aria-label="Extra details" placeholder="Facts or context to include. Only add things that really happened."></textarea></details>
+         <small class="aw-ready" id="awActReady"></small>
+         <button class="btn aw-find" type="button" id="awActFind">Find improvements</button>
+         <div class="aw-out" id="awActOut"><p class="aw-help">Suggested changes will be highlighted in your draft. Hover or tap to review them.</p></div>
+         <small class="aw-priv">Sends this description and any extra details to OpenAI when you ask. Review for accuracy before applying. Your original is saved with every edit.</small>
+         <details class="aw-hist"><summary>Saved originals &amp; undo</summary><div id="awActHist"><p>Your last 20 originals are saved when you apply changes.</p></div></details>
+        </div>
+       </aside>
+      </div>
      </div>
     </div>
    </main>
@@ -1519,13 +1956,14 @@ button.pstep:hover{background:#F7F7F7}
   <button type="button" data-nav="s2" title="4">4 Paywall</button>
   <button type="button" data-nav="s3" title="5">5 Finalize</button>
   <button type="button" data-nav="sR" title="6">6 Reveal</button>
-  <button type="button" data-nav="s5" title="7">7 Home</button>
+  <button type="button" data-nav="s5" title="7">7 Results</button>
   <button type="button" data-nav="s4" title="8">8 Schools</button>
   <button type="button" data-nav="s6" title="9">9 Workshop</button>
-  <button type="button" data-nav="s8" title="0">0 Editor</button>
+  <button type="button" data-nav="s8" title="0">0 Activities</button>
 </div>
 
 <script>
+if(location.search.includes('static=1'))addEventListener('error',e=>{const d=document.createElement('pre');d.style.cssText='position:fixed;left:8px;top:8px;z-index:99999;background:#fff;color:#c00;font:14px monospace;padding:8px;border:2px solid #c00';d.textContent=e.message+' @'+e.lineno+':'+e.colno;document.documentElement.appendChild(d);});
 (function(){
 const $=id=>document.getElementById(id);
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1545,7 +1983,7 @@ function newDust(init){const a=rnd(0,Math.PI*2),r=Math.pow(rnd(0.02,1),0.7)*1.4;
 for(let i=0;i<ND;i++)dust.push(newDust(true));
 function drawDust(dt,sp){ctx.save();ctx.strokeStyle='#fff';ctx.fillStyle='#fff';ctx.lineCap='round';for(const s of dust){s.z-=dt*sp*s.w;if(s.z<0.04){Object.assign(s,newDust(false));}const k=S/s.z,x=VX+s.x*k,y=VY+s.y*k;ctx.globalAlpha=Math.min(1,(1-s.z)*1.3)*0.75;
  if(RM||s.px==null){ctx.fillRect(x,y,1.4,1.4);}else{ctx.lineWidth=Math.min(2.2,0.7/s.z*0.4);ctx.beginPath();ctx.moveTo(s.px,s.py);ctx.lineTo(x,y);ctx.stroke();}s.px=x;s.py=y;}ctx.restore();}
-const vort=[];const NV=RM?0:560;
+const vort=[];const NV=0;/* vortex ring removed (user: no still circle of dots) */
 function newVort(){const r=Math.pow(Math.random(),0.6);return{a:rnd(0,Math.PI*2),r:r,s:rnd(0.6,1.4)};}
 for(let i=0;i<NV;i++)vort.push(newVort());
 function drawVortex(dt,t){ctx.save();ctx.translate(ox*0.55,oy*0.55);ctx.fillStyle='#fff';const R=S*0.78;for(const v of vort){v.a+=dt*(0.35+0.9/(0.15+v.r))*v.s;v.r-=dt*0.06*v.s;if(v.r<0.05){Object.assign(v,newVort());v.r=1;}
@@ -1562,9 +2000,9 @@ function setWord(w,silent){word=w;head.textContent=w;if(!W||RM)return;
  for(let i=0;i<NP;i++){const p=parts[i];if(i<t.length){p.tx=t[i][0];p.ty=t[i][1];p.on=true;}else{p.on=false;const a=rnd(0,6.283),r=rnd(0.2,1)*S*0.8;p.tx=CX+Math.cos(a)*r;p.ty=CY+Math.sin(a)*r*0.34;}
   if(silent){p.x=p.tx;p.y=p.ty;p.vx=p.vy=0;}else{const a=rnd(0,6.283),v=rnd(40,320);p.vx=Math.cos(a)*v;p.vy=Math.sin(a)*v;}}}
 let wordCol='#fff';
-function drawWord(dt,burst){ctx.save();ctx.translate(ox*0.55,oy*0.55);ctx.fillStyle=wordCol;const e=1-Math.exp(-8*dt),damp=Math.exp(-8*dt);for(const p of parts){if(burst){const dx=p.x-CX,dy=p.y-CY,d=Math.hypot(dx,dy)+1;p.vx+=dx/d*burst*dt;p.vy+=dy/d*burst*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;ctx.globalAlpha=p.on?0.9:0.3;ctx.fillRect(p.x,p.y,1.7,1.7);continue;}
+function drawWord(dt,burst){ctx.save();ctx.translate(ox*0.55,oy*0.55);ctx.fillStyle=wordCol;const e=1-Math.exp(-8*dt),damp=Math.exp(-8*dt);for(const p of parts){if(burst){const dx=p.x-CX,dy=p.y-CY,d=Math.hypot(dx,dy)+1;p.vx+=dx/d*burst*dt;p.vy+=dy/d*burst*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;if(!p.on)continue;ctx.globalAlpha=0.9;ctx.fillRect(p.x,p.y,1.7,1.7);continue;}
  const qx=p.x+ox*0.55-pmx,qy=p.y+oy*0.55-pmy,qd=qx*qx+qy*qy;if(qd<8100&&qd>0.01){const q=Math.sqrt(qd),f=(1-q/90)*(1-q/90)*2600;p.vx+=qx/q*f*dt;p.vy+=qy/q*f*dt;}
- p.vx*=damp;p.vy*=damp;p.x+=p.vx*dt+(p.tx-p.x)*e;p.y+=p.vy*dt+(p.ty-p.y)*e;const d=Math.hypot(p.tx-p.x,p.ty-p.y);ctx.globalAlpha=p.on?Math.max(0.35,1-d/160):Math.max(0,0.1-d/200);ctx.fillRect(p.x,p.y,1.7,1.7);}ctx.restore();}
+ p.vx*=damp;p.vy*=damp;p.x+=p.vx*dt+(p.tx-p.x)*e;p.y+=p.vy*dt+(p.ty-p.y)*e;const d=Math.hypot(p.tx-p.x,p.ty-p.y);if(!p.on)continue;ctx.globalAlpha=Math.max(0.35,1-d/160);ctx.fillRect(p.x,p.y,1.7,1.7);}ctx.restore();}
 const GS=96;
 function sprite(draw){const c=document.createElement('canvas');c.width=c.height=GS*2;const g=c.getContext('2d');g.scale(2,2);g.fillStyle='#fff';g.strokeStyle='#fff';g.lineWidth=5;g.lineCap='round';g.lineJoin='round';g.textAlign='center';g.textBaseline='middle';g.translate(GS/2,GS/2);draw(g);return c;}
 const txt=(s,fs)=>sprite(g=>{g.font=`700 ${fs||34}px "Inter Tight",Inter,sans-serif`;try{g.letterSpacing='-0.04em';}catch(e){}g.fillText(s,0,2);});
@@ -1665,25 +2103,25 @@ let readyTimers=[];
 /* confetti for the ready moment: one short burst from behind the headline, brand blues with a little yellow and coral */
 const c2=$('confetti2'),c2x=c2.getContext('2d');let cf=[],cfRaf=0,cfLast=0;const CFC=['#0059FF','#2F6BFF','#00B3FF','#7FD4FF','#BFE3FF','#FFFFFF','#0A3DFF','#FFC53D'];
 function cfSize(){const d=Math.min(2,devicePixelRatio||1);c2.width=innerWidth*d;c2.height=innerHeight*d;c2x.setTransform(d,0,0,d,0,0);}
-function cfBurst(){if(RM)return;cfSize();const h=document.querySelector(cur==='s3'?'#s3 .morph':cur==='sR'?'#rc':'#s2 .h').getBoundingClientRect();const y0=h.top+h.height*0.6;for(let i=0;i<150;i++){const left=i%2===0;const a=left?rnd(-0.95,-0.15):Math.PI-rnd(-0.15,0.95)*-1;const ang=left?rnd(-0.9,-0.1):Math.PI+rnd(0.1,0.9);const v=rnd(700,1400);cf.push({x:left?-12:innerWidth+12,y:y0+rnd(-80,120),vx:Math.cos(ang)*v,vy:Math.sin(ang)*v,w:rnd(5,9),h:rnd(3,6),r:rnd(0,6.28),vr:rnd(-9,9),c:CFC[(Math.random()*CFC.length)|0],life:0,ttl:rnd(1.6,2.4),ph:rnd(0,6.28)});}if(!cfRaf){cfLast=performance.now();cfRaf=requestAnimationFrame(cfFrame);}}
+function cfBurst(n,big){if(RM)return;cfSize();const N=n||150,K=big?1.6:1;const h=document.querySelector(cur==='s3'?'#s3 .morph':cur==='sR'?'#rc':'#s2 .h').getBoundingClientRect();const y0=h.top+h.height*0.6;for(let i=0;i<N;i++){const left=i%2===0;const a=left?rnd(-0.95,-0.15):Math.PI-rnd(-0.15,0.95)*-1;const ang=left?rnd(-0.9,-0.1):Math.PI+rnd(0.1,0.9);const v=rnd(700,1400)*(big?1.25:1);cf.push({x:left?-12:innerWidth+12,y:y0+rnd(-80,120),vx:Math.cos(ang)*v,vy:Math.sin(ang)*v,w:rnd(5,9)*K,h:rnd(3,6)*K,r:rnd(0,6.28),vr:rnd(-9,9),c:CFC[(Math.random()*CFC.length)|0],life:0,ttl:rnd(1.6,2.4),ph:rnd(0,6.28)});}if(!cfRaf){cfLast=performance.now();cfRaf=requestAnimationFrame(cfFrame);}}
 function cfFrame(now){const dt=Math.min(0.1,(now-cfLast)/1000);cfLast=now;c2x.clearRect(0,0,innerWidth,innerHeight);for(const p of cf){p.life+=dt;p.vy+=1300*dt;p.vx*=Math.exp(-1.6*dt);p.vy*=Math.exp(-0.9*dt);p.x+=p.vx*dt;p.y+=p.vy*dt;p.r+=p.vr*dt;const a=Math.min(1,Math.max(0,(p.ttl-p.life)/0.6));c2x.save();c2x.translate(p.x,p.y);c2x.rotate(p.r);c2x.globalAlpha=a;c2x.fillStyle=p.c;const hh=Math.max(1.2,p.h*Math.abs(Math.cos(p.life*6+p.ph)));c2x.beginPath();c2x.roundRect(-p.w/2,-hh/2,p.w,hh,1.5);c2x.fill();c2x.restore();}cf=cf.filter(p=>p.life<p.ttl&&p.y<innerHeight+40);if(cf.length)cfRaf=requestAnimationFrame(cfFrame);else{cfRaf=0;c2x.clearRect(0,0,innerWidth,innerHeight);}}
-function runReady(){readyTimers.forEach(clearTimeout);readyTimers=[];const sr=$('s2');sr.classList.remove('ready');sr.querySelectorAll('#steps li').forEach(li=>li.classList.add('done'));readyTimers.push(setTimeout(()=>{sr.classList.add('ready');},RM?0:120));}
+function runReady(){readyTimers.forEach(clearTimeout);readyTimers=[];const sr=$('s2');sr.classList.remove('ready');sr.querySelectorAll('#steps li').forEach(li=>li.classList.add('done'));if(QP.has('static')){sr.classList.add('ready');}else readyTimers.push(setTimeout(()=>{sr.classList.add('ready');},RM?0:120));}
 
 /* ---------- 02 · promo ---------- */
-let promoEnd=0,timerId=0;function tick(){const ms=Math.max(0,promoEnd-Date.now());const m=Math.floor(ms/60000),sec=Math.floor(ms/1000)%60;const el=$('timer');el.textContent=String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');(el.closest('.promo')||el.closest('.deal')).classList.toggle('hot',ms<60000);if(ms<=0)clearInterval(timerId);}
+let promoEnd=0,timerId=0;function tick(){const el=$('timer');if(!el){clearInterval(timerId);return;}const ms=Math.max(0,promoEnd-Date.now());const m=Math.floor(ms/60000),sec=Math.floor(ms/1000)%60;el.textContent=String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');(el.closest('.promo')||el.closest('.deal')).classList.toggle('hot',ms<60000);if(ms<=0)clearInterval(timerId);}
 function startPromo(){if(!promoEnd||promoEnd<Date.now()){promoEnd=Date.now()+15*60*1000;}clearInterval(timerId);timerId=setInterval(tick,1000);tick();}
 const plans=[...document.querySelectorAll('.plan')];plans.forEach(p=>p.addEventListener('click',()=>{if(p.classList.contains('on'))return;const card=p.closest('.checkout');plans.forEach(q=>{q.classList.toggle('on',q===p);q.setAttribute('aria-checked',q===p);});card.classList.add('swapping');rollPrice($('jnew'),+p.dataset.new);rollPrice($('jold'),+p.dataset.old);const off=$('joff');off.textContent='−'+p.dataset.off+'%';off.classList.remove('pop');void off.offsetWidth;off.classList.add('pop');setTimeout(()=>{$('ctatxt').textContent=p.dataset.cta;$('ctasub').textContent=p.dataset.sub;card.classList.remove('swapping');},RM?0:200);movePsel();}));
 function movePsel(){const wrap=document.querySelector('.plans3'),sel=wrap.querySelector('.psel'),on=wrap.querySelector('.plan.on');if(!on){sel.style.opacity=0;return;}const z=parseFloat(getComputedStyle(document.querySelector('#s2 .page')).zoom)||1;const r=on.getBoundingClientRect(),w=wrap.getBoundingClientRect();sel.style.width=r.width/z+'px';sel.style.height=r.height/z+'px';sel.style.transform='translate('+(r.left-w.left)/z+'px,'+(r.top-w.top)/z+'px)';sel.style.opacity=1;}
 addEventListener('resize',()=>requestAnimationFrame(movePsel));
 /* price rolls from the old value to the new one, 380 ms ease-out, decimals only when the price has them */
-function rollPrice(el,to){const from=parseFloat(el.textContent.replace(/[^0-9.]/g,''))||0;const dec=Number.isInteger(to)?0:2;if(RM){el.textContent='$'+to.toFixed(dec);return;}const t0=performance.now();el.classList.remove('roll');void el.offsetWidth;el.classList.add('roll');function f(now){const k=Math.min(1,(now-t0)/380),e=1-Math.pow(1-k,3);const v=from+(to-from)*e;el.textContent='$'+v.toFixed(dec);if(k<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
+function rollPrice(el,to){const from=parseFloat(el.textContent.replace(/[^0-9.]/g,''))||0;const dec=Number.isInteger(to)?0:2;if(RM){el.textContent='$'+to.toFixed(dec);return;}const t0=performance.now();el.classList.remove('roll');void el.offsetWidth;el.classList.add('roll');function f(now){const k=Math.max(0,Math.min(1,(now-t0)/380)),e=1-Math.pow(1-k,3);const v=from+(to-from)*e;el.textContent='$'+v.toFixed(dec);if(k<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
 
 /* ---------- 03 · processing ---------- */
 const PROC=[
  ['Verifying your transcript and scores…','Transcript and test scores','verified'],
  ['Cross-checking admitted-class data…','Admitted profiles · 5 schools','matched'],
  ['Confirming the 3 critical issues…','Critical issues','3 confirmed'],
- ['Finalizing your fix plan…','Fix plan · 4 steps','up to +24%'],
+ ['Finalizing your fix plan…','Fix plan · 4 steps','up to +95%'],
  ['Formatting your report…','School-by-school report','ready']
 ];
 let procTimers=[];
@@ -1729,14 +2167,14 @@ function morphStop(){cancelAnimationFrame(mRaf);mRaf=0;}
 function runProc(){procTimers.forEach(clearTimeout);procTimers=[];const ul=$('lines');ul.innerHTML='';morphStart();$('phead').textContent='Finalizing your results';$('plead').textContent='Payment confirmed. Clarifying what we found and putting your school-by-school report together.';$('plead').style.visibility='';$('pfill').style.width='0%';$('ppct').textContent='0%';
  const step=RM?300:1200;PROC.forEach((row,i)=>{procTimers.push(setTimeout(()=>{$('ptxt').textContent=row[0];const li=document.createElement('li');li.className='live';li.innerHTML=`<span class="tick"><svg><use href="#i-check"/></svg></span><span class="cur">${row[3]?'<img class="lgi" src="logos/'+row[3]+'.png" alt="">':''}${row[1]}</span><span class="val"></span>`;ul.appendChild(li);requestAnimationFrame(()=>li.classList.add('show'));
   const pct=Math.round((i+0.5)/PROC.length*100);$('pfill').style.width=pct+'%';$('ppct').textContent=pct+'%';
-  procTimers.push(setTimeout(()=>{li.classList.remove('live');li.querySelector('.cur').classList.remove('cur');const v=li.querySelector('.val');v.classList.add('hot');morphPulse();const m=/^(\d+)%$/.exec(row[2]);if(m&&!RM){const to=+m[1],t0=performance.now();(function f(now){const k=Math.min(1,(now-t0)/450),e=1-Math.pow(1-k,3);v.textContent=Math.round(to*e)+'%';if(k<1)requestAnimationFrame(f);})(t0);}else v.textContent=row[2];},step*0.75));},300+i*step));});
+  procTimers.push(setTimeout(()=>{li.classList.remove('live');li.querySelector('.cur').classList.remove('cur');const v=li.querySelector('.val');v.classList.add('hot');morphPulse();const m=/^(\d+)%$/.exec(row[2]);if(m&&!RM){const to=+m[1],t0=performance.now();(function f(now){const k=Math.max(0,Math.min(1,(now-t0)/450)),e=1-Math.pow(1-k,3);v.textContent=Math.round(to*e)+'%';if(k<1)requestAnimationFrame(f);})(t0);}else v.textContent=row[2];},step*0.75));},300+i*step));});
  procTimers.push(setTimeout(()=>{$('ptxt').textContent='Report ready';$('pfill').style.width='100%';$('ppct').textContent='100%';morphDone();$('plead').style.visibility='hidden';},300+PROC.length*step));
  procTimers.push(setTimeout(()=>{if(cur==='s3'){$('s3').classList.add('reveal');}},300+PROC.length*step+900));
  procTimers.push(setTimeout(()=>{if(cur==='s3'){go('sR');setTimeout(()=>{morphStop();$('s3').classList.remove('reveal');},900);}},300+PROC.length*step+1500));}
 
 /* ---------- router ---------- */
 const APP={s4:1,s5:1,s6:1,s8:1};const ORDER={s5:0,s4:1,s6:2,s8:3};let cur='s1';
-let curPg=null;function showPage(id){const next=$('pg-'+id);const prev=curPg;const dir=prev&&ORDER[id]<ORDER[prev.id.slice(3)]?-1:1;document.documentElement.style.setProperty('--dir',dir);if(prev&&prev!==next&&!RM){prev.classList.add('out');setTimeout(()=>{prev.classList.remove('on','out');},150);}else{document.querySelectorAll('.pg').forEach(p=>{if(p!==next)p.classList.remove('on','out');});}next.classList.remove('out');next.classList.add('on');curPg=next;document.querySelectorAll('.rm-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.page===id));let first=true;document.querySelectorAll('.rm-it').forEach(b=>{const on=b.dataset.page===id&&first&&(id!=='s4'||b.dataset.school===curSchool);if(on)first=false;b.classList.toggle('on',on);});$('rmmain').scrollTop=0;
+let curPg=null;function showPage(id){const next=$('pg-'+id);const prev=curPg;const dir=prev&&ORDER[id]<ORDER[prev.id.slice(3)]?-1:1;document.documentElement.style.setProperty('--dir',dir);document.querySelectorAll('.pg.out').forEach(p=>{if(p!==prev&&p!==next)p.classList.remove('on','out');});if(prev&&prev!==next&&!RM){prev.classList.add('out');setTimeout(()=>{if(curPg!==prev)prev.classList.remove('on','out');else prev.classList.remove('out');},150);}else{document.querySelectorAll('.pg').forEach(p=>{if(p!==next)p.classList.remove('on','out');});}next.classList.remove('out');next.classList.add('on');curPg=next;document.querySelectorAll('.rm-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.page===id));let first=true;document.querySelectorAll('.rm-it').forEach(b=>{const on=b.dataset.page===id&&first&&(id!=='s4'||b.dataset.school===curSchool);if(on)first=false;b.classList.toggle('on',on);});$('rmmain').scrollTop=0;
  const pg=$('pg-'+id);[...pg.querySelectorAll('.crumb,.rm-h1,.rm-sub,.nums,.rm-cards .rm-card,.rm-h2,.rm-li,.rm-row,.rm-actions')].forEach((el,i)=>el.style.setProperty('--i',Math.min(i,10)));
  pg.querySelectorAll('.nums [data-v]').forEach(countUp);requestAnimationFrame(moveInd);}
 /* sliding indicators (FLIP-lite: measure, then let transform/width transition) */
@@ -1744,7 +2182,7 @@ function moveInd(){const tabs=document.querySelector('.rm-tabs'),ind=tabs.queryS
  const side=document.querySelector('.rm-side'),sind=side.querySelector('.sind'),son=side.querySelector('.rm-it.on');if(son){const r=son.getBoundingClientRect(),sr=side.getBoundingClientRect();sind.style.height=r.height+'px';sind.style.width=r.width+'px';sind.style.transform='translate('+(r.left-sr.left)+'px,'+(r.top-sr.top+side.scrollTop)+'px)';sind.style.opacity=1;}else sind.style.opacity=0;}
 addEventListener('resize',()=>requestAnimationFrame(moveInd));
 /* numbers count up on page enter (420 ms, ease-out) */
-function countUp(el){if(RM){el.textContent=el.dataset.v+'%';return;}const v=+el.dataset.v,t0=performance.now();function f(now){const k=Math.min(1,(now-t0)/420),e=1-Math.pow(1-k,3);el.textContent=Math.round(v*e)+'%';if(k<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
+function countUp(el){if(RM){el.textContent=el.dataset.v+'%';return;}const v=+el.dataset.v,t0=performance.now();function f(now){const k=Math.max(0,Math.min(1,(now-t0)/420)),e=1-Math.pow(1-k,3);el.textContent=Math.round(v*e)+'%';if(k<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
 /* school detail data + renderer */
 const SD={
  yale:{short:'Yale',name:'Yale University',city:'New Haven, CT',admit:'4.6%',sat:[1480,1560],med:1540,apps:'57,465',round:'Early Action',due:'Nov 1',early:'10.3%',top10:'94%',gpa:'3.95',sup:['Why Yale?',0,200],aps:'7–9',now:9,after:21},
@@ -1760,7 +2198,7 @@ function renderSchool(k){const d=SD[k];if(!d)return;const gain=d.after-d.now,dSa
   <span class="sev reach">Reach</span>
  </div>
  <div class="sc-hero">
-  <div class="nums"><span class="now" data-v="${d.now}">${d.now}%</span><span class="arr">→</span><span class="after" data-v="${d.after}">${d.after}%</span><span class="cap">after your 3 fixes</span></div>
+  <div class="sc-nums"><div class="sc-n"><span class="sc-l">Today</span><span class="now" data-v="${d.now}">${d.now}%</span></div><span class="arr">→</span><div class="sc-n"><span class="sc-l">After your 3 fixes</span><span class="after" data-v="${d.after}">${d.after}%</span></div></div>
   <div class="sc-cta"><button class="btn ghost" type="button" data-act="editor">Open editor</button><button class="btn" type="button" data-act="fix" id="startfix">Start fixing <svg class="ico"><use href="#i-arrow"/></svg></button></div>
  </div>
  <div class="sc2">
@@ -1811,7 +2249,7 @@ renderSchool('yale');
 let curSchool='yale';const SCH={};
 document.querySelectorAll('.rm-it[data-school]').forEach(b=>{SCH[b.dataset.school]=b.dataset;b.addEventListener('click',()=>{curSchool=b.dataset.school;renderSchool(curSchool);const n=document.querySelector('#pg-s4 .now'),a=document.querySelector('#pg-s4 .after');if(cur==='s4'){countUp(n);countUp(a);document.querySelectorAll('.rm-it').forEach(x=>x.classList.toggle('on',x===b));requestAnimationFrame(moveInd);}});});
 /* command palette */
-const CMDS=[{t:'Home',k:'page',p:'s5',i:'home'},{t:'Schools',k:'page',p:'s4',i:'chart'},{t:'Workshop',k:'page',p:'s6',i:'pen'},{t:'Editor',k:'page',p:'s8',i:'doc'},
+const CMDS=[{t:'Results',k:'page',p:'s5',i:'home'},{t:'Schools',k:'page',p:'s4',i:'chart'},{t:'Workshop',k:'page',p:'s6',i:'pen'},{t:'Activity descriptions',k:'page',p:'s8',i:'doc'},
  {t:'Yale University',k:'school',p:'s4',sc:'yale',r:'9% → 21%'},{t:'Harvard University',k:'school',p:'s4',sc:'harvard',r:'7% → 18%'},{t:'Stanford University',k:'school',p:'s4',sc:'stanford',r:'6% → 15%'},{t:'MIT',k:'school',p:'s4',sc:'mit',r:'11% → 19%'},{t:'Princeton University',k:'school',p:'s4',sc:'princeton',r:'8% → 20%'},
  {t:'SAT retake · 900 to 1350',k:'fix',p:'s6',i:'chart',r:'+5.2'},{t:'Lead one project',k:'fix',p:'s6',i:'users',r:'+2.0'},{t:'Essay opening rewrite',k:'fix',p:'s6',i:'pen',r:'+1.6'}];
 const cmdk=$('cmdk'),cmdkIn=$('cmdkInput'),cmdkList=$('cmdkList');let cmdkSel=0,cmdkHits=[];
@@ -1831,38 +2269,93 @@ addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()===
 /* toast */
 let toastT=0;function toast(msg){const t=$('toast');$('toastTxt').textContent=msg;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2400);}
 $('addSchool').addEventListener('click',()=>toast('School search opens here'));
-$('contSat').addEventListener('click',()=>toast('SAT plan · next session Tuesday 6 pm'));
+
 /* ---------- round 3: reveal, fix screen, home + editor interactions ---------- */
 const RV=[["yale","Yale University",9,21,"Reach · 4.6% admit rate"],["harvard","Harvard University",7,18,"Reach · 3.4% admit rate"],["stanford","Stanford University",6,15,"Reach · 3.7% admit rate"],["mit","MIT",11,19,"Reach · 4.0% admit rate"],["princeton","Princeton University",8,20,"Reach · 4.5% admit rate"]];
 let rvTimers=[];
-function roll(el,to,ms,suffix,from){const t0=performance.now(),f0=from==null?0:from;if(RM){el.textContent=to+(suffix||'%');return;}(function f(now){const k=Math.min(1,(now-t0)/ms),e=1-Math.pow(1-k,4);el.textContent=Math.round(f0+(to-f0)*e)+(suffix||'%');if(k<1)requestAnimationFrame(f);})(t0);}
-function runReveal(){rvTimers.forEach(clearTimeout);rvTimers=[];const sec=$('sR'),card=$('rc'),rows=$('rcRows');sec.classList.remove('final');card.classList.remove('on');rows.innerHTML='';const per=RM?120:620;
- RV.forEach((x,i)=>{const r=document.createElement('div');r.className='rc-row';r.innerHTML='<img src="logos/'+x[0]+'.png" alt=""><div class="rc-nm"><b>'+x[1]+'</b><i class="rc-bar"><u class="aft" style="--v:'+x[3]+'"></u><u class="now" style="--v:'+x[2]+'"></u></i></div><em>0%</em><small>→ '+x[3]+'%</small>';rows.appendChild(r);
-  rvTimers.push(setTimeout(()=>{r.classList.add('on');roll(r.querySelector('em'),x[2],900);},(RM?0:700)+i*per));});
+function roll(el,to,ms,suffix,from){const t0=performance.now(),f0=from==null?0:from,sx=suffix==null?'%':suffix;if(RM){el.textContent=to+sx;return;}(function f(now){const k=Math.max(0,Math.min(1,(now-t0)/ms)),e=1-Math.pow(1-k,4);el.textContent=Math.round(f0+(to-f0)*e)+sx;if(k<1)requestAnimationFrame(f);})(t0);}
+function runReveal(){rvTimers.forEach(clearTimeout);rvTimers=[];const sec=$('sR'),card=$('rc'),rows=$('rcRows');sec.classList.remove('final');card.classList.remove('on');rows.innerHTML='';const per=RM?120:480;
+ RV.forEach((x,i)=>{const w=document.createElement('div');w.className='rc-rw';const r=document.createElement('div');r.className='rc-row';w.appendChild(r);r.innerHTML='<img src="logos/'+x[0]+'.png" alt=""><div class="rc-nm"><b>'+x[1]+'</b><i class="rc-bar"><u class="aft" style="--v:'+x[3]+'"></u><u class="now" style="--v:'+x[2]+'"></u></i></div><em>0%</em><small class="rc-up">→ '+x[3]+'%</small>';rows.appendChild(w);
+  rvTimers.push(setTimeout(()=>{w.classList.add('on');r.classList.add('on');roll(r.querySelector('em'),x[2],900);},(RM?0:700)+i*per));});
  rvTimers.push(setTimeout(()=>card.classList.add('on'),RM?0:120));
- rvTimers.push(setTimeout(()=>{if(cur!=='sR')return;sec.classList.add('final');},(RM?0:700)+RV.length*per+500));}
+ rvTimers.push(setTimeout(()=>{if(cur!=='sR')return;sec.classList.add('final');cfBurst(320,true);setTimeout(()=>{if(cur==='sR')cfBurst(220,true);},450);},(RM?0:700)+RV.length*per+500));}
 $('rvOpen').addEventListener('click',()=>{$('app').classList.add('enter');go('s5');setTimeout(()=>$('app').classList.remove('enter'),900);});
 $('rvShare').addEventListener('click',()=>toast('Link copied · collegereveal.app/r/evan'));
-function boostCount(){const el=$('boostNum');if(!el)return;setTimeout(()=>{const t0=performance.now();if(RM){el.textContent='+24%';return;}(function f(now){const k=Math.min(1,(now-t0)/900),e=1-Math.pow(1-k,3);el.textContent='+'+Math.round(24*e)+'%';if(k<1)requestAnimationFrame(f);})(t0);},350);}
+function boostCount(){const el=$('boostNum');if(!el)return;setTimeout(()=>{const t0=performance.now();if(RM){el.textContent='+86%';return;}(function f(now){const k=Math.max(0,Math.min(1,(now-t0)/1100)),e=1-Math.pow(1-k,3);el.textContent='+'+Math.round(86*e)+'%';if(k<1)requestAnimationFrame(f);})(t0);},350);}
+let issCdT=0,issCdS=1*86400+14*3600+22*60+8;function issTick(){const el=$('issCd');if(!el)return;const s=Math.max(0,issCdS--),d=Math.floor(s/86400),hh=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),ss=s%60;el.innerHTML='<span>'+d+'</span><small>d</small> <span>'+String(hh).padStart(2,'0')+'</span><small>h</small> <span>'+String(m).padStart(2,'0')+'</span><small>m</small> <span>'+String(ss).padStart(2,'0')+'</span><small>s</small>';}
 function stagger(id){[...$(id).querySelectorAll('.rise')].forEach((el,i)=>el.style.transitionDelay=(RM?0:70*i+80)+'ms');}
 /* home: update score recomputes every number in the UI */
-const pop=$('scorePop');$('updScore').addEventListener('click',e=>{e.stopPropagation();pop.classList.toggle('on');if(pop.classList.contains('on'))setTimeout(()=>$('satIn').focus(),30);});
+const pop=$('scorePop');$('updScore').addEventListener('click',e=>{e.stopPropagation();if($('updScore').disabled)return;pop.classList.toggle('on');if(pop.classList.contains('on'))setTimeout(()=>$('satIn').focus(),30);});
 pop.addEventListener('click',e=>e.stopPropagation());document.addEventListener('click',()=>pop.classList.remove('on'));
-function applyScore(v){const k=Math.max(0,Math.min(1,(v-900)/450));let first='';RV.forEach(x=>{const now=Math.round(x[2]+(x[3]-x[2])*k*0.85);const row=document.querySelector('.ch-row[data-school="'+x[0]+'"]');if(row){row.querySelector('.ch-bar .now').style.setProperty('--v',now);const ce=row.querySelector('.ch-now');roll(ce,now,600,'%',parseInt(ce.textContent)||0);}const it=document.querySelector('.rm-it[data-school="'+x[0]+'"]');if(it){it.querySelector('.pill').textContent=now+'%';it.dataset.now=now;}if(!first)first=x[1].split(' ')[0]+' '+x[2]+'% → '+now+'%';});const n=document.querySelector('#pg-s4 .now');if(n&&SCH[curSchool]){n.dataset.v=SCH[curSchool].now;}pop.classList.remove('on');toast('Scores updated · '+first);}
-$('satGo').addEventListener('click',()=>applyScore(+$('satIn').value||900));document.querySelectorAll('.pop-chips button').forEach(b=>b.addEventListener('click',()=>{$('satIn').value=b.dataset.sat;applyScore(+b.dataset.sat);}));$('satIn').addEventListener('keydown',e=>{if(e.key==='Enter')applyScore(+$('satIn').value||900);});
+/* results report: every input the Update panel can change */
+const RP={sat:900,gpa:4.0,ap:6,acts:3,lead:0,essay:'draft'},RP0={...RP};
+const RP_AX=['Academics','Tests','Essays','Activities','Recs','Fit'];
+function rpAxes(p){const k=Math.max(0,Math.min(1,(p.sat-900)/450));return [Math.max(40,Math.min(97,Math.round(84+p.ap*1.2+(p.gpa-3.6)*8))),Math.round(38+54*k),p.essay==='rewritten'?78:58,Math.min(94,Math.round(44+Math.min(p.acts,6)*2+Math.min(p.lead,2)*14)),90,72];}
+function rpProgress(p){const k=Math.max(0,Math.min(1,(p.sat-900)/450));return Math.min(1,0.62*k+0.21*Math.min(p.lead,1)+0.17*(p.essay==='rewritten'?1:0)+Math.max(0,p.acts-3)*0.02);}
+function rpScore(p){const a=rpAxes(p);return Math.max(1,Math.min(99,Math.round(61+0.2*(a[1]-38)+0.15*(a[3]-54)+0.12*(a[2]-58)+(a[0]-92)*0.3)));}
+const RP_POT=rpScore({sat:1350,gpa:4.0,ap:6,acts:3,lead:1,essay:'rewritten'});
+function rpRadarSVG(vals,chips){const cx=160,cy=138,R=96,n=vals.length,pt=(v,i)=>{const a=-Math.PI/2+i*2*Math.PI/n,r=R*v/100;return [cx+Math.cos(a)*r,cy+Math.sin(a)*r];},P=a=>a.map(x=>x.toFixed(1)).join(',');
+ const ring=(f,cls)=>'<polygon class="grid '+cls+'" points="'+Array.from({length:n},(_,i)=>P(pt(100*f,i))).join(' ')+'"/>';
+ const axes=Array.from({length:n},(_,i)=>{const [x,y]=pt(100,i);return '<line class="axis" x1="'+cx+'" y1="'+cy+'" x2="'+x.toFixed(1)+'" y2="'+y.toFixed(1)+'"/>';}).join('');
+ const labels=Array.from({length:n},(_,i)=>{const [x,y]=pt(136,i),anchor=Math.abs(x-cx)<6?'middle':x>cx?'start':'end';return '<text class="lbl" x="'+x.toFixed(1)+'" y="'+(y+4.5).toFixed(1)+'" text-anchor="'+anchor+'">'+RP_AX[i]+'</text>';}).join('');
+ const you='<polygon class="you" points="'+vals.map((v,i)=>P(pt(v,i))).join(' ')+'"/>';
+ const ch=chips?vals.map((v,i)=>{const [x,y]=pt(v,i);return '<g><rect class="chip" x="'+(x-16).toFixed(1)+'" y="'+(y-11).toFixed(1)+'" width="32" height="22" rx="7"/><text class="cv" x="'+x.toFixed(1)+'" y="'+(y+4.5).toFixed(1)+'" text-anchor="middle">'+v+'</text></g>';}).join(''):'';
+ return ring(1,'f')+ring(.75,'')+ring(.5,'')+ring(.25,'')+axes+you+ch+labels;}
+function gauge(v,cls,size){return '<div class="rr-g '+cls+' '+size+'"><svg viewBox="0 0 100 58" aria-hidden="true"><path class="trk" d="M9 52A41 41 0 0 1 91 52" pathLength="100"/><path class="val" d="M9 52A41 41 0 0 1 91 52" pathLength="100" style="stroke-dasharray:'+Math.max(1.5,Math.min(100,v))+' 100"/></svg><b>'+v+'%</b><span>'+(cls==='avg'?'Average':cls==='pot'?'Your potential':'Your chance')+'</span></div>';}
+const RP_NEXT={yale:'Draft the “Why Yale?” supplement (0 / 200 words) before Nov 1.',harvard:'Finish the intellectual-experience essay (112 / 200 words).',stanford:'Start the roommate letter. It carries the most weight of Stanford’s short answers.',mit:'Write the “making &amp; tinkering” response around the robotics build.',princeton:'Start “Why Princeton?” and name the two programs you would join.'};
+const RP_TASKS={yale:4,harvard:3,stanford:4,mit:4,princeton:4};
+function rpBand(n){return n<25?['Reach','reach']:n<60?['Possible','warn']:['More likely','ok'];}
+let rpOpen='yale';
+function rpRow(x,i){const d=SD[x[0]],p=RP,ax=rpAxes(p),now=Math.round(x[2]+(x[3]-x[2])*rpProgress(p)),pot=x[3],adm=parseFloat(d.admit),[bl,bc]=rpBand(now),lo=Math.max(1,now-2),hi=now+3,mult=(now/adm).toFixed(1);
+ const fit=[['Essays',Math.round(ax[2]/10)],['Activities',Math.round(ax[3]/10)],['Academics',Math.round(ax[0]/10)]],fitAvg=(fit.reduce((s,f)=>s+f[1],0)/3).toFixed(1);
+ const a=1380,b=1600,pc=v=>Math.max(0,Math.min(100,(v-a)/(b-a)*100)),satPos=pc(p.sat),satOk=p.sat>=d.sat[0],med=parseFloat(d.gpa),gh=v=>Math.round(Math.max(8,Math.min(100,(v-3.5)/0.55*100)));
+ return '<article class="rr'+(x[0]===rpOpen?' open':'')+'" data-school="'+x[0]+'" style="--i:'+(i+1)+'">'+
+  '<div class="rr-top"><div class="rr-id"><img src="logos/'+x[0]+'.png" alt=""><div><b>'+x[1]+'</b><span>'+d.city+'</span></div></div>'+
+  '<div class="rr-gauges">'+gauge(adm,'avg','sm')+gauge(now,'you','lg')+gauge(pot,'pot','md')+'</div>'+
+  '<div class="rr-meta"><span class="sev '+bc+'">'+bl+'</span><small><b>'+lo+'–'+hi+'%</b> range</small><small><b>'+mult+'×</b> the average applicant</small></div>'+
+  '<button class="rr-more" type="button">'+(x[0]===rpOpen?'Show less':'Show more')+' <svg class="ico"><use href="#i-chev"/></svg></button></div>'+
+  '<div class="rr-det"><div class="rr-detin"><div class="rr-stats">'+
+   '<div class="rr-s"><span class="rr-sl">Your fit</span><b>'+fitAvg+'<small>/10</small></b><div class="rr-fit">'+fit.map(f=>'<div><span>'+f[0]+'</span><b>'+f[1]+'</b><div class="mini-bar"><i style="--v:'+f[1]*10+'"></i></div></div>').join('')+'</div></div>'+
+   '<div class="rr-s"><span class="rr-sl">Your SAT</span><b>'+p.sat+'</b><span class="rr-sc">Admits '+d.sat[0]+'–'+d.sat[1]+'</span><span class="sev '+(satOk?'ok':'')+'">'+(satOk?'Matches admits':'Below the 25th percentile')+'</span></div>'+
+   '<div class="rr-s"><span class="rr-sl">Your GPA</span><b>'+p.gpa.toFixed(2)+'</b><span class="rr-sc">Admitted median '+d.gpa+'</span><span class="sev '+(p.gpa>=med?'ok':'')+'">'+(p.gpa>=med?'Above average':'Below average')+'</span></div>'+
+   '<div class="rr-s next"><span class="rr-sl">Next move</span><p>'+RP_NEXT[x[0]]+'</p><button type="button" data-open="plan">Open plan · '+RP_TASKS[x[0]]+' tasks →</button></div>'+
+  '</div></div></div>'+
+  '</div></article>';}
+function renderReport(){const p=RP,ax=rpAxes(p),score=rpScore(p),prog=rpProgress(p);
+ if($('rpNow')){const cur=parseInt($('rpNow').textContent)||score;if(cur!==score)roll($('rpNow'),score,700,'',cur);else $('rpNow').textContent=score;$('rpNowBar').style.setProperty('--v',score);$('rpPot').textContent=RP_POT;$('rpPotBar').style.setProperty('--v',RP_POT);$('rpRadar').innerHTML=rpRadarSVG(ax,true);$('rpGain').textContent='· +'+Math.max(0,RP_POT-score)+' points';
+  $('rpSubs').innerHTML='<div><span>Personal statement</span><b>'+(p.essay==='rewritten'?3:2)+'<small> /4</small></b></div><div><span>Activities</span><b>'+(p.lead>0?2:1)+'<small> /4</small></b></div><div><span>Supplements</span><b>0<small> /4</small></b></div>';}
+ if($('pvRadar'))$('pvRadar').innerHTML=rpRadarSVG(rpAxes(RP0),true);
+ RV.forEach(x=>{const now=Math.round(x[2]+(x[3]-x[2])*prog);const it=document.querySelector('.rm-it[data-school="'+x[0]+'"]');if(it){it.querySelector('.pill').textContent=now+'%';it.dataset.now=now;}if(SCH[x[0]])SCH[x[0]].now=now;});
+ if($('rpCards'))$('rpCards').innerHTML=RV.map(rpRow).join('');
+ if($('pvCards'))$('pvCards').innerHTML=RV.map(x=>'<div><img src="logos/'+x[0]+'.png" alt=""><span>'+x[1].replace(' University','')+'</span><b class="blur">'+x[2]+'%</b><small>Reach</small></div>').join('');
+ const n=document.querySelector('#pg-s4 .now');if(n&&SCH[curSchool]){n.dataset.v=SCH[curSchool].now;}}
+let rpNextAt=0,updT=0;const UPD_LABEL='<svg class="ico"><use href="#i-refresh"/></svg>Update chances';
+function updTick(){const ms=rpNextAt-Date.now(),go=$('satGo'),top=$('updScore');if(ms<=0){clearInterval(updT);go.disabled=false;go.textContent='Update chances';top.disabled=false;top.classList.remove('cool');top.innerHTML=UPD_LABEL;return;}go.disabled=true;go.textContent='Updated · next update in 24h';top.disabled=true;top.classList.add('cool');top.innerHTML='<svg class="ico"><use href="#i-check"/></svg>Updated · next in 24h';}
+function startCooldown(){rpNextAt=Date.now()+86400000;clearInterval(updT);updTick();updT=setInterval(updTick,60000);}
+function onWorkshopChange(kind){let changed=false;if(kind==='essay'&&RP.essay!=='rewritten'){RP.essay='rewritten';$('essayChips').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.essay==='rewritten'));changed=true;}
+ if(kind==='activity'&&RP.lead<1){RP.lead=1;$('leadChips').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.lead==='1'));changed=true;}
+ if(!changed)return;const before=SCH.yale?+SCH.yale.now:9;renderReport();$('rpWhen').textContent='Updated just now from your workshop edit.';setTimeout(()=>toast('Chances updated from your workshop edit · Yale '+before+'% → '+SCH.yale.now+'%'),1400);}
+function applyScore(){if($('satGo').disabled)return;startCooldown();RP.sat=Math.max(400,Math.min(1600,+$('satIn').value||900));RP.gpa=Math.max(0,Math.min(5,parseFloat($('gpaIn').value)||4.0));RP.ap=Math.max(0,+$('apIn').value||0);RP.acts=Math.max(0,+$('actIn').value||0);const before=SCH.yale?+SCH.yale.now:9,sb=rpScore(RP);renderReport();$('rpWhen').textContent='Updated just now.';pop.classList.remove('on');toast('Chances updated · Yale '+before+'% → '+SCH.yale.now+'% · score '+sb+'/100');}
+$('leadChips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;RP.lead=+b.dataset.lead;$('leadChips').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));});
+$('essayChips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;RP.essay=b.dataset.essay;$('essayChips').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));});
+$('rpCards').addEventListener('click',e=>{const more=e.target.closest('.rr-more'),lk=e.target.closest('[data-open]'),art=e.target.closest('.rr');if(!art)return;
+ if(more){const was=art.classList.contains('open');document.querySelectorAll('#rpCards .rr').forEach(a=>{a.classList.remove('open');a.querySelector('.rr-more').firstChild.textContent='Show more ';});if(!was){art.classList.add('open');more.firstChild.textContent='Show less ';rpOpen=art.dataset.school;}else rpOpen='';return;}
+ if(lk||e.target.closest('.rr-id')){const k=art.dataset.school;curSchool=k;renderSchool(k);go('s4');const it=document.querySelector('.rm-it[data-school="'+k+'"]');if(it)it.click();if(lk&&lk.dataset.open==='plan')setTimeout(()=>{const pl=document.querySelector('#pg-s4 .sc2');if(pl)pl.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});},80);}});
+renderReport();
+$('satGo').addEventListener('click',()=>applyScore());document.querySelectorAll('.pop-chips button[data-sat]').forEach(b=>b.addEventListener('click',()=>{$('satIn').value=b.dataset.sat;}));document.querySelectorAll('.upd-grid input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter')applyScore();}));
 /* editor */
 const paper=$('paper');function countWords(){const n=paper.innerText.trim().split(/\s+/).filter(Boolean).length;$('wc').textContent=n;}paper.addEventListener('input',countWords);
 $('applyOpen').addEventListener('click',()=>{const p=$('p1');p.classList.add('fade');setTimeout(()=>{p.textContent='The first thing I ever taught was fractions, on a napkin, to a nine-year-old who had decided she was bad at math. I drew a pizza. She drew a bigger one.';p.classList.remove('fade');p.classList.add('fresh');countWords();},220);const sg=$('sugOpen');sg.classList.add('done');sg.querySelector('.sev').textContent='+1.8';$('sugCount').textContent='2';toast('Opening rewritten · 1.8 points recovered');});
 $('scoreOpen').addEventListener('click',()=>toast('Opening scored · reads generic (−1.8). One suggestion ready.'));
 document.querySelectorAll('[data-toast]').forEach(b=>b.addEventListener('click',()=>toast(b.dataset.toast)));
 document.querySelectorAll('.ed-doc').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.ed-doc').forEach(x=>x.classList.toggle('on',x===b));if(!b.classList.contains('add'))toast('Opened '+b.querySelector('b').textContent);}));
-document.querySelectorAll('.ch-row[data-school]').forEach(r=>r.addEventListener('click',()=>{const b=document.querySelector('.rm-it[data-school="'+r.dataset.school+'"]');if(b)b.click();}));
-function go(id){if(cur===id&&id!=='s1')return;const prev=cur;cur=id;
+
+function go(id){if(id==='s8'){id='s6';awTab('activities');}if(cur===id&&id!=='s1')return;const prev=cur;cur=id;
  document.querySelectorAll('.tools button').forEach(b=>b.classList.toggle('on',b.dataset.nav===id));
  if(id==='s1'){glow.classList.remove('on');document.body.classList.add('dark');document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id==='s1'));startCheck();return;}
- document.body.classList.toggle('dark',id==='sR');glow.classList.toggle('on',!APP[id]&&id!=='sR'&&id!=='s2');
+ document.body.classList.toggle('dark',id==='sR');glow.classList.toggle('on',!APP[id]&&id!=='sR'&&id!=='s2');glow.classList.toggle('red',id==='sE');
  const sec=x=>APP[x]?'app':x;if(prev==='s1'){s1.classList.add('leave');setTimeout(()=>{s1.classList.remove('on');stopCheck();},RM?0:1050);}else if(sec(prev)!==sec(id)){$(sec(prev)).classList.remove('on');}
- if(APP[id])showPage(id);requestAnimationFrame(()=>{$(sec(id)).classList.add('on');});
+ if(APP[id])showPage(id);if(location.search.includes('static=1'))$(sec(id)).classList.add('on');else requestAnimationFrame(()=>{$(sec(id)).classList.add('on');});
  if(id==='s2'){runReady();startPromo();setTimeout(movePsel,60);}if(id==='s3')runProc();if(id==='sR')runReveal();if(id==='sB')boostCount();if(id==='sE'||id==='sB'||id==='s2')stagger(id);}
 document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.nav)));
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
@@ -1870,13 +2363,116 @@ document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',(
 /* real school logos replace the letter tiles */
 const LOGO={Y:'yale',H:'harvard',S:'stanford',M:'mit',P:'princeton'};document.querySelectorAll('.mk').forEach(m=>{const k=LOGO[m.textContent.trim()];if(!k)return;const img=document.createElement('img');img.src='logos/'+k+'.png';img.alt=k;img.className='lgi'+(m.classList.contains('lg')?' lg':'');if(m.style.width){img.style.width=m.style.width;img.style.height=m.style.height;}m.replaceWith(img);});
 $('unlock').addEventListener('click',()=>{toast('Payment confirmed');go('s3');});
-$('pg-s4').addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;if(a==='fix'){go('s6');toast('Opened the '+SD[curSchool].short+' fix plan');}else if(a==='editor'){go('s8');}else if(a==='workshop'){go('s6');}else toast(b.dataset.toast||'Done');});
+$('pg-s4').addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;if(a==='fix'){go('s6');toast('Opened the '+SD[curSchool].short+' fix plan');}else if(a==='editor'){go('s6');}else if(a==='workshop'){go('s6');}else toast(b.dataset.toast||'Done');});
 document.querySelectorAll('.switch').forEach(sw=>sw.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{sw.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');})));
 document.querySelectorAll('.task').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('done')));
 addEventListener('pointermove',e=>{mx=(e.clientX/W-0.5)*2;my=(e.clientY/H-0.5)*2;pmx=e.clientX;pmy=e.clientY;},{passive:true});addEventListener('pointerleave',()=>{mx=my=0;pmx=pmy=-9999;});
 addEventListener('keydown',e=>{if(e.target===cmdkIn)return;const map={'1':'s1','2':'sE','3':'sB','4':'s2','5':'s3','6':'sR','7':'s5','8':'s4','9':'s6','0':'s8'};if(map[e.key])go(map[e.key]);if(e.key==='r'||e.key==='R')go('s1');});
-function start(){buildSprites();fit();document.querySelector('.tools button').classList.add('on');startCheck();}
+
+/* ---------- application workshop ---------- */
+const AW_PS="Ever since I was young, I have always been passionate about helping others. Community service has taught me the value of giving back, and through my experiences I have learned that one person really can make a difference in the world.\n\nLast spring I started a free tutoring program at the public library near my school. What began as two of us at a folding table turned into fourteen tutors and forty regular students by June. I built the schedule, trained the new tutors, and spent most Saturdays explaining fractions with pizza slices drawn on napkins.\n\nThe hardest part was not the math. It was the afternoon Maria's mother told me, in careful English, that Maria had stopped hiding her report card. I had been measuring the program in hours and headcounts. She was measuring it in a kid who no longer felt behind.\n\nI still run the program, and I still draw the pizzas. But I understand now that the thing I built was not a tutoring schedule. It was a room where being confused was allowed, and that is the thing I want to keep building, wherever I end up next.";
+const AW={
+ common:{title:'Personal statement',limit:650,text:AW_PS,edits:[
+  {title:'Start inside the moment',before:'Ever since I was young, I have always been passionate about helping others.',after:'The first thing I ever taught was fractions, with pizza slices drawn on a napkin.',reason:'Your first sentence announces the theme. The napkin image shows it, and it is yours.'},
+  {title:'Cut the generic claim',before:'and through my experiences I have learned that one person really can make a difference in the world',after:'and I wanted a way to give some of that back',reason:'This phrase appears in a large share of drafts. A specific motive reads as your own.'},
+  {title:'Name what you believed before the turn',before:'I had been measuring the program in hours and headcounts.',after:'I had been measuring the program in hours and headcounts, and I would have called it a success either way.',reason:'Say what you thought success was so the realization in the next sentence lands.'}],
+  questions:["What did Maria's mother actually say? A short quote would be stronger than a summary.","How many Saturdays did you run the program before June?"]},
+ yale:{title:'Yale supplement',limit:200,text:'',prompt:'What is it about Yale that has led you to apply? (125 words or fewer)',edits:[],questions:[]},
+ harvard:{title:'Harvard supplement',limit:200,text:"The first time I read a proof that did not need numbers, I stopped trusting my calculator. It was a one-page argument about why there are infinitely many primes, and it worked on nothing but patience. I spent that summer collecting arguments like it, and I started to notice the same shape in how my tutoring students learned: not more facts, but a reason the facts had to be true.",prompt:'Briefly describe an intellectual experience that was important to you. (200 words)',edits:[
+  {title:'Tie the proof to the tutoring sooner',before:'I spent that summer collecting arguments like it, and I started to notice the same shape in how my tutoring students learned',after:'By August I was collecting arguments like it, and I saw the same shape in how my tutoring students learned',reason:'The link between the proof and your students is the point of the paragraph. Reach it a beat earlier.'}],questions:['Which proof was it? Naming it shows the reader you went back to the source.']},
+ stanford:{title:'Stanford supplement',limit:250,text:'',prompt:'Write a note to your future roommate that reveals something about you. (100 to 250 words)',edits:[],questions:[]},
+ mit:{title:'MIT supplement',limit:200,text:'',prompt:'Tell us about something you do simply for the pleasure of it. (200 words)',edits:[],questions:[]},
+ princeton:{title:'Princeton supplement',limit:250,text:'',prompt:'As a research institution that also prides itself on its liberal arts curriculum, Princeton allows students to explore areas across the humanities and the arts, the natural sciences, and the social sciences. What academic areas most pique your curiosity? (250 words)',edits:[],questions:[]}};
+const AW_ACTS=[
+ {name:'Library tutoring program',role:'Founder',hours:'6',text:'Started a free tutoring program at the public library near my school. I recruited and trained the tutors, built the weekly schedule, and worked with students on math on Saturdays.',edits:[{title:'Tighten to 150 characters',before:'Started a free tutoring program at the public library near my school. I recruited and trained the tutors, built the weekly schedule, and worked with students on math on Saturdays.',after:'Founded a free library tutoring program; recruited and trained 14 tutors, built the weekly schedule, and taught math to 40 students.',reason:'Leads with the role, keeps the numbers you can support, and fits the Common App limit.'}],questions:[]},
+ {name:'Robotics club',role:'Member',hours:'3',text:'Member of the robotics club. Helped build the drive train for the competition robot.',edits:[{title:'Say what you owned',before:'Helped build the drive train for the competition robot.',after:'Built and tested the drive train for the competition robot with two teammates.',reason:'"Helped" hides your part. Name what you did and who you did it with.'}],questions:['What did the robot place at competition?']},
+ {name:'Debate',role:'Member',hours:'2',text:'',edits:[],questions:[]}];
+const awWords=t=>t.trim()?t.trim().split(/\s+/).length:0;
+function awEsc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function awTab(t){document.querySelectorAll('.aw-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.wstab===t));$('awEssays').classList.toggle('on',t==='essays');$('awActs').classList.toggle('on',t==='activities');awPopClose();}
+document.querySelectorAll('.aw-tabs button').forEach(b=>b.addEventListener('click',()=>awTab(b.dataset.wstab)));
+/* custom selects */
+document.querySelectorAll('.aw-sel').forEach(sel=>{const trig=sel.querySelector('.aw-trig');trig.addEventListener('click',e=>{e.stopPropagation();const open=sel.classList.contains('open');document.querySelectorAll('.aw-sel.open').forEach(x=>x.classList.remove('open'));if(!open)sel.classList.add('open');});
+ sel.querySelectorAll('[role=option]').forEach(o=>o.addEventListener('click',()=>{sel.querySelectorAll('[role=option]').forEach(x=>x.setAttribute('aria-selected',x===o));trig.querySelector('span').textContent=o.textContent;sel.classList.remove('open');sel.dispatchEvent(new CustomEvent('pick',{detail:o}));}));});
+addEventListener('click',e=>{if(!e.target.closest('.aw-sel'))document.querySelectorAll('.aw-sel.open').forEach(x=>x.classList.remove('open'));if(!e.target.closest('.aw-headact'))$('awVers').classList.remove('on');});
+$('awVersions').addEventListener('click',e=>{e.stopPropagation();$('awVers').classList.toggle('on');});
+/* a workshop session: draft text + suggestions, essays and activities share the engine */
+function awSession(cfg){
+ const S={key:null,text:'',edits:[],handled:new Set(),snapshot:null,history:[],pending:false,review:true,stale:false};
+ const el=cfg;
+ const pending=()=>S.edits.map((ed,i)=>({ed,i})).filter(x=>!S.handled.has(x.i));
+ const valid=()=>!!S.snapshot&&!S.stale;
+ function count(){cfg.count(S.text);}
+ function load(key,text,edits){S.key=key;S.text=text;S.edits=edits||[];S.handled=new Set();S.snapshot=null;S.stale=false;S.review=true;el.editor.value=text;count();render();}
+ function annotate(){const spans=pending().map(({ed,i})=>{const st=S.text.indexOf(ed.before);return st<0?null:{st,en:st+ed.before.length,i,ed};}).filter(Boolean).sort((a,b)=>a.st-b.st);let o=0,out='';for(const sp of spans){out+=awEsc(S.text.slice(o,sp.st))+'<mark data-i="'+sp.i+'" tabindex="0" role="button" aria-label="'+awEsc(sp.ed.title)+'">'+awEsc(S.text.slice(sp.st,sp.en))+'</mark>';o=sp.en;}return out+awEsc(S.text.slice(o));}
+ function render(){
+  const n=pending().length,v=valid();
+  el.tool.hidden=!(v||S.history.length);
+  el.revN.textContent=v?n:0;el.tool.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('on',b.dataset.view==='review'?(S.review&&v):(!S.review||!v)));el.tool.querySelector('[data-view=review]').disabled=!v;
+  el.applyAll.disabled=!v||!n||S.pending;el.applyAll.textContent='Apply all changes'+(n?' ('+n+')':'');el.undo.hidden=!S.history.length;
+  const reviewing=S.review&&v;el.doc.hidden=!reviewing;el.editor.hidden=reviewing;if(reviewing)el.doc.innerHTML=annotate();
+  const words=awWords(S.text),ready=cfg.kind==='activity'?words>=8:words>=20;el.find.disabled=S.pending||!ready;el.ready.textContent=ready?'':(cfg.kind==='activity'?'Add a few facts about what you did in the description or extra details.':'Add at least 20 words of your draft to get started.');el.find.textContent=S.pending?'Reviewing…':S.snapshot?'Refresh suggestions':'Find improvements';
+  let out='';if(S.pending)out='<div class="aw-busy"><span class="spin"></span><b>Finding useful edits…</b><p>We\'ll highlight suggested changes in your draft.</p></div>';
+  else if(!S.snapshot)out='<p class="aw-help">Suggested changes will be highlighted in your draft. Hover or tap to review them.</p>';
+  else if(S.stale)out='<p class="aw-stale">Your draft changed. Generate fresh suggestions for this version.</p>';
+  else out='<div class="aw-status"><b>'+(n?n+' '+(n===1?'suggestion':'suggestions')+' in your draft':'All suggestions reviewed')+'</b><p>'+(n?'Hover or tap a highlight to see the change.':'Your latest wording is saved.')+'</p></div>'+((cfg.questions()||[]).length?'<details class="aw-qs"><summary>A few details would help</summary><ul>'+cfg.questions().map(q=>'<li>'+awEsc(q)+'</li>').join('')+'</ul><p>Add your answers under Extra details.</p></details>':'');
+  el.out.innerHTML=out;
+  el.hist.innerHTML=S.history.length?S.history.slice().reverse().map(r=>'<div class="aw-hrow"><div><b>'+awEsc(r.when)+'</b>'+awEsc(r.label)+'</div><button class="lnk" type="button" data-undo="'+r.id+'" '+(S.text!==r.after?'disabled':'')+'>Undo edit</button></div>').join(''):'<p>Your last 20 originals are saved when you apply changes.</p>';
+ }
+ function find(){if(S.pending)return;S.pending=true;S.stale=false;render();setTimeout(()=>{S.pending=false;S.snapshot=S.text;S.handled=new Set();S.review=true;render();},RM?0:1300);}
+ function apply(ids,all){const list=pending().filter(x=>ids.includes(x.i));if(!list.length)return;const before=S.text;let text=S.text;for(const {ed} of list.slice().sort((a,b)=>S.text.indexOf(b.ed.before)-S.text.indexOf(a.ed.before))){text=text.replace(ed.before,ed.after);}
+  const rec={id:Date.now()+''+Math.random(),when:new Date().toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}),label:all&&list.length>1?list.length+' changes applied':list[0].ed.title,before,after:text};
+  S.history=[...S.history,rec].slice(-20);S.text=text;S.snapshot=text;el.editor.value=text;list.forEach(x=>S.handled.add(x.i));count();awPopClose();render();if(typeof onWorkshopChange==='function')onWorkshopChange(cfg.kind);toast(all&&list.length>1?'All changes applied. Use Undo to restore the original.':'Change applied. Your original is saved.');}
+ function dismiss(i){S.handled.add(i);awPopClose();render();}
+ function undo(id){const r=id?S.history.find(x=>x.id===id):S.history[S.history.length-1];if(!r||S.text!==r.after){toast('You have made newer changes. Copy the saved original instead.');return;}S.text=r.before;S.snapshot=r.before;el.editor.value=r.before;S.history=S.history.filter(x=>x!==r);S.handled=new Set();count();awPopClose();render();toast('Original restored.');}
+ el.editor.addEventListener('input',()=>{S.text=el.editor.value;if(S.snapshot&&S.text!==S.snapshot){S.stale=true;}count();render();});
+ el.tool.addEventListener('click',e=>{const v=e.target.closest('[data-view]');if(v){S.review=v.dataset.view==='review';render();if(!S.review)el.editor.focus({preventScroll:true});}});
+ el.applyAll.addEventListener('click',()=>apply(pending().map(x=>x.i),true));
+ el.undo.addEventListener('click',()=>undo());
+ el.hist.addEventListener('click',e=>{const b=e.target.closest('[data-undo]');if(b&&!b.disabled)undo(b.dataset.undo);});
+ el.find.addEventListener('click',find);
+ el.doc.addEventListener('click',e=>{const m=e.target.closest('mark');if(m)awPopOpen(m,S.edits[+m.dataset.i],+m.dataset.i,api,true);});
+ el.doc.addEventListener('pointerover',e=>{const m=e.target.closest('mark');if(m&&e.pointerType!=='touch')awPopOpen(m,S.edits[+m.dataset.i],+m.dataset.i,api,false);});
+ el.doc.addEventListener('keydown',e=>{const m=e.target.closest('mark');if(m&&(e.key==='Enter'||e.key===' ')){e.preventDefault();awPopOpen(m,S.edits[+m.dataset.i],+m.dataset.i,api,true);}});
+ const api={load,apply:i=>apply([i],false),dismiss,S,render};return api;
+}
+/* popover */
+const awPop=document.createElement('section');awPop.className='aw-pop';awPop.setAttribute('role','dialog');document.body.appendChild(awPop);let awPopState=null,awPopTimer=null;
+function awPopClose(){awPop.classList.remove('on');document.querySelectorAll('.aw-doc mark.on').forEach(m=>m.classList.remove('on'));awPopState=null;}
+function awPopOpen(mark,ed,i,api,pin){clearTimeout(awPopTimer);if(awPopState&&awPopState.mark===mark){awPopState.pin=awPopState.pin||pin;return;}awPopClose();mark.classList.add('on');
+ awPop.innerHTML='<div class="ph"><b>'+awEsc(ed.title)+'</b><button type="button" aria-label="Close" data-close>×</button></div><span class="pl">REPLACE WITH</span><p class="pr">'+awEsc(ed.after)+'</p><p class="pe">'+awEsc(ed.reason)+'</p><div class="pa"><button class="btn sm" type="button" data-apply>Apply change</button><button class="lnk" type="button" data-dismiss>Dismiss</button></div>';
+ awPop.classList.add('on');awPopState={mark,api,i,pin};
+ const r=mark.getBoundingClientRect(),pr=awPop.getBoundingClientRect();let top=r.bottom+8;if(top+pr.height>innerHeight-12)top=r.top-pr.height-8;awPop.style.left=Math.max(12,Math.min(r.left,innerWidth-pr.width-12))+'px';awPop.style.top=Math.max(12,top)+'px';}
+awPop.addEventListener('click',e=>{if(!awPopState)return;if(e.target.closest('[data-close]'))awPopClose();else if(e.target.closest('[data-apply]'))awPopState.api.apply(awPopState.i);else if(e.target.closest('[data-dismiss]'))awPopState.api.dismiss(awPopState.i);});
+awPop.addEventListener('pointerenter',()=>clearTimeout(awPopTimer));
+document.addEventListener('pointerout',e=>{if(!awPopState||awPopState.pin)return;const n=e.relatedTarget;if(n instanceof Node&&(awPopState.mark.contains(n)||awPop.contains(n)))return;if(e.target.closest('.aw-doc mark,.aw-pop'))awPopTimer=setTimeout(awPopClose,220);});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&awPopState)awPopClose();});
+$('rmmain').addEventListener('scroll',awPopClose,{passive:true});
+/* essays */
+let awDraft='common';
+const essay=awSession({kind:'essay',editor:$('awEditor'),doc:$('awDoc'),tool:$('awTool'),revN:$('awRevN'),applyAll:$('awApplyAll'),undo:$('awUndo'),find:$('awFind'),ready:$('awReady'),out:$('awOut'),hist:$('awHist'),questions:()=>AW[awDraft].questions,
+ count:t=>{const d=AW[awDraft];$('awCount').textContent=awWords(t)+(awDraft==='common'?' / 650':'')+' words';d.text=t;}});
+function awLoadDraft(k){awDraft=k;const d=AW[k];$('awTitle').textContent=d.title;$('awDraftName').textContent=k==='common'?'Personal statement':d.title.replace(' supplement',' · Supplement').replace(/^(\w+)/,m=>({Yale:'Yale University',Harvard:'Harvard University',Stanford:'Stanford University',Princeton:'Princeton University',MIT:'MIT'}[m]||m));$('awPrompt').hidden=!d.prompt;$('awPromptTxt').textContent=d.prompt||'';$('awSaveVer').hidden=k!=='common';$('awChecks').hidden=k!=='common';$('awVersions').hidden=k!=='common';essay.load(k,d.text,d.edits);}
+$('awDraftSel').addEventListener('pick',e=>awLoadDraft(e.detail.dataset.draft));
+$('awSaveVer').addEventListener('click',()=>toast(AW.common.text.trim()?'Version saved. You can return to it anytime.':'Add a draft before saving a version.'));
+$('awRunChecks').addEventListener('click',()=>{const t=AW.common.text,w=awWords(t),paras=t.split(/\n\s*\n/).filter(x=>x.trim()).length,sent=t.split(/[.!?]+/).filter(x=>x.trim()),avg=sent.length?Math.round(w/sent.length):0,longest=sent.reduce((m,x)=>Math.max(m,awWords(x)),0);const rows=[];
+ for(const ph of ['Ever since I was young','passionate about','make a difference in the world','give back'])if(t.includes(ph))rows.push(['Common phrase','"'+ph+'" appears in a large share of drafts. Replace it with a detail only you could write.']);
+ if(longest>35)rows.push(['Long sentence','Your longest sentence runs '+longest+' words. Split it or cut the clause that repeats.']);
+ if(w>650)rows.push(['Over the limit','Cut '+(w-650)+' words to fit the Common App limit.']);
+ $('awCheckOut').innerHTML='<div class="aw-cstat"><b>'+w+' words</b><span>'+paras+' paragraphs</span><span>'+sent.length+' sentences</span><span>avg '+avg+' words per sentence</span></div>'+(rows.length?rows.map(r=>'<div class="aw-crow"><span class="sev warn">'+r[0]+'</span><div>'+awEsc(r[1])+'</div></div>').join(''):'<div class="aw-crow"><span class="sev ok">Clear</span><div>No basic issues found. Ask for improvements for a closer read.</div></div>');});
+awLoadDraft('common');
+/* activities */
+let awAct=0;
+const act=awSession({kind:'activity',editor:$('awActEditor'),doc:$('awActDoc'),tool:$('awActTool'),revN:$('awActRevN'),applyAll:$('awActApplyAll'),undo:$('awActUndo'),find:$('awActFind'),ready:$('awActReady'),out:$('awActOut'),hist:$('awActHist'),questions:()=>AW_ACTS[awAct].questions,
+ count:t=>{$('awActCount').textContent=t.length+' characters · 150-character goal';AW_ACTS[awAct].text=t;}});
+function awLoadAct(i){awAct=i;const a=AW_ACTS[i];$('awActTitle').textContent=a.name;$('awActName').textContent=a.name;$('awActCtx').innerHTML='<span>'+awEsc(a.role)+'</span><span>'+awEsc(a.hours)+' hours / week</span>';act.load(i,a.text,a.edits);}
+$('awActSel').addEventListener('pick',e=>awLoadAct(+e.detail.dataset.actI));
+awLoadAct(0);
+const QP=new URLSearchParams(location.search),QS=QP.get('s')||location.hash.slice(1);
+function start(){buildSprites();fit();document.querySelector('.tools button').classList.add('on');if(QS&&QS!=='s1'&&(document.getElementById(QS)||document.getElementById('pg-'+QS))){go(QS);if(QP.has('find'))setTimeout(()=>{(QS==='s8'?$('awActFind'):$('awFind')).click();},300);return;}startCheck();}
 const ready=[loadLogos()];if(document.fonts&&document.fonts.load)ready.push(document.fonts.load('600 64px "Inter Tight"'),document.fonts.load('700 34px "Inter Tight"'),document.fonts.load('500 14px Inter'));Promise.all(ready).then(start,start);
+/* dev deep link: ?s=<screen>&static=1 */
+if(QP.has('static')){const st=document.createElement('style');st.textContent='*{transition-duration:0s!important;transition-delay:0s!important;animation:none!important}';document.head.appendChild(st);}
 })();
 </script>
 </body>
