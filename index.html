@@ -1625,6 +1625,12 @@ button.pstep:hover{background:#F7F7F7}
 #pg-s4 .sc-hero{margin-top:26px;padding-bottom:26px}
 #pg-s4 .sc-n{gap:10px}
 #rpCards .rr-det{grid-template-columns:minmax(0,1fr)}
+
+/* fix58: issues locked before the paywall */
+.iss-cat{display:block;font:500 12px/1 var(--sans);color:#8C8C8C;margin-bottom:5px}
+#sE .iss-row.lock>div>b{display:flex;align-items:center;gap:8px;min-width:0}
+#sE .iss-row.lock>div>b .blur{filter:blur(5px);user-select:none;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:clip;max-width:min(360px,100%)}
+#sE .iss-row.lock>div>b .ico{width:14px;height:14px;color:#8C8C8C;flex:none}
 </style>
 </head>
 <body class="dark">
@@ -1678,16 +1684,16 @@ button.pstep:hover{background:#F7F7F7}
   <h1 class="h2x rise"><span class="crit">3 critical errors</span> are still<br>in your application</h1>
   <p class="lead rise">Unless you fix them, they go into every application you send.</p>
   <div class="iss rise">
-   <div class="iss-row"><span class="iss-st"><i></i>Unresolved</span><div><b>SAT 900 is below Yale's 25th percentile</b><span>Admits sit at 1480 to 1560.</span></div><em>−6.8</em></div>
-   <div class="iss-row"><span class="iss-st"><i></i>Unresolved</span><div><b>No leadership signal in your activities</b><span>Two clubs, no role.</span></div><em>−2.3</em></div>
-   <div class="iss-row"><span class="iss-st"><i></i>Unresolved</span><div><b>Essay opening reads generic</b><span>Matches one in four applicants.</span></div><em>−1.8</em></div>
+   <div class="iss-row lock"><span class="iss-st"><i></i>Unresolved</span><div><span class="iss-cat">Test scores</span><b><span class="blur">SAT 900 is below Yale's 25th percentile</span><svg class="ico"><use href="#i-lock"/></svg></b></div><em>−6.8</em></div>
+   <div class="iss-row lock"><span class="iss-st"><i></i>Unresolved</span><div><span class="iss-cat">Activities</span><b><span class="blur">No leadership signal in your activities</span><svg class="ico"><use href="#i-lock"/></svg></b></div><em>−2.3</em></div>
+   <div class="iss-row lock"><span class="iss-st"><i></i>Unresolved</span><div><span class="iss-cat">Essay</span><b><span class="blur">Essay opening reads generic</span><svg class="ico"><use href="#i-lock"/></svg></b></div><em>−1.8</em></div>
    <div class="iss-foot">
     <div class="iss-ft"><span>Cost to your chances</span><b>−10.9 points</b></div>
     <div class="iss-seg"><i style="--w:62.4"></i><i style="--w:21.1"></i><i style="--w:16.5"></i></div>
-    <div class="iss-keys"><span><i></i>SAT 6.8</span><span><i></i>Leadership 2.3</span><span><i></i>Essay 1.8</span></div>
+    <div class="iss-keys"><span><i></i>Test scores 6.8</span><span><i></i>Activities 2.3</span><span><i></i>Essay 1.8</span></div>
    </div>
   </div>
-  <button class="btn xl rise" type="button" data-go="sB">Fix all three <svg class="ico"><use href="#i-arrow"/></svg></button>
+  <button class="btn xl rise" type="button" data-go="sB">See what they are <svg class="ico"><use href="#i-arrow"/></svg></button>
  </div>
 </section>
 
@@ -2036,23 +2042,23 @@ const SEQ=[
  {t:0.9,l:'GPA 4.0 unweighted',d:'+4.1',k:'good'},
  {t:1.5,l:'AP Calc BC · AP Physics',d:'+2.0',k:'good'},
  {t:2.1,l:'Class rank top 3%',d:'+1.2',k:'good'},
- {t:2.7,l:'SAT 900 · below 25th pct',d:'−6.8',k:'bad'},
- {t:3.4,l:'Activities · 2 clubs, no lead',d:'−2.3',k:'warn'},
- {t:4.1,l:'Essay opening generic',d:'−1.8',k:'warn'},
+ {t:2.7,l:'Test scores · critical issue',d:'−6.8',k:'bad'},
+ {t:3.4,l:'Activities · issue found',d:'−2.3',k:'warn'},
+ {t:4.1,l:'Essay · issue found',d:'−1.8',k:'warn'},
  {t:4.7,l:'Recommendations · 2',d:'+0.8',k:'good'},
  {t:5.2,l:'Legacy · none',d:'0',k:'info'},
  /* Harvard */
  {t:6.0,logo:'H'},
  {t:6.5,l:'GPA 4.0 · above median',d:'+3.9',k:'good'},
- {t:7.1,l:'SAT 900 · below range',d:'−7.2',k:'bad'},
+ {t:7.1,l:'Test scores · critical',d:'−7.2',k:'bad'},
  {t:7.7,l:'AP rigor',d:'+1.6',k:'good'},
- {t:8.3,l:'Essay opening',d:'−1.8',k:'warn'},
- {t:8.9,l:'No leadership role',d:'−2.0',k:'warn'},
+ {t:8.3,l:'Essay · flagged',d:'−1.8',k:'warn'},
+ {t:8.9,l:'Activities · flagged',d:'−2.0',k:'warn'},
  {t:9.4,l:'Recommendations · 2',d:'+0.8',k:'good'},
  /* issues */
- {t:10.1,l:'Critical · SAT below range',d:'',k:'bad'},
- {t:10.5,l:'Critical · no leadership',d:'',k:'bad'},
- {t:10.9,l:'Critical · essay opening',d:'',k:'bad'},
+ {t:10.1,l:'Critical · test scores',d:'',k:'bad'},
+ {t:10.5,l:'Critical · activities',d:'',k:'bad'},
+ {t:10.9,l:'Critical · essay',d:'',k:'bad'},
  /* boost */
  {t:11.4,l:'SAT 1350',d:'+6.8',k:'boost'},
  {t:11.8,l:'Lead one project',d:'+2.3',k:'boost'},
