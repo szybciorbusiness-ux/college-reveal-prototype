@@ -1635,7 +1635,7 @@ button.pstep:hover{background:#F7F7F7}
 .rc-arr .ico{width:16px;height:16px}
 .rc-arr.rc-prev .ico{transform:rotate(90deg)}
 .rc-arr.rc-next .ico{transform:rotate(-90deg)}
-.rc-pl{font:500 13px/1 var(--sans);color:#6E6E6E;font-variant-numeric:tabular-nums;min-width:64px;text-align:center}
+.rc-pl{font:500 13px/1 var(--sans);color:#6E6E6E;font-variant-numeric:tabular-nums;min-width:28px;text-align:center}
 .rc-pager+.rc-boost{margin-top:18px}
 #s2 .prev-sch{grid-template-columns:repeat(auto-fit,minmax(56px,1fr));gap:6px;margin-top:16px;padding-top:16px}
 #s2 .prev-sch div{background:none;padding:0;gap:10px}
@@ -1741,6 +1741,11 @@ button.pstep:hover{background:#F7F7F7}
 #s2 .prev{display:flex;flex-direction:column;align-items:center;gap:18px}
 #s2 .prev-sch{align-self:stretch}
 #s2 .prev .prev-lock{position:static;transform:none;margin:0}
+/* fix68: both bars fill together, pill never shows early */
+.rc-row .rc-up,.rc-row.on .rc-up{opacity:0}
+.rc-row.pot .rc-up{opacity:1}
+.rc-row.on .rc-bar .aft{width:calc(var(--v) * 3.6%);transition-delay:0s}
+.rc-row.on .rc-bar .now{transition-delay:.1s}
 /* fix55: readable width on wide screens */
 #pg-s5,#pg-s4{max-width:1080px;margin:0 auto}
 .rp-card{grid-template-columns:minmax(0,1fr) minmax(280px,.8fr);gap:24px 36px}
@@ -2059,7 +2064,7 @@ body.upd-open #updScrim{opacity:1;visibility:visible;transition:opacity .2s ease
   <div class="rc" id="rc">
    <div class="rc-top"><div class="rc-who"><img src="pfp/1.jpg" alt=""><div><b>Evan Carter</b><span>Class of 2027 · <i id="rcCount">5 schools</i> · Oct 30, 2026</span></div></div><span class="rc-brand"><svg class="ico"><use href="#i-cap"/></svg>College Reveal</span></div>
       <div class="rc-view" id="rcView"><div class="rc-track" id="rcRows"></div></div>
-   <div class="rc-pager" id="rcPager" hidden><button class="rc-arr rc-prev" type="button" data-d="-1" aria-label="Previous schools"><svg class="ico"><use href="#i-chev"/></svg></button><span class="rc-pl" id="rcPl" aria-live="polite">1–5 of 8</span><button class="rc-arr rc-next" type="button" data-d="1" aria-label="More schools"><svg class="ico"><use href="#i-chev"/></svg></button></div>
+   <div class="rc-pager" id="rcPager" hidden><button class="rc-arr rc-prev" type="button" data-d="-1" aria-label="Previous schools"><svg class="ico"><use href="#i-chev"/></svg></button><span class="rc-pl" id="rcPl" aria-live="polite">1/2</span><button class="rc-arr rc-next" type="button" data-d="1" aria-label="More schools"><svg class="ico"><use href="#i-chev"/></svg></button></div>
    <div class="rc-boost" id="rcFoot"><div><span>Fix the 3 critical issues</span><b>+86% average gain</b></div><em>Chances nearly double at every school</em></div>
    <div class="rc-url">collegereveal.app/r/evan</div>
   </div>
@@ -2570,7 +2575,7 @@ const RV_PER=5;let rvPage=0,rvManual=false;
 let rvTimers=[];
 function roll(el,to,ms,suffix,from){const t0=performance.now(),f0=from==null?0:from,sx=suffix==null?'%':suffix;if(RM){el.textContent=to+sx;return;}(function f(now){const k=Math.max(0,Math.min(1,(now-t0)/ms)),e=1-Math.pow(1-k,4);el.textContent=Math.round(f0+(to-f0)*e)+sx;if(k<1)requestAnimationFrame(f);})(t0);}
 function rvPages(){return Math.ceil(RVX.length/RV_PER);}
-function rvPl(){const n=RVX.length,f=rvPage*RV_PER+1,t=Math.min(n,f+RV_PER-1);$('rcPl').textContent=f+'–'+t+' of '+n;$('rcPager').querySelector('.rc-prev').disabled=rvPage===0;$('rcPager').querySelector('.rc-next').disabled=rvPage>=rvPages()-1;}
+function rvPl(){const n=RVX.length,f=rvPage*RV_PER+1,t=Math.min(n,f+RV_PER-1);$('rcPl').textContent=(rvPage+1)+'/'+rvPages();$('rcPager').querySelector('.rc-prev').disabled=rvPage===0;$('rcPager').querySelector('.rc-next').disabled=rvPage>=rvPages()-1;}
 function rvGo(p,instant){p=Math.max(0,Math.min(rvPages()-1,p));const view=$('rcView'),track=$('rcRows'),first=track.querySelector('.rc-rw');
  const rowH=first?first.querySelector('.rc-row').scrollHeight:0,k=Math.min(RV_PER,RVX.length-p*RV_PER);
  
@@ -2581,7 +2586,7 @@ function runReveal(){rvTimers.forEach(clearTimeout);rvTimers=[];const sec=$('sR'
  let t=RM?0:700;
  RVX.forEach((x,i)=>{const p=Math.floor(i/RV_PER);const w=document.createElement('div');w.className='rc-rw';const r=document.createElement('div');r.className='rc-row';w.appendChild(r);r.innerHTML='<img src="logos/'+x[0]+'.png" alt=""><div class="rc-nm"><b>'+x[1]+'</b><i class="rc-bar"><u class="aft" style="--v:'+x[3]+'"></u><u class="now" style="--v:'+x[2]+'"></u></i></div><em>0%</em><small class="rc-up">→ '+x[3]+'%</small>';pages[p].appendChild(w);
   if(p>0&&i%RV_PER===0){t+=RM?0:1000;rvTimers.push(setTimeout(()=>{if(!rvManual)rvGo(p);},t));t+=RM?0:900;}
-  rvTimers.push(setTimeout(()=>{w.classList.add('on');r.classList.add('on');roll(r.querySelector('em'),x[2],1100);rvTimers.push(setTimeout(()=>r.classList.add('pot'),RM?0:1000));},t));t+=per;
+  rvTimers.push(setTimeout(()=>{w.classList.add('on');r.classList.add('on');roll(r.querySelector('em'),x[2],1100);rvTimers.push(setTimeout(()=>r.classList.add('pot'),RM?0:650));},t));t+=per;
   if(i%RV_PER===RV_PER-1||i===RVX.length-1)t+=RM?0:900;});
  rvTimers.push(setTimeout(()=>card.classList.add('on'),RM?0:120));
  if(multi)rvTimers.push(setTimeout(()=>$('rcPager').classList.add('on'),RM?0:700));
