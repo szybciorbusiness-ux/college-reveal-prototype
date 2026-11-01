@@ -1678,6 +1678,40 @@ button.pstep:hover{background:#F7F7F7}
 .rm.noside .rm-side{opacity:0;overflow:hidden;pointer-events:none;border-right-color:transparent}
 @media (max-width:1100px){.rm-tog{display:none}}
 @media (prefers-reduced-motion:reduce){.rm-body,.rm-side{transition:none}}
+/* fix65: school page, less copy, one comparison chart */
+#pg-s4 .sc2{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);align-items:stretch}
+#pg-s4 .pstep{padding:14px 8px}
+#pg-s4 .pstep span{color:#8C8C8C}
+#pg-s4 .chk{grid-template-columns:22px 1fr auto;padding:11px 0}
+#pg-s4 .chk i{grid-row:auto}
+#pg-s4 .chk span{font:500 12.5px/1 var(--sans);color:#8C8C8C}
+#pg-s4 .chk.done b{color:#8C8C8C;text-decoration:none}
+#pg-s4 .vs{margin-top:16px;padding:22px 24px 10px}
+.vs-leg{display:inline-flex;align-items:center;gap:7px;font:500 12.5px/1 var(--sans);color:#6E6E6E}
+.vs-leg i{display:inline-block;width:10px;height:10px;border-radius:50%;background:#1A1A1A}
+.vs-leg i.r{width:18px;height:8px;border-radius:99px;background:#BCD0FF;margin-left:10px}
+.vs-rows{display:grid}
+.vs-row{display:grid;grid-template-columns:150px minmax(0,1fr) 116px;align-items:center;column-gap:32px;padding:20px 0 24px;border-top:1px solid #F0F0F0}
+.vs-row:first-child{border-top:0}
+.vs-k{display:grid;gap:6px}
+.vs-k span{font:500 13px/1 var(--sans);color:#6E6E6E}
+.vs-k b{font:700 24px/1 var(--head);letter-spacing:-.03em;color:#1A1A1A;font-variant-numeric:tabular-nums}
+.vs-row.bad .vs-k b{color:#C8313A}
+.vs-tr{position:relative;height:10px;border-radius:99px;background:#F1F1F3}
+.vs-band{position:absolute;top:0;bottom:0;left:var(--a);width:calc(var(--b) - var(--a));min-width:8px;border-radius:99px;background:#BCD0FF}
+.vs-band small{position:absolute;top:16px;left:50%;transform:translateX(-50%);font:500 11.5px/1 var(--sans);color:#8C8C8C;white-space:nowrap;font-variant-numeric:tabular-nums}
+.vs-you{position:absolute;top:50%;left:var(--x);width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.22);background:#1E8E5A}
+.vs-row.bad .vs-you{background:#D4383E}
+.vs-row.warn .vs-you{background:#E59A1A}
+.vs-st{justify-self:end;font:600 12.5px/1 var(--sans);padding:6px 10px;border-radius:999px;color:#1E6E48;background:#E3F6EA;white-space:nowrap}
+.vs-row.bad .vs-st{color:#C8313A;background:#FDECEC}
+.vs-row.warn .vs-st{color:#A0600B;background:#FFF3DF}
+.pg.on .vs-you{animation:vsIn .9s cubic-bezier(.45,0,.1,1) backwards;animation-delay:calc(.15s + var(--i,0) * 80ms)}
+.pg.on .vs-band{animation:vsBand .6s cubic-bezier(.25,.8,.25,1) backwards;animation-delay:calc(var(--i,0) * 80ms)}
+@keyframes vsIn{from{left:0}}
+@keyframes vsBand{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){.pg.on .vs-you,.pg.on .vs-band{animation:none}}
+@media (max-width:1180px){#pg-s4 .sc2{grid-template-columns:1fr}.vs-row{grid-template-columns:110px minmax(0,1fr) 104px;column-gap:20px}}
 /* fix55: readable width on wide screens */
 #pg-s5,#pg-s4{max-width:1080px;margin:0 auto}
 .rp-card{grid-template-columns:minmax(0,1fr) minmax(280px,.8fr);gap:24px 36px}
@@ -2437,59 +2471,49 @@ const SD={
  stanford:{short:'Stanford',name:'Stanford University',city:'Stanford, CA',admit:'3.7%',sat:[1500,1570],med:1540,apps:'56,378',round:'Restrictive Early Action',due:'Nov 1',early:'9.1%',top10:'96%',gpa:'3.96',sup:['Roommate letter',0,250],aps:'7–9',now:6,after:15},
  mit:{short:'MIT',name:'MIT',city:'Cambridge, MA',admit:'4.0%',sat:[1520,1580],med:1560,apps:'28,232',round:'Early Action',due:'Nov 1',early:'5.3%',top10:'97%',gpa:'3.98',sup:['Making & tinkering',0,200],aps:'8–10',now:11,after:19},
  princeton:{short:'Princeton',name:'Princeton University',city:'Princeton, NJ',admit:'4.5%',sat:[1500,1570],med:1540,apps:'39,644',round:'Single-Choice Early Action',due:'Nov 1',early:'11.0%',top10:'93%',gpa:'3.95',sup:['Why Princeton?',0,250],aps:'7–9',now:8,after:20}};
+function vsRows(d,satNow,TD){const ap=d.aps.split('–').map(Number),gpa=+(document.querySelector('#gpaIn')||{}).value||4,aps=+(document.querySelector('#apIn')||{}).value||6,lead=TD.lead?1:0;
+ const M=[{k:'SAT',v:satNow,t:satNow,lo:400,hi:1600,r:d.sat,near:40},{k:'GPA',v:gpa,t:gpa.toFixed(1),lo:3,hi:4.1,r:[3.9,4.0],near:.05,rt:'3.9–4.0'},{k:'AP courses',v:aps,t:aps,lo:0,hi:12,r:ap,near:1},{k:'Leadership',v:lead,t:lead+(lead===1?' role':' roles'),lo:0,hi:4,r:[1,2],near:0}];
+ const pc=(m,v)=>Math.max(0,Math.min(100,(v-m.lo)/(m.hi-m.lo)*100)).toFixed(1)+'%';
+ return '<div class="vs-rows">'+M.map((m,i)=>{const st=m.v<m.r[0]?(m.r[0]-m.v<=m.near?'warn':'bad'):'good',lab=m.v<m.r[0]?(st==='warn'?'Slightly low':'Below range'):(m.v>m.r[1]?'Above range':'In range');
+  return '<div class="vs-row '+st+'" style="--i:'+i+'"><div class="vs-k"><span>'+m.k+'</span><b>'+m.t+'</b></div><div class="vs-tr"><i class="vs-band" style="--a:'+pc(m,m.r[0])+';--b:'+pc(m,m.r[1])+'"><small>'+(m.rt||m.r[0]+'–'+m.r[1])+'</small></i><b class="vs-you" style="--x:'+pc(m,m.v)+'"></b></div><span class="vs-st">'+lab+'</span></div>';}).join('')+'</div>';}
 function renderSchool(k){const d=SD[k];if(!d)return;const TD=window.TDONE||{},DONE='<em class="pdone"><svg class="ico"><use href="#i-check"/></svg>Done</em>',CH='<svg class="ico pch"><use href="#i-chev"/></svg>';const gain=d.after-d.now,dSat=(gain*.62).toFixed(1),dLead=(gain*.21).toFixed(1),dEss=(gain-dSat-dLead).toFixed(1);const lo=400,hi=1600,px=v=>((v-lo)/(hi-lo)*100).toFixed(1)+'%';const satNow=+(document.querySelector('#satIn')||{}).value||900;
  $('pg-s4').innerHTML=`
  <div class="sc-head">
   <img class="sc-logo" src="logos/${k}.png" alt="">
-  <div class="sc-title"><div class="crumb">Schools</div><h1 class="rm-h1" id="schName">${d.name}</h1><p class="rm-sub" id="schMeta">${d.city} · ${d.admit} admit rate · ${d.round} closes ${d.due}</p></div>
+  <div class="sc-title"><div class="crumb">Schools</div><h1 class="rm-h1" id="schName">${d.name}</h1><p class="rm-sub" id="schMeta">${d.city} · ${d.admit} admit rate · ${d.round} due ${d.due}</p></div>
   <span class="sev reach">Reach</span>
  </div>
  <div class="sc-hero">
   <div class="sc-nums"><div class="sc-n"><span class="sc-l">Today</span><span class="now" data-v="${d.now}">${d.now}%</span></div><span class="arr">→</span><div class="sc-n"><span class="sc-l">After your 3 fixes</span><span class="after" data-v="${d.after}">${d.after}%</span></div></div>
-  <div class="sc-cta"><button class="btn ghost" type="button" data-act="editor">Open editor</button><button class="btn" type="button" data-act="fix" id="startfix">Start fixing <svg class="ico"><use href="#i-arrow"/></svg></button></div>
+  <div class="sc-cta"><button class="btn" type="button" data-act="fix" id="startfix">Start fixing <svg class="ico"><use href="#i-arrow"/></svg></button></div>
  </div>
  <div class="sc2">
-  <div class="sc2-col">
    <section class="hm-card">
-    <div class="hm-ch"><h2>Your plan for ${d.short}</h2><span class="pill g">+${gain.toFixed(1)} if you do all three</span></div>
+    <div class="hm-ch"><h2>Your plan</h2><span class="pill g">+${gain}% possible</span></div>
     <div class="plan-steps">
-     <button class="pstep${TD.sat?' done':''}" type="button" data-task="sat"><span class="pnum">1</span><div><b>${TD.sat?'SAT '+satNow+' is in range':'SAT '+satNow+' is below the 25th percentile'}</b><span>${TD.sat?'Updated in your profile':'Retake Dec 6 · update your score here'}</span><div class="mini-bar"><i style="--v:${TD.sat?100:40}"></i></div></div>${TD.sat?DONE:'<em class="good">+'+dSat+'</em>'}${CH}</button>
-     <button class="pstep${TD.lead?' done':''}" type="button" data-task="lead"><span class="pnum">2</span><div><b>${TD.lead?'Leadership signal added':'No leadership signal'}</b><span>${TD.lead?'Shown in your activity descriptions':'Rewrite your tutoring program description'}</span><div class="mini-bar"><i style="--v:${TD.lead?100:10}"></i></div></div>${TD.lead?DONE:'<em class="good">+'+dLead+'</em>'}${CH}</button>
-     <button class="pstep${TD.essay?' done':''}" type="button" data-task="essay"><span class="pnum">3</span><div><b>${TD.essay?'Essay opening rewritten':'Essay opening reads generic'}</b><span>${TD.essay?'Saved in your personal statement':'One rewrite ready in the editor'}</span><div class="mini-bar"><i style="--v:${TD.essay?100:0}"></i></div></div>${TD.essay?DONE:'<em class="good">+'+dEss+'</em>'}${CH}</button>
-     <button class="pstep" type="button" data-task="sup"><span class="pnum">4</span><div><b>${d.sup[0]} supplement</b><span>Due ${d.due} · ${d.round}</span><div class="mini-bar"><i style="--v:${Math.round(d.sup[1]/d.sup[2]*100)}"></i></div></div><em class="muted">${d.sup[1]} / ${d.sup[2]}</em>${CH}</button>
+     <button class="pstep${TD.sat?' done':''}" type="button" data-task="sat"><div><b>${TD.sat?'SAT updated':'Raise your SAT'}</b><span>${TD.sat?satNow+' is in range':satNow+' now · admits score '+d.sat[0]+'+'}</span></div>${TD.sat?DONE:'<em class="good">+'+dSat+'%</em>'}${CH}</button>
+     <button class="pstep${TD.lead?' done':''}" type="button" data-task="lead"><div><b>${TD.lead?'Leadership shown':'Show leadership'}</b><span>${TD.lead?'In your activities':'Rewrite your tutoring description'}</span></div>${TD.lead?DONE:'<em class="good">+'+dLead+'%</em>'}${CH}</button>
+     <button class="pstep${TD.essay?' done':''}" type="button" data-task="essay"><div><b>${TD.essay?'Essay opening rewritten':'Sharpen your essay opening'}</b><span>${TD.essay?'Saved to your draft':'A rewrite is ready'}</span></div>${TD.essay?DONE:'<em class="good">+'+dEss+'%</em>'}${CH}</button>
+     <button class="pstep" type="button" data-task="sup"><div><b>${d.sup[0]} supplement</b><span>${d.sup[1]} of ${d.sup[2]} words</span></div><em class="muted">Due ${d.due}</em>${CH}</button>
     </div>
    </section>
    <section class="hm-card">
-    <div class="hm-ch"><h2>How you compare with ${d.short} admits</h2><span class="hm-leg"><i class="now"></i>you <i class="rng"></i>admitted middle 50%</span></div>
-    <div class="cmp">
-     <div class="cmp-row"><span class="cmp-k">SAT</span><div class="cmp-bar"><i class="rng" style="left:${px(d.sat[0])};width:calc(${px(d.sat[1])} - ${px(d.sat[0])})"></i><b class="you ${satNow<d.sat[0]?'bad':'good'}" style="left:${px(satNow)}"></b></div><span class="cmp-v ${satNow<d.sat[0]?'red':''}">${satNow} <small>vs ${d.sat[0]}–${d.sat[1]}</small></span></div>
-     <div class="cmp-row"><span class="cmp-k">GPA</span><div class="cmp-bar"><i class="rng" style="left:86%;width:12%"></i><b class="you good" style="left:98%"></b></div><span class="cmp-v">4.0 <small>vs ${d.gpa} median</small></span></div>
-     <div class="cmp-row"><span class="cmp-k">Class rank</span><div class="cmp-bar"><i class="rng" style="left:80%;width:20%"></i><b class="you good" style="left:96%"></b></div><span class="cmp-v">Top 3% <small>vs ${d.top10} in top 10%</small></span></div>
-     <div class="cmp-row"><span class="cmp-k">AP courses</span><div class="cmp-bar"><i class="rng" style="left:58%;width:26%"></i><b class="you warn" style="left:50%"></b></div><span class="cmp-v">6 <small>vs ${d.aps} typical</small></span></div>
-     <div class="cmp-row"><span class="cmp-k">Leadership</span><div class="cmp-bar"><i class="rng" style="left:33%;width:40%"></i><b class="you bad" style="left:2%"></b></div><span class="cmp-v red">0 roles <small>vs 1–2 typical</small></span></div>
-     <div class="cmp-row"><span class="cmp-k">Recommendations</span><div class="cmp-bar"><i class="rng" style="left:60%;width:40%"></i><b class="you good" style="left:90%"></b></div><span class="cmp-v">2 confirmed <small>teacher + counselor</small></span></div>
-    </div>
-   </section>
-  </div>
-  <div class="sc2-col">
-   <section class="hm-card">
-    <div class="hm-ch"><h2>${d.short} checklist</h2><span class="pill b">3 of 7</span></div>
+    <div class="hm-ch"><h2>Checklist</h2><span class="pill b">3 of 7</span></div>
     <div class="chk-list">
-     <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Common App</b><span>Submitted draft · 487 words</span></div>
-     <div class="chk"><i></i><b>${d.sup[0]}</b><span>${d.sup[1]} / ${d.sup[2]} words · due ${d.due}</span></div>
-     <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Teacher recommendations</b><span>2 of 2 confirmed</span></div>
-     <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Counselor report</b><span>Requested Oct 12</span></div>
-     <div class="chk"><i></i><b>SAT score report</b><span>Send after the Dec 6 retake</span></div>
-     <div class="chk"><i></i><b>Alumni interview</b><span>Offered after submission</span></div>
-     <div class="chk"><i></i><b>CSS Profile</b><span>Financial aid · due ${d.due}</span></div>
+     <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Common App</b></div>
+     <div class="chk"><i></i><b>${d.sup[0]}</b><span>${d.due}</span></div>
+     <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Recommendations</b></div>
+     <div class="chk done"><i><svg class="ico"><use href="#i-check"/></svg></i><b>Counselor report</b></div>
+     <div class="chk"><i></i><b>CSS Profile</b><span>${d.due}</span></div>
+     <div class="chk"><i></i><b>SAT score report</b><span>After Dec 6</span></div>
+     <div class="chk"><i></i><b>Alumni interview</b><span>Later</span></div>
     </div>
    </section>
-   <section class="hm-card snap">
-    <div class="hm-ch"><h2>Admitted class</h2><span class="muted inline">Latest cycle</span></div>
-    <div class="snap-grid"><div><b>${d.med}</b><span>median SAT</span></div><div><b>${d.gpa}</b><span>median GPA</span></div><div><b>${d.top10}</b><span>in top 10% of class</span></div><div><b>${d.early}</b><span>early round admit rate</span></div><div><b>${d.apps}</b><span>applications</span></div><div><b>${d.aps}</b><span>AP courses typical</span></div></div>
-   </section>
-  </div>
- </div>`;
+ </div>
+ <section class="hm-card vs">
+  <div class="hm-ch"><h2>You vs. admitted students</h2><span class="vs-leg"><i class="y"></i>You<i class="r"></i>Middle 50% admitted</span></div>
+  ${vsRows(d,satNow,TD)}
+ </section>`;
  document.querySelectorAll('#pg-s4 .hm-card').forEach((c,i)=>c.style.setProperty('--i',i));}
 renderSchool('yale');
 /* schools: the sidebar rows drive the page */
