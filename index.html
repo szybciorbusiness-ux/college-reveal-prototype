@@ -1795,6 +1795,10 @@ button.pstep:hover{background:#F7F7F7}
 .rv-fx.go .rv-edge{animation:rvEdge 2.2s linear var(--d) both}
 @keyframes rvEdge{0%{transform:scale(1);opacity:0;animation-timing-function:cubic-bezier(.2,.7,.3,1)}8%{opacity:1}100%{transform:scale(1.32,1.26);opacity:0}}
 @keyframes rvFlash{0%{opacity:0}20%{opacity:.16}100%{opacity:0}}
+/* fix73: quieter ripple, no flash */
+.rv-edge{border:1.5px solid rgba(255,255,255,.32)}
+@keyframes rvEdge{0%{transform:scale(1);opacity:0;animation-timing-function:cubic-bezier(.2,.7,.3,1)}10%{opacity:1}100%{transform:scale(1.16,1.13);opacity:0}}
+.rv-fx.go .rv-flash{animation:none;opacity:0}
 /* fix55: readable width on wide screens */
 #pg-s5,#pg-s4{max-width:1080px;margin:0 auto}
 .rp-card{grid-template-columns:minmax(0,1fr) minmax(280px,.8fr);gap:24px 36px}
@@ -2635,7 +2639,7 @@ function odo(el,v,sx,dl){if(RM){el.textContent=v+sx;return;}const ds=String(v).s
 /* finale: light rays and rings burst from behind the card, potential lights up */
 function rvFinale(){const sec=$('sR'),card=$('rc');if(RM)return;let fx=$('rvFx');if(!fx){fx=document.createElement('div');fx.id='rvFx';fx.className='rv-fx';sec.insertBefore(fx,sec.querySelector('.rc-wrap'));}
  const r=card.getBoundingClientRect(),R=Math.max(r.width,r.height)*.5;fx.style.left=(r.left+r.width/2)+'px';fx.style.top=(r.top+r.height/2)+'px';fx.style.setProperty('--R',R+'px');fx.style.setProperty('--h',r.height+'px');fx.style.setProperty('--w',r.width+'px');
- let h='<i class="rv-flash"></i>';for(let i=0;i<3;i++)h+='<i class="rv-edge" style="--d:'+(i*220)+'ms"></i>';
+ let h='<i class="rv-flash"></i>';for(let i=0;i<2;i++)h+='<i class="rv-edge" style="--d:'+(i*320)+'ms"></i>';
  for(let i=0;i<0;i++){const len=70+((i*37)%5)*30,del=(i%5)*60;h+='<i class="rv-ray" style="--a:'+(i*360/40+(i%2?3:0))+'deg;--l:'+len+'px;--d:'+del+'ms"><b></b></i>';}
  fx.innerHTML=h;fx.classList.remove('go');fx.offsetHeight;fx.classList.add('go');
  const rows=[...document.querySelectorAll('.rc-pg')][rvPage].querySelectorAll('.rc-row');rows.forEach((x,i)=>rvTimers.push(setTimeout(()=>x.classList.add('lit'),120+i*90)));
