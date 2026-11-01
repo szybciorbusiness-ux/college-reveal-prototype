@@ -1774,6 +1774,22 @@ button.pstep:hover{background:#F7F7F7}
 .rc-boost .rc-g,.rc-boost .od{display:inline-flex;opacity:1;font:inherit;margin:0}
 .rc-boost .od-c{display:inline-block;opacity:1;font:inherit;margin:0}
 .rc-boost .od-s{display:flex;opacity:1;font:inherit;margin:0}
+/* fix70: collapse lives in the sidebar, open button shows only when collapsed */
+.side-x{position:absolute;top:33px;right:14px;z-index:2;width:30px;height:30px;padding:0;border:0;border-radius:8px;background:none;color:#8C8C8C;display:grid;place-items:center;cursor:pointer;transition:background .2s,color .2s}
+.side-x:hover{background:#F2F2F2;color:#1A1A1A}
+.side-x .ico{width:18px;height:18px}
+#app .rm-tog{width:0;margin:0 -10px 0 -18px;opacity:0;pointer-events:none;overflow:hidden;transition:width .35s cubic-bezier(.45,0,.1,1),margin .35s cubic-bezier(.45,0,.1,1),opacity .25s ease}
+#app .rm.noside .rm-tog{width:32px;margin:0 -8px 0 -6px;opacity:1;pointer-events:auto}
+#app .rm-tog[aria-pressed=true]{color:#6E6E6E}
+/* fix71: louder finale, card-shaped shockwaves from the card edge */
+.rv-edge{width:var(--w);height:var(--h);margin:calc(var(--h) / -2) 0 0 calc(var(--w) / -2);border-radius:30px;border:3px solid #fff;opacity:0}
+.rv-fx.go .rv-edge{animation:rvEdge 1.8s linear var(--d) both}
+@keyframes rvEdge{0%{transform:scale(1);opacity:0;animation-timing-function:cubic-bezier(.2,.8,.3,1)}6%{opacity:1}100%{transform:scale(1.5,1.4);opacity:0}}
+.rv-ray b{width:6px;margin-left:-1px;border-radius:6px}
+.rv-fx.go .rv-ray b{animation:rvRay 1.7s cubic-bezier(.2,.85,.3,1) var(--d) both}
+@keyframes rvRay{0%{transform:translateY(calc(var(--R) * -1 + 40px)) scaleY(.3);opacity:0}10%{opacity:1}55%{opacity:1}100%{transform:translateY(calc(var(--R) * -1 - 340px)) scaleY(1);opacity:0}}
+@keyframes rvFlash{0%{opacity:0}15%{opacity:.55}100%{opacity:0}}
+.rv-fx.go .rv-flash{animation-duration:1.2s}
 /* fix55: readable width on wide screens */
 #pg-s5,#pg-s4{max-width:1080px;margin:0 auto}
 .rp-card{grid-template-columns:minmax(0,1fr) minmax(280px,.8fr);gap:24px 36px}
@@ -1968,7 +1984,7 @@ body.upd-open #updScrim{opacity:1;visibility:visible;transition:opacity .2s ease
   <filter id="goo" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="g"/><feComposite in="SourceGraphic" in2="g" operator="atop"/></filter>
   <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></symbol>
-  <symbol id="i-side" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></symbol><symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol>
+  <symbol id="i-side" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></symbol><symbol id="i-side-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m16 15-3-3 3-3"/></symbol><symbol id="i-side-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m14 9 3 3-3 3"/></symbol><symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol>
   <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></symbol>
   <symbol id="i-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2" /><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" /><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" /></symbol>
   <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /><path d="M20 3v4" /><path d="M22 5h-4" /><path d="M4 17v2" /><path d="M5 18H3" /></symbol>
@@ -2123,7 +2139,7 @@ body.upd-open #updScrim{opacity:1;visibility:visible;transition:opacity .2s ease
 <section class="screen" id="app" aria-label="College Reveal">
  <div class="rm">
   <header class="rm-top">
-   <span class="rm-logo"><svg class="ico"><use href="#i-cap"/></svg></span><button class="rm-tog" type="button" id="sideTog" aria-label="Hide sidebar" aria-pressed="false" title="Toggle sidebar"><svg class="ico"><use href="#i-side"/></svg></button><span class="rm-div"></span>
+   <span class="rm-logo"><svg class="ico"><use href="#i-cap"/></svg></span><button class="rm-tog" type="button" id="sideTog" aria-label="Show sidebar" title="Show sidebar"><svg class="ico"><use href="#i-side-open"/></svg></button><span class="rm-div"></span>
    <nav class="rm-tabs"><i class="ind" aria-hidden="true"></i>
     <button data-page="s5"><svg class="ico"><use href="#i-home"/></svg>Results</button>
     <button data-page="s4"><svg class="ico"><use href="#i-chart"/></svg>Schools</button>
@@ -2132,7 +2148,7 @@ body.upd-open #updScrim{opacity:1;visibility:visible;transition:opacity .2s ease
    <div class="rm-right"><div class="rm-search"><svg class="ico"><use href="#i-search"/></svg><span>Search</span><kbd>⌘K</kbd></div></div>
   </header>
   <div class="rm-body">
-   <aside class="rm-side"><i class="sind" aria-hidden="true"></i>
+   <aside class="rm-side"><i class="sind" aria-hidden="true"></i><button class="side-x" type="button" id="sideX" aria-label="Hide sidebar" title="Hide sidebar"><svg class="ico"><use href="#i-side-close"/></svg></button>
     <div class="rm-sec">Your schools</div>
     <button class="rm-it" data-page="s4" data-school="yale" data-name="Yale University" data-now="9" data-after="21" data-meta="Reach · 4.6% admit rate"><img class="lg" src="logos/yale.png" alt="">Yale<span class="pill b">9%</span></button>
     <button class="rm-it" data-page="s4" data-school="harvard" data-name="Harvard University" data-now="7" data-after="18" data-meta="Reach · 3.4% admit rate"><img class="lg" src="logos/harvard.png" alt="">Harvard<span class="pill b">7%</span></button>
@@ -2613,13 +2629,13 @@ function odo(el,v,sx,dl){if(RM){el.textContent=v+sx;return;}const ds=String(v).s
  ss.forEach((c,i)=>{c.style.transitionDelay=((dl||0)+(ds.length-1-i)*110)+'ms';c.style.transform='translateY(-'+((+ds[i]+10)*5)+'%)';});}
 /* finale: light rays and rings burst from behind the card, potential lights up */
 function rvFinale(){const sec=$('sR'),card=$('rc');if(RM)return;let fx=$('rvFx');if(!fx){fx=document.createElement('div');fx.id='rvFx';fx.className='rv-fx';sec.insertBefore(fx,sec.querySelector('.rc-wrap'));}
- const r=card.getBoundingClientRect(),R=Math.max(r.width,r.height)*.56;fx.style.left=(r.left+r.width/2)+'px';fx.style.top=(r.top+r.height/2)+'px';fx.style.setProperty('--R',R+'px');fx.style.setProperty('--h',r.height+'px');
- let h='<i class="rv-flash"></i>';for(let i=0;i<3;i++)h+='<i class="rv-ring" style="--d:'+(i*170)+'ms"></i>';
- for(let i=0;i<32;i++){const len=50+((i*37)%5)*22,del=(i%4)*45;h+='<i class="rv-ray" style="--a:'+(i*360/32+(i%2?4:0))+'deg;--l:'+len+'px;--d:'+del+'ms"><b></b></i>';}
+ const r=card.getBoundingClientRect(),R=Math.max(r.width,r.height)*.5;fx.style.left=(r.left+r.width/2)+'px';fx.style.top=(r.top+r.height/2)+'px';fx.style.setProperty('--R',R+'px');fx.style.setProperty('--h',r.height+'px');fx.style.setProperty('--w',r.width+'px');
+ let h='<i class="rv-flash"></i>';for(let i=0;i<3;i++)h+='<i class="rv-edge" style="--d:'+(i*220)+'ms"></i>';for(let i=0;i<2;i++)h+='<i class="rv-ring" style="--d:'+(150+i*260)+'ms"></i>';
+ for(let i=0;i<40;i++){const len=70+((i*37)%5)*30,del=(i%5)*60;h+='<i class="rv-ray" style="--a:'+(i*360/40+(i%2?3:0))+'deg;--l:'+len+'px;--d:'+del+'ms"><b></b></i>';}
  fx.innerHTML=h;fx.classList.remove('go');fx.offsetHeight;fx.classList.add('go');
  const rows=[...document.querySelectorAll('.rc-pg')][rvPage].querySelectorAll('.rc-row');rows.forEach((x,i)=>rvTimers.push(setTimeout(()=>x.classList.add('lit'),120+i*90)));
  const gb=document.querySelector('#rcFoot b');gb.innerHTML='+<span class="rc-g"></span> average gain';odo(gb.querySelector('.rc-g'),86,'%',150);
- rvTimers.push(setTimeout(()=>{fx.classList.remove('go');fx.innerHTML='';},2600));}
+ rvTimers.push(setTimeout(()=>{fx.classList.remove('go');fx.innerHTML='';},3200));}
 function runReveal(){rvTimers.forEach(clearTimeout);rvTimers=[];const sec=$('sR'),card=$('rc'),rows=$('rcRows'),view=$('rcView');sec.classList.remove('final');card.classList.remove('on');document.querySelector('#rcFoot b').textContent='+86% average gain';if($('rvFx'))$('rvFx').innerHTML='';rows.innerHTML='';view.style.height='';rvPage=0;rvManual=false;rows.classList.add('still');rows.style.transform='';const per=RM?120:820;
  $('rcCount').textContent=RVX.length+' schools';const multi=rvPages()>1;$('rcPager').hidden=!multi;$('rcPager').classList.remove('on');if(multi)rvPl();
  const pages=[];for(let p=0;p<rvPages();p++){const pg=document.createElement('div');pg.className='rc-pg';rows.appendChild(pg);pages.push(pg);}
@@ -2631,7 +2647,7 @@ function runReveal(){rvTimers.forEach(clearTimeout);rvTimers=[];const sec=$('sR'
  rvTimers.push(setTimeout(()=>card.classList.add('on'),RM?0:120));
  if(multi)rvTimers.push(setTimeout(()=>$('rcPager').classList.add('on'),RM?0:700));
  rvTimers.push(setTimeout(()=>{if(cur!=='sR')return;sec.classList.add('final');rvFinale();},t+500));}
-$('sideTog').addEventListener('click',()=>{const off=document.querySelector('#app .rm').classList.toggle('noside');$('sideTog').setAttribute('aria-pressed',off);$('sideTog').setAttribute('aria-label',off?'Show sidebar':'Hide sidebar');});
+const sideSet=off=>{document.querySelector('#app .rm').classList.toggle('noside',off);(off?$('sideTog'):$('sideX')).focus({preventScroll:true});};$('sideTog').addEventListener('click',()=>sideSet(false));$('sideX').addEventListener('click',()=>sideSet(true));
 $('rcPager').addEventListener('click',e=>{const bt=e.target.closest('.rc-arr');if(!bt||bt.disabled)return;rvManual=true;rvGo(rvPage+(+bt.dataset.d));});
 $('rvOpen').addEventListener('click',()=>go('sK'));
 $('skGo').addEventListener('click',()=>{$('app').classList.add('enter');go('s5');setTimeout(()=>$('app').classList.remove('enter'),900);});
