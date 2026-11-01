@@ -1247,7 +1247,9 @@ button.pstep:hover{background:#F7F7F7}
 /* fix41b: paywall preview, blur numbers only */
 #s2 .prev::after{display:none}
 #s2 .prev-row img,#s2 .prev-row span{filter:none;opacity:1}
-#s2 .prev-lock{top:50%}
+#s2 .prev{display:flex;flex-direction:column;align-items:center;gap:18px}
+#s2 .prev-sch{align-self:stretch}
+#s2 .prev .prev-lock{position:static;transform:none;margin:0}
 /* fix41c: finalizing labels bigger */
 #s3 .lines li{font-size:15px}
 #s3 .lines .val{font:600 15px/1 var(--mono)}
@@ -1717,11 +1719,28 @@ button.pstep:hover{background:#F7F7F7}
 .rc-row.pot .rc-up{opacity:1;transform:none;animation:none}
 .rc-row.pot em{animation:rcLand .45s cubic-bezier(.25,.8,.25,1) both}
 @keyframes rcLand{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
-#pg-s4 .pstep em.pdone{color:var(--blue)}
+#pg-s4 .pstep em.pdone{color:var(--blue);padding:0 10px;height:26px;box-sizing:border-box;line-height:1}
 #pg-s4 button.pstep{position:relative;border-top:0}
 #pg-s4 button.pstep+button.pstep::before{content:'';position:absolute;left:8px;right:8px;top:0;height:1px;background:#EEEEEE}
 #pg-s4 button.pstep:hover::before,#pg-s4 button.pstep:hover+button.pstep::before{opacity:0}
 @media (prefers-reduced-motion:reduce){.rc-row.on .rc-up{transition:none}.rc-row.pot em{animation:none}}
+/* fix67: smooth reveal, rows hold their space, no scaling text, no blur */
+.rc,.rc.on{filter:none}
+.rc-rw,.rc-rw.on{grid-template-rows:1fr;transition:none}
+.rc-row{opacity:0;transform:translateY(8px);transition:opacity .5s cubic-bezier(.25,.8,.25,1),transform .6s cubic-bezier(.25,.8,.25,1)}
+.rc-row.on{opacity:1;transform:none}
+.rc-row.on em,.rc-row.pot em{animation:none}
+.rc-row.on .rc-up{transform:translateX(-8px);transition:opacity .4s cubic-bezier(.25,.8,.25,1),transform .5s cubic-bezier(.25,.8,.25,1)}
+.rc-row.pot .rc-up{transform:none}
+#sR.final .rc{animation:none}
+.rc-head,.rc-wrap{will-change:auto}
+/* fix67b: paywall preview is just logos and blurred chances */
+#s2 .prev{padding:22px 24px 20px}
+#s2 .prev-sch{margin:0;padding:0;border:0}
+#s2 .prev-sch b{color:var(--blue)}
+#s2 .prev{display:flex;flex-direction:column;align-items:center;gap:18px}
+#s2 .prev-sch{align-self:stretch}
+#s2 .prev .prev-lock{position:static;transform:none;margin:0}
 /* fix55: readable width on wide screens */
 #pg-s5,#pg-s4{max-width:1080px;margin:0 auto}
 .rp-card{grid-template-columns:minmax(0,1fr) minmax(280px,.8fr);gap:24px 36px}
@@ -1994,13 +2013,6 @@ body.upd-open #updScrim{opacity:1;visibility:visible;transition:opacity .2s ease
    <li><span class="tick"><svg><use href="#i-check"/></svg></span>Updates as you edit</li>
   </ul>
   <div class="prev rise" aria-hidden="true">
-   <div class="prev-rep">
-    <div class="prev-sc">
-     <span class="rp-eyebrow">Application report</span><b class="prev-name">Evan Carter</b>
-     <div class="rp-line"><span>Overall score</span><b><em class="blur">61</em><small>/100</small></b></div><div class="rp-bar"><i class="blur" style="--v:61"></i></div>
-     <div class="rp-line"><span>Your potential</span><b class="pot"><em class="blur">76</em><small>/100</small></b></div><div class="rp-bar light"><i class="blur" style="--v:76"></i></div>
-    </div>
-   </div>
    <div class="prev-sch" id="pvCards"></div>
    <div class="prev-lock"><svg class="ico"><use href="#i-lock"/></svg>Unlock to see your exact numbers</div>
   </div>
@@ -2561,7 +2573,7 @@ function rvPages(){return Math.ceil(RVX.length/RV_PER);}
 function rvPl(){const n=RVX.length,f=rvPage*RV_PER+1,t=Math.min(n,f+RV_PER-1);$('rcPl').textContent=f+'–'+t+' of '+n;$('rcPager').querySelector('.rc-prev').disabled=rvPage===0;$('rcPager').querySelector('.rc-next').disabled=rvPage>=rvPages()-1;}
 function rvGo(p,instant){p=Math.max(0,Math.min(rvPages()-1,p));const view=$('rcView'),track=$('rcRows'),first=track.querySelector('.rc-rw');
  const rowH=first?first.querySelector('.rc-row').scrollHeight:0,k=Math.min(RV_PER,RVX.length-p*RV_PER);
- if(rvPages()>1&&rowH){if(view.style.height===''){view.style.height=view.offsetHeight+'px';view.offsetHeight;}view.style.height=(k*rowH)+'px';}
+ 
  track.classList.toggle('still',!!instant||RM);track.style.transform='translateX('+(-100*p)+'%)';rvPage=p;rvPl();}
 function runReveal(){rvTimers.forEach(clearTimeout);rvTimers=[];const sec=$('sR'),card=$('rc'),rows=$('rcRows'),view=$('rcView');sec.classList.remove('final');card.classList.remove('on');rows.innerHTML='';view.style.height='';rvPage=0;rvManual=false;rows.classList.add('still');rows.style.transform='';const per=RM?120:820;
  $('rcCount').textContent=RVX.length+' schools';const multi=rvPages()>1;$('rcPager').hidden=!multi;$('rcPager').classList.remove('on');if(multi)rvPl();
