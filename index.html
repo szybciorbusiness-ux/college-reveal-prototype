@@ -1712,6 +1712,16 @@ button.pstep:hover{background:#F7F7F7}
 @keyframes vsBand{from{opacity:0}}
 @media (prefers-reduced-motion:reduce){.pg.on .vs-you,.pg.on .vs-band{animation:none}}
 @media (max-width:1180px){#pg-s4 .sc2{grid-template-columns:1fr}.vs-row{grid-template-columns:110px minmax(0,1fr) 104px;column-gap:20px}}
+/* fix66: reveal row beat, plan row fixes */
+.rc-row.on .rc-up{opacity:0;transform:translateX(-10px) scale(.85);animation:none;transition:opacity .35s cubic-bezier(.25,.8,.25,1),transform .5s cubic-bezier(.34,1.56,.64,1)}
+.rc-row.pot .rc-up{opacity:1;transform:none;animation:none}
+.rc-row.pot em{animation:rcLand .45s cubic-bezier(.25,.8,.25,1) both}
+@keyframes rcLand{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+#pg-s4 .pstep em.pdone{color:var(--blue)}
+#pg-s4 button.pstep{position:relative;border-top:0}
+#pg-s4 button.pstep+button.pstep::before{content:'';position:absolute;left:8px;right:8px;top:0;height:1px;background:#EEEEEE}
+#pg-s4 button.pstep:hover::before,#pg-s4 button.pstep:hover+button.pstep::before{opacity:0}
+@media (prefers-reduced-motion:reduce){.rc-row.on .rc-up{transition:none}.rc-row.pot em{animation:none}}
 /* fix55: readable width on wide screens */
 #pg-s5,#pg-s4{max-width:1080px;margin:0 auto}
 .rp-card{grid-template-columns:minmax(0,1fr) minmax(280px,.8fr);gap:24px 36px}
@@ -2476,7 +2486,7 @@ function vsRows(d,satNow,TD){const ap=d.aps.split('–').map(Number),gpa=+(docum
  const pc=(m,v)=>Math.max(0,Math.min(100,(v-m.lo)/(m.hi-m.lo)*100)).toFixed(1)+'%';
  return '<div class="vs-rows">'+M.map((m,i)=>{const st=m.v<m.r[0]?(m.r[0]-m.v<=m.near?'warn':'bad'):'good',lab=m.v<m.r[0]?(st==='warn'?'Slightly low':'Below range'):(m.v>m.r[1]?'Above range':'In range');
   return '<div class="vs-row '+st+'" style="--i:'+i+'"><div class="vs-k"><span>'+m.k+'</span><b>'+m.t+'</b></div><div class="vs-tr"><i class="vs-band" style="--a:'+pc(m,m.r[0])+';--b:'+pc(m,m.r[1])+'"><small>'+(m.rt||m.r[0]+'–'+m.r[1])+'</small></i><b class="vs-you" style="--x:'+pc(m,m.v)+'"></b></div><span class="vs-st">'+lab+'</span></div>';}).join('')+'</div>';}
-function renderSchool(k){const d=SD[k];if(!d)return;const TD=window.TDONE||{},DONE='<em class="pdone"><svg class="ico"><use href="#i-check"/></svg>Done</em>',CH='<svg class="ico pch"><use href="#i-chev"/></svg>';const gain=d.after-d.now,dSat=(gain*.62).toFixed(1),dLead=(gain*.21).toFixed(1),dEss=(gain-dSat-dLead).toFixed(1);const lo=400,hi=1600,px=v=>((v-lo)/(hi-lo)*100).toFixed(1)+'%';const satNow=+(document.querySelector('#satIn')||{}).value||900;
+function renderSchool(k){const d=SD[k];if(!d)return;const it0=document.querySelector('.rm-it[data-school="'+k+'"]'),NOW=it0&&it0.dataset.now?+it0.dataset.now:d.now,LEFT=['sat','lead','essay'].filter(x=>!(window.TDONE||{})[x]).length;const TD=window.TDONE||{},DONE='<em class="pdone"><svg class="ico"><use href="#i-check"/></svg>Done</em>',CH='<svg class="ico pch"><use href="#i-chev"/></svg>';const gain=d.after-d.now,dSat=(gain*.62).toFixed(1),dLead=(gain*.21).toFixed(1),dEss=(gain-dSat-dLead).toFixed(1);const lo=400,hi=1600,px=v=>((v-lo)/(hi-lo)*100).toFixed(1)+'%';const satNow=+(document.querySelector('#satIn')||{}).value||900;
  $('pg-s4').innerHTML=`
  <div class="sc-head">
   <img class="sc-logo" src="logos/${k}.png" alt="">
@@ -2484,12 +2494,12 @@ function renderSchool(k){const d=SD[k];if(!d)return;const TD=window.TDONE||{},DO
   <span class="sev reach">Reach</span>
  </div>
  <div class="sc-hero">
-  <div class="sc-nums"><div class="sc-n"><span class="sc-l">Today</span><span class="now" data-v="${d.now}">${d.now}%</span></div><span class="arr">→</span><div class="sc-n"><span class="sc-l">After your 3 fixes</span><span class="after" data-v="${d.after}">${d.after}%</span></div></div>
+  <div class="sc-nums"><div class="sc-n"><span class="sc-l">${LEFT?'Today':'Today, all fixes done'}</span><span class="now" data-v="${NOW}">${NOW}%</span></div>${LEFT?'<span class="arr">→</span><div class="sc-n"><span class="sc-l">'+(LEFT===1?'After your last fix':'After your '+LEFT+' fixes')+'</span><span class="after" data-v="'+d.after+'">'+d.after+'%</span></div>':''}</div>
   <div class="sc-cta"><button class="btn" type="button" data-act="fix" id="startfix">Start fixing <svg class="ico"><use href="#i-arrow"/></svg></button></div>
  </div>
  <div class="sc2">
    <section class="hm-card">
-    <div class="hm-ch"><h2>Your plan</h2><span class="pill g">+${gain}% possible</span></div>
+    <div class="hm-ch"><h2>Your plan</h2>${LEFT?'<span class="pill g">+'+(d.after-NOW)+'% possible</span>':'<span class="pill b">All done</span>'}</div>
     <div class="plan-steps">
      <button class="pstep${TD.sat?' done':''}" type="button" data-task="sat"><div><b>${TD.sat?'SAT updated':'Raise your SAT'}</b><span>${TD.sat?satNow+' is in range':satNow+' now · admits score '+d.sat[0]+'+'}</span></div>${TD.sat?DONE:'<em class="good">+'+dSat+'%</em>'}${CH}</button>
      <button class="pstep${TD.lead?' done':''}" type="button" data-task="lead"><div><b>${TD.lead?'Leadership shown':'Show leadership'}</b><span>${TD.lead?'In your activities':'Rewrite your tutoring description'}</span></div>${TD.lead?DONE:'<em class="good">+'+dLead+'%</em>'}${CH}</button>
@@ -2559,8 +2569,8 @@ function runReveal(){rvTimers.forEach(clearTimeout);rvTimers=[];const sec=$('sR'
  let t=RM?0:700;
  RVX.forEach((x,i)=>{const p=Math.floor(i/RV_PER);const w=document.createElement('div');w.className='rc-rw';const r=document.createElement('div');r.className='rc-row';w.appendChild(r);r.innerHTML='<img src="logos/'+x[0]+'.png" alt=""><div class="rc-nm"><b>'+x[1]+'</b><i class="rc-bar"><u class="aft" style="--v:'+x[3]+'"></u><u class="now" style="--v:'+x[2]+'"></u></i></div><em>0%</em><small class="rc-up">→ '+x[3]+'%</small>';pages[p].appendChild(w);
   if(p>0&&i%RV_PER===0){t+=RM?0:1000;rvTimers.push(setTimeout(()=>{if(!rvManual)rvGo(p);},t));t+=RM?0:900;}
-  rvTimers.push(setTimeout(()=>{w.classList.add('on');r.classList.add('on');roll(r.querySelector('em'),x[2],1300);},t));t+=per;
-  if(i%RV_PER===RV_PER-1||i===RVX.length-1){t+=RM?0:1300;const rs=[...pages[p].querySelectorAll('.rc-row')];rs.forEach((row,j)=>rvTimers.push(setTimeout(()=>row.classList.add('pot'),t+(RM?0:j*380))));t+=RM?0:rs.length*380+500;}});
+  rvTimers.push(setTimeout(()=>{w.classList.add('on');r.classList.add('on');roll(r.querySelector('em'),x[2],1100);rvTimers.push(setTimeout(()=>r.classList.add('pot'),RM?0:1000));},t));t+=per;
+  if(i%RV_PER===RV_PER-1||i===RVX.length-1)t+=RM?0:900;});
  rvTimers.push(setTimeout(()=>card.classList.add('on'),RM?0:120));
  if(multi)rvTimers.push(setTimeout(()=>$('rcPager').classList.add('on'),RM?0:700));
  rvTimers.push(setTimeout(()=>{if(cur!=='sR')return;sec.classList.add('final');},t+500));}
